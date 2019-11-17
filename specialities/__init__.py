@@ -1,0 +1,1 @@
+"""App for mechanics specialities."""
