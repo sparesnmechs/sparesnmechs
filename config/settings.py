@@ -17,13 +17,10 @@ import environ
 env = environ.Env(
     DEBUG=(bool, False)
 )
-
 environ.Env.read_env('.env')
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -36,7 +33,6 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,9 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Pip installed apps
+    'phonenumber_field',
+
     # local apps
-    'accounts',
-    'common',
+    'clients',
+    'spareparts',
 ]
 
 
