@@ -1,1 +1,1 @@
-"""User login."""
+"""App for user accounts."""
