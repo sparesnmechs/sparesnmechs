@@ -88,6 +88,7 @@ To run the project:
 To test the project:
 
 .. code:: bash
+
 	(name-of-your-virtualenv)$ pytest # This will run all the tests in the project
 
 Credits
