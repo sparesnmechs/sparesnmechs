@@ -2,12 +2,8 @@
 import pytest
 from model_bakery import baker
 
-import spareparts.models as models
-<< << << < HEAD
-from clients.models import CarOwner, Mechanic, SpareDealer, Store
-== == == =
-from clients.models import CarOwner, Common, Mechanic, SpareDealer, Store
->>>>>> > create - models
+import snm.spareparts.models as models
+from snm.clients.models import CarOwner, Common, Mechanic, SpareDealer, Store
 
 pytestmark = pytest.mark.django_db
 
