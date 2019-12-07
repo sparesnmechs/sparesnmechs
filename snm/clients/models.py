@@ -2,7 +2,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
-from spareparts.models import (CarMake, CarModel, CommonFields, SparePart,
+from snm.spareparts.models import (CarMake, CarModel, CommonFields, SparePart,
                                Speciality)
 
 
