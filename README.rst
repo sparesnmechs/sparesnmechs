@@ -7,6 +7,7 @@ How to install the project
 Prerequisites
 ~~~~~~~~~~~~~
 Make sure you have the following before beginning:
+
 	* python3-dev
 	* git
 	* pip
@@ -27,18 +28,14 @@ Set up the environment variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Create a .env file in your parent project directory
 
-	``
-	$ cd path/to/your/directory/sparesnmechs
-	$ touch .env
-	``
+	``$ cd path/to/your/directory/sparesnmechs``
+	``$ touch .env``
 
 Add these environment variables to your ``.env`` file:
 
-	``
-	SECRET_KEY=your-secret-key
-	DATABASE_URL=psql://db_user:db_passwordlocalhost:5432/db_name
-	``
-
+	``SECRET_KEY=your-secret-key``
+	``DATABASE_URL=psql://db_user:db_passwordlocalhost:5432/db_name``
+	
 Setting up the projects dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Navigate into the projects directory from the terminal.
@@ -61,17 +58,15 @@ Running and testing the project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 To run the project:
 	
-	``
-	(name-of-your-virtualenv)$ ./manage.py runserver # the information below will be displayed if everything is okay
-	Performing system checks...
+	``(name-of-your-virtualenv)$ ./manage.py runserver # the information below will be displayed if everything is okay``
+	``Performing system checks...``
 
-	System check identified no issues (0 silenced).
-	December 7, 2019 - 18:55:56
-	Django version 3.0, using settings 'config.settings'
-	Starting development server at http://127.0.0.1:8000/
-	Quit the server with CONTROL-C.
-	``
-
+	``System check identified no issues (0 silenced).``
+	``December 7, 2019 - 18:55:56``
+	``Django version 3.0, using settings 'config.settings'``
+	``Starting development server at http://127.0.0.1:8000/``
+	``Quit the server with CONTROL-C.``
+	
 To test the project:
 
 	``(name-of-your-virtualenv)$ pytest # This will run all the tests in the project``
