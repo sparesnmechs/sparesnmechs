@@ -42,7 +42,7 @@ Add these environment variables to your ``.env`` file:
 .. code:: bash
 
 	SECRET_KEY=your-secret-key
-	DATABASE_URL=psql://db_user:db_passwordlocalhost:5432/db_name
+	DATABASE_URL=psql://db_user:db_password@localhost:5432/db_name
 	
 Setting up the projects dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
