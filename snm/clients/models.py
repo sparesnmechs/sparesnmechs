@@ -3,20 +3,21 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
 from snm.spareparts.models import (CarMake, CarModel, CommonFields, SparePart,
-                               Speciality)
+                                   Speciality)
 
 
 class Common(models.Model):
     """Common fields."""
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = PhoneNumberField(blank=False)
     description = models.TextField()
-    photo = models.ImageField(upload_to='spareparts/')
+    photo = models.ImageField(upload_to="spareparts/")
 
     def __str__(self):
         """Represent first and last name."""
-        return '{} {}'.format(self.first_name, self.last_name)
+        return "{} {}".format(self.first_name, self.last_name)
 
 
 class Store(CommonFields):

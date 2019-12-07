@@ -8,99 +8,172 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='CarMake',
+            name="CarMake",
             fields=[
-                ('id', models.AutoField(auto_created=True,
-                                        primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('description', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("description", models.TextField()),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='CarModel',
+            name="CarModel",
             fields=[
-                ('id', models.AutoField(auto_created=True,
-                                        primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('description', models.TextField()),
-                ('car_make', models.ForeignKey(
-                    on_delete=django.db.models.deletion.PROTECT, to='spareparts.CarMake')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("description", models.TextField()),
+                (
+                    "car_make",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="spareparts.CarMake",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='SparePartCategory',
+            name="SparePartCategory",
             fields=[
-                ('id', models.AutoField(auto_created=True,
-                                        primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('description', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("description", models.TextField()),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='Speciality',
+            name="Speciality",
             fields=[
-                ('id', models.AutoField(auto_created=True,
-                                        primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('description', models.TextField()),
-                ('car_make', models.ForeignKey(
-                    on_delete=django.db.models.deletion.PROTECT, to='spareparts.CarMake')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("description", models.TextField()),
+                (
+                    "car_make",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="spareparts.CarMake",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='SparePartSubCategory',
+            name="SparePartSubCategory",
             fields=[
-                ('id', models.AutoField(auto_created=True,
-                                        primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('description', models.TextField()),
-                ('category', models.ForeignKey(
-                    on_delete=django.db.models.deletion.PROTECT, to='spareparts.SparePartCategory')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("description", models.TextField()),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="spareparts.SparePartCategory",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='SparePart',
+            name="SparePart",
             fields=[
-                ('id', models.AutoField(auto_created=True,
-                                        primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('description', models.TextField()),
-                ('price', models.DecimalField(decimal_places=2, max_digits=14)),
-                ('condition', models.CharField(choices=[
-                 ('NEW', 'New'), ('LOCALLY USED', 'Locally Used'), ('FOREIGN USED', 'Foreign Used')], max_length=255)),
-                ('year_of_manufacture', models.CharField(max_length=4)),
-                ('photo', models.ImageField(upload_to='spareparts/')),
-                ('car_make', models.ForeignKey(
-                    on_delete=django.db.models.deletion.PROTECT, to='spareparts.CarMake')),
-                ('car_model', models.ForeignKey(
-                    on_delete=django.db.models.deletion.PROTECT, to='spareparts.CarModel')),
-                ('category', models.ForeignKey(
-                    on_delete=django.db.models.deletion.PROTECT, to='spareparts.SparePartCategory')),
-                ('sub_category', models.ForeignKey(
-                    on_delete=django.db.models.deletion.PROTECT, to='spareparts.SparePartSubCategory')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("description", models.TextField()),
+                ("price", models.DecimalField(decimal_places=2, max_digits=14)),
+                (
+                    "condition",
+                    models.CharField(
+                        choices=[
+                            ("NEW", "New"),
+                            ("LOCALLY USED", "Locally Used"),
+                            ("FOREIGN USED", "Foreign Used"),
+                        ],
+                        max_length=255,
+                    ),
+                ),
+                ("year_of_manufacture", models.CharField(max_length=4)),
+                ("photo", models.ImageField(upload_to="spareparts/")),
+                (
+                    "car_make",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="spareparts.CarMake",
+                    ),
+                ),
+                (
+                    "car_model",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="spareparts.CarModel",
+                    ),
+                ),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="spareparts.SparePartCategory",
+                    ),
+                ),
+                (
+                    "sub_category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="spareparts.SparePartSubCategory",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
     ]
