@@ -6,37 +6,39 @@ from spareparts.models import (CarMake, CarModel, CommonFields, SparePart,
                                Speciality)
 
 
+class Common(models.Model):
+    """Common fields."""
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone_number = PhoneNumberField(blank=False)
+    description = models.TextField()
+    photo = models.ImageField(upload_to='spareparts/')
+
+    def __str__(self):
+        """Represent first and last name."""
+        return '{} {}'.format(self.first_name, self.last_name)
+
+
 class Store(CommonFields):
     """Create a store for spare dealers."""
 
 
-class SpareDealer(models.Model):
+class SpareDealer(Common):
     """Create the spare dealer."""
 
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    phone_number = PhoneNumberField(blank=False)
-    description = models.TextField()
     store = models.ForeignKey(Store, on_delete=models.PROTECT)
     spare_parts = models.ForeignKey(SparePart, on_delete=models.PROTECT)
 
 
-class Mechanic(models.Model):
+class Mechanic(Common):
     """Create the mechanic."""
 
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    phone_number = PhoneNumberField(blank=False)
-    description = models.TextField()
     store = models.ForeignKey(Store, on_delete=models.PROTECT)
     speciality = models.ForeignKey(Speciality, on_delete=models.PROTECT)
 
 
-class CarOwner(models.Model):
+class CarOwner(Common):
     """Create a car onwer."""
 
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    phone_number = PhoneNumberField(blank=False)
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     car_model = models.ForeignKey(CarModel, on_delete=models.PROTECT)

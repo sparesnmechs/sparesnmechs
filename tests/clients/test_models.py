@@ -4,6 +4,14 @@ import pytest
 pytestmark = pytest.mark.django_db
 
 
+def test_common(common):
+    """Test the common fileds."""
+    assert common.first_name == 'Fundi'
+    assert common.last_name == 'Wa Magari'
+    assert common.phone_number == '+254711223344'
+    assert common.description == 'Nimeivisha kupaka rangi'
+
+
 def test_store(store):
     """Test if store is created."""
     assert store.name == 'duka'

@@ -67,9 +67,4 @@ class SparePart(CommonFields):
         SparePartSubCategory, on_delete=models.PROTECT)
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     car_model = models.ForeignKey(CarModel, on_delete=models.PROTECT)
-
-
-class SparePartPhoto:
-    """Store parts images."""
     photo = models.ImageField(upload_to='spareparts/')
-    spare_part = models.ForeignKey(SparePart, on_delete=models.PROTECT)

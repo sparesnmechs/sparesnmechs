@@ -3,7 +3,11 @@ import pytest
 from model_bakery import baker
 
 import spareparts.models as models
+<< << << < HEAD
 from clients.models import CarOwner, Mechanic, SpareDealer, Store
+== == == =
+from clients.models import CarOwner, Common, Mechanic, SpareDealer, Store
+>>>>>> > create - models
 
 pytestmark = pytest.mark.django_db
 
@@ -84,6 +88,18 @@ def store():
         Store,
         name='duka',
         description='duka ya magari noma',
+    )
+
+
+@pytest.fixture
+def common():
+    """Common."""
+    return baker.make(
+        Common,
+        first_name='Fundi',
+        last_name='Wa Magari',
+        phone_number='+254711223344',
+        description='Nimeivisha kupaka rangi',
     )
 
 
