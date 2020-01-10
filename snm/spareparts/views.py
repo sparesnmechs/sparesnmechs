@@ -1,19 +1,15 @@
-"""Spare parts views."""
+"""Spareparts app views."""
 from django.contrib import messages
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from .models import (
-    CarMake,
-    CarModel,
-    SparePart,
-    SparePartCategory,
-    SparePartSubCategory,
-    Speciality,
-)
+from .forms import (CarMakeForm, CarModelForm, SparePartCategoryForm,
+                    SparePartForm, SparePartSubCategoryForm, SpecialityForm)
+from .models import (CarMake, CarModel, SparePart, SparePartCategory,
+                     SparePartSubCategory, Speciality)
 
 
-class SparePartMixin:
+class SuccessMessageMixin:
     """Common spare part view behaviours."""
 
     fields = ["__all__"]
@@ -23,23 +19,25 @@ class SparePartMixin:
         """Success msg."""
         return NotImplemented
 
-    def form_valid(self):
+    def form_valid(self, form):
         """Display the success msg when the form is valid."""
         messages.info(self.request, self.success_message)
-        return super(SparePartMixin, self).form_valid(form)
+        return super(SuccessMessageMixin, self).form_valid(form)
 
 
-class SparePartCreateView(SparePartMixin, CreateView):
+class SparePartCreateView(SuccessMessageMixin, CreateView):
     """Create view for spare parts."""
 
     model = SparePart
+    form_class = SparePartForm
     success_message = "Spare part created!"
 
 
-class SparePartUpdateView(SparePartMixin, UpdateView):
+class SparePartUpdateView(SuccessMessageMixin, UpdateView):
     """Update view for spare parts."""
 
     model = SparePart
+    form_class = SparePartForm
     success_message = "Spare part updated!"
 
     def get_success_url(self):
@@ -77,17 +75,19 @@ class SparePartListView(ListView):
         return queryset
 
 
-class SparePartCategoryCreateView(SparePartMixin, CreateView):
+class SparePartCategoryCreateView(SuccessMessageMixin, CreateView):
     """Create view for spare parts."""
 
     model = SparePartCategory
+    form_class = SparePartCategoryForm
     success_message = "Spare part category created!"
 
 
-class SparePartCategoryUpdateView(SparePartMixin, UpdateView):
+class SparePartCategoryUpdateView(SuccessMessageMixin, UpdateView):
     """Update view for spare parts."""
 
     model = SparePartCategory
+    form_class = SparePartCategoryForm
     success_message = "Spare part category updated!"
 
     def get_success_url(self):
@@ -126,17 +126,19 @@ class SparePartCategoryListView(ListView):
         return queryset
 
 
-class SparePartSubCategoryCreateView(SparePartMixin, CreateView):
+class SparePartSubCategoryCreateView(SuccessMessageMixin, CreateView):
     """Create view for spare parts."""
 
     model = SparePartSubCategory
+    form_class = SparePartSubCategoryForm
     success_message = "Spare part sub-category created!"
 
 
-class SparePartSubCategoryUpdateView(SparePartMixin, UpdateView):
+class SparePartSubCategoryUpdateView(SuccessMessageMixin, UpdateView):
     """Update view for spare parts."""
 
     model = SparePartSubCategory
+    form_class = SparePartSubCategoryForm
     success_message = "Spare part sub-category updated!"
 
     def get_success_url(self):
@@ -175,17 +177,19 @@ class SparePartSubCategoryListView(ListView):
         return queryset
 
 
-class SpecialityCreateView(SparePartMixin, CreateView):
+class SpecialityCreateView(SuccessMessageMixin, CreateView):
     """Create view for spare parts."""
 
     model = Speciality
+    form_class = SpecialityForm
     success_message = "Speciality created!"
 
 
-class SpecialityUpdateView(SparePartMixin, UpdateView):
+class SpecialityUpdateView(SuccessMessageMixin, UpdateView):
     """Update view for spare parts."""
 
     model = Speciality
+    form_class = SpecialityForm
     success_message = "Speciality updated!"
 
     def get_success_url(self):
@@ -223,17 +227,19 @@ class SpecialityListView(ListView):
         return queryset
 
 
-class CarMakeCreateView(SparePartMixin, CreateView):
+class CarMakeCreateView(SuccessMessageMixin, CreateView):
     """Create view for spare parts."""
 
     model = CarMake
+    form_class = CarMakeForm
     success_message = "Car make created!"
 
 
-class CarMakeUpdateView(SparePartMixin, UpdateView):
+class CarMakeUpdateView(SuccessMessageMixin, UpdateView):
     """Update view for spare parts."""
 
     model = CarMake
+    form_class = CarMakeForm
     success_message = "Car make updated!"
 
     def get_success_url(self):
@@ -271,17 +277,19 @@ class CarMakeListView(ListView):
         return queryset
 
 
-class CarModelCreateView(SparePartMixin, CreateView):
+class CarModelCreateView(SuccessMessageMixin, CreateView):
     """Create view for spare parts."""
 
     model = CarModel
+    form_class = CarModelForm
     success_message = "Car model created!"
 
 
-class CarModelUpdateView(SparePartMixin, UpdateView):
+class CarModelUpdateView(SuccessMessageMixin, UpdateView):
     """Update view for spare parts."""
 
     model = CarModel
+    form_class = CarModelForm
     success_message = "Car model updated!"
 
     def get_success_url(self):
