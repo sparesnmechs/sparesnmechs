@@ -1,117 +1,54 @@
 """Spareparts app urls."""
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = "spareparts"
 urlpatterns = [
-    # Sparepart
-    url(regex=r"^$", view=views.SparePartCreateView.as_view(), name="create"),
-    url(
-        regex=r"^(?P<pk>\d+)/update/$",
-        view=views.SparePartUpdateView.as_view(),
+    path(
+        "sparepart",
+        views.SparePartListView.as_view(),
+        name="sparepart-list",
+    ),
+    path(
+        "sparepart/create",
+        views.SparePartCreateView.as_view(),
+        name="create",
+        ),
+    path(
+        "sparepart/<int:pk>/",
+        views.SparePartUpdateView.as_view(),
         name="update",
+        ),
+    path(
+        "sparepart/<int:pk>/delete",
+        views.SparePartDeleteView.as_view(),
+        name="delete",
     ),
-    url(
-        regex=r"^(?P<pk>\d+)/$", view=views.SparePartDetailView.as_view(),
-        name="detail"
+    path(
+        "category",
+        views.SparePartListView.as_view(),
+        name="category-list",
     ),
-    url(
-        regex=r"^(?P<pk>\d+)/results/$",
-        view=views.SparePartResultView.as_view(),
-        name="results",
-    ),
-    url(regex=r"^$", view=views.SparePartListView.as_view(), name="list"),
-    # Sparepart category
-    url(regex=r"^$", view=views.SparePartCategoryCreateView.as_view(),
-        name="create"),
-    url(
-        regex=r"^(?P<pk>\d+)/update/$",
-        view=views.SparePartCategoryUpdateView.as_view(),
-        name="update",
-    ),
-    url(
-        regex=r"^(?P<pk>\d+)/$",
-        view=views.SparePartCategoryDetailView.as_view(),
-        name="detail",
-    ),
-    url(
-        regex=r"^(?P<pk>\d+)/results/$",
-        view=views.SparePartCategoryResultView.as_view(),
-        name="results",
-    ),
-    url(regex=r"^$", view=views.SparePartCategoryListView.as_view(),
-        name="list"),
-    # Sparepart sub-category
-    url(
-        regex=r"^$", view=views.SparePartSubCategoryCreateView.as_view(),
-        name="create"
-    ),
-    url(
-        regex=r"^(?P<pk>\d+)/update/$",
-        view=views.SparePartSubCategoryUpdateView.as_view(),
-        name="update",
-    ),
-    url(
-        regex=r"^(?P<pk>\d+)/$",
-        view=views.SparePartSubCategoryDetailView.as_view(),
-        name="detail",
-    ),
-    url(
-        regex=r"^(?P<pk>\d+)/results/$",
-        view=views.SparePartSubCategoryResultView.as_view(),
-        name="results",
-    ),
-    url(regex=r"^$", view=views.SparePartSubCategoryListView.as_view(),
-        name="list"),
+
     # Speciality
-    url(regex=r"^$", view=views.SpecialityCreateView.as_view(), name="create"),
-    url(
-        regex=r"^(?P<pk>\d+)/update/$",
-        view=views.SpecialityUpdateView.as_view(),
-        name="update",
+    path(
+        "speciality/",
+        views.SpecialityListView.as_view(),
+        name="speciality-list",
     ),
-    url(
-        regex=r"^(?P<pk>\d+)/$",
-        view=views.SpecialityDetailView.as_view(),
-        name="detail",
+    path(
+        "speciality/create",
+        views.SpecialityCreateView.as_view(),
+        name="create",
+        ),
+    path("speciality/<int:pk>/",
+    views.SpecialityUpdateView.as_view(),
+    name="update",
     ),
-    url(
-        regex=r"^(?P<pk>\d+)/results/$",
-        view=views.SpecialityResultView.as_view(),
-        name="results",
+    path(
+        "speciality/<int:pk>/delete",
+        views.SpecialityDeleteView.as_view(),
+        name="delete",
     ),
-    url(regex=r"^$", view=views.SpecialityListView.as_view(), name="list"),
-    # Car make
-    url(regex=r"^$", view=views.CarMakeCreateView.as_view(), name="create"),
-    url(
-        regex=r"^(?P<pk>\d+)/update/$",
-        view=views.CarMakeUpdateView.as_view(),
-        name="update",
-    ),
-    url(regex=r"^(?P<pk>\d+)/$",
-        view=views.CarMakeDetailView.as_view(), name="detail"),
-    url(
-        regex=r"^(?P<pk>\d+)/results/$",
-        view=views.CarMakeResultView.as_view(),
-        name="results",
-    ),
-    url(regex=r"^$", view=views.CarMakeListView.as_view(), name="list"),
-    # Car model
-    url(regex=r"^$", view=views.CarModelCreateView.as_view(), name="create"),
-    url(
-        regex=r"^(?P<pk>\d+)/update/$",
-        view=views.CarModelUpdateView.as_view(),
-        name="update",
-    ),
-    url(
-        regex=r"^(?P<pk>\d+)/$", view=views.CarModelDetailView.as_view(),
-        name="detail"
-    ),
-    url(
-        regex=r"^(?P<pk>\d+)/results/$",
-        view=views.CarModelResultView.as_view(),
-        name="results",
-    ),
-    url(regex=r"^$", view=views.CarModelListView.as_view(), name="list"),
 ]

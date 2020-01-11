@@ -17,26 +17,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # Clients
-    url(r'^spare_dealer', include('snm.clients.urls', namespace='spare_dealer')
-        ),
-    url(r'^mechanic', include('snm.clients.urls', namespace='mechanic')),
-    url(r'^car_owner', include('snm.clients.urls', namespace='car_owner')),
-
-    # Spareparts
-    url(r'^spare_part', include('snm.spareparts.urls', namespace='spare_part')
-        ),
-    url(r'^spare_part_category', include(
-        'snm.spareparts.urls', namespace='spare_part_category')),
-    url(r'^spare_part_sub_category', include(
-        'snm.spareparts.urls', namespace='spare_part_sub_category')),
-
-    url(r'^speciality', include('snm.spareparts.urls', namespace='speciality')
-        ),
-    url(r'^car_make', include('snm.spareparts.urls', namespace='car_make')),
-    url(r'^car_model', include('snm.spareparts.urls', namespace='car_model')),
+    path('', include('snm.spareparts.urls', namespace='spareparts')),
 ]
+
+if settings.DEBUG: # new
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
