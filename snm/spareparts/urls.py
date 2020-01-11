@@ -1,4 +1,4 @@
-"""Spareparts urls."""
+"""Spareparts app urls."""
 from django.conf.urls import url
 
 from . import views
