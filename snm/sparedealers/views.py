@@ -1,8 +1,7 @@
-"""Spareparts app views."""
-from django.urls import reverse_lazy
+from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from .models import SparePart, SparePartCategory, Speciality
+from .models import SparePart, SparePartCategory
 
 
 class SparePartCreateView(CreateView):
@@ -43,7 +42,7 @@ class SparePartDeleteView(DeleteView):
     """Delete a sparepart."""
 
     model = SparePart
-    success_url = reverse_lazy("#")  # TODO Create List View
+    # success_url = reverse_lazy("#")  # TODO Create List View
 
 
 class SparePartListView(ListView):
@@ -59,38 +58,3 @@ class SparePartCategoryListView(ListView):
     queryset = SparePartCategory.objects.all()
     context_object_name = "sparepart_category"
     template_name = "spareparts/sparepart_list.html"
-
-class SpecialityListView(ListView):
-    """List view of spareparts."""
-
-    queryset = Speciality.objects.all()
-    context_object_name = "speciality"
-
-
-class SpecialityCreateView(CreateView):
-    """Create view for spare parts."""
-
-    model = Speciality
-    fields = [
-        "name",
-        "description",
-        "car_make",
-    ]
-
-
-class SpecialityUpdateView(UpdateView):
-    """Update view for spare parts."""
-
-    model = Speciality
-    fields = [
-        "name",
-        "description",
-        "car_make",
-    ]
-
-
-class SpecialityDeleteView(DeleteView):
-    """Delete a sparepart."""
-
-    model = Speciality
-    success_url = reverse_lazy("#")  # TODO Create List View

@@ -48,7 +48,10 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     # local apps
-    'snm.spareparts',
+    'snm.carowners',
+    'snm.common',
+    'snm.mechanics',
+    'snm.sparedealers',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
