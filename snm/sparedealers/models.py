@@ -1,3 +1,4 @@
+"""Models."""
 from django.db import models
 
 from snm.common.models import CommonItemFields, CommonUserFields, Store
@@ -25,10 +26,6 @@ class SparePartSubCategory(CommonItemFields):
     """Spare part subcategory for each category created."""
 
     category = models.ForeignKey(SparePartCategory, on_delete=models.PROTECT)
-
-    def __str__(self):
-        """Represent a spare part subcategory name."""
-        return self.name
 
 
 class SparePart(CommonItemFields):

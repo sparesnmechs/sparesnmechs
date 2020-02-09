@@ -1,3 +1,4 @@
+"""Models."""
 from django.db import models
 
 from snm.common.models import CommonItemFields, CommonUserFields, Store

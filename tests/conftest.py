@@ -2,8 +2,15 @@
 import pytest
 from model_bakery import baker
 
-import snm.spareparts.models as models
-from snm.clients.models import CarOwner, Common, Mechanic, SpareDealer, Store
+from snm.carowners.models import CarMake, CarModel, CarOwner
+from snm.common.models import CommonItemFields, CommonUserFields, Store
+from snm.mechanics.models import Mechanic, Speciality
+from snm.sparedealers.models import (
+    SpareDealer,
+    SparePart,
+    SparePartCategory,
+    SparePartSubCategory,
+)
 
 pytestmark = pytest.mark.django_db
 
@@ -11,21 +18,20 @@ pytestmark = pytest.mark.django_db
 @pytest.fixture
 def car_make():
     """Car make."""
-    return baker.make(models.CarMake, name="Toyota",
-                      description="Gari ya nguvu",)
+    return baker.make(CarMake, name="Toyota", description="Gari ya nguvu")
 
 
 @pytest.fixture
 def car_model(car_make):
     """Car model."""
-    return baker.make(models.CarModel, name="Harrier", car_make=car_make,)
+    return baker.make(CarModel, name="Harrier", car_make=car_make)
 
 
 @pytest.fixture
 def spare_part_category():
     """Spare part category."""
     return baker.make(
-        models.SparePartCategory, name="Ya Nje", description="Parts za nje",
+        SparePartCategory, name="Ya Nje", description="Parts za nje",
     )
 
 
@@ -33,19 +39,23 @@ def spare_part_category():
 def spare_part_subcategory(spare_part_category):
     """Spare part sub category."""
     return baker.make(
-        models.SparePartSubCategory,
+        SparePartSubCategory,
         name="Iko kwa ya nje",
         description="Iko kwa Parts za nje",
     )
 
 
 @pytest.fixture
-def spare_part(spare_part_category, spare_part_subcategory, car_make,
-               car_model
-               ):
+def spare_part(
+    spare_part_category,
+    spare_part_subcategory,
+    car_make,
+    car_model,
+    spare_dealer,
+):
     """Spare part."""
     return baker.make(
-        models.SparePart,
+        SparePart,
         name="bumper",
         description="All new bumper",
         price="10000",
@@ -55,6 +65,7 @@ def spare_part(spare_part_category, spare_part_subcategory, car_make,
         sub_category=spare_part_subcategory,
         car_make=car_make,
         car_model=car_model,
+        sparedealer=spare_dealer,
     )
 
 
@@ -62,7 +73,7 @@ def spare_part(spare_part_category, spare_part_subcategory, car_make,
 def speciality(car_make):
     """Speciality category."""
     return baker.make(
-        models.Speciality,
+        Speciality,
         name="service",
         description="General servicing",
         car_make=car_make,
@@ -76,28 +87,35 @@ def store():
 
 
 @pytest.fixture
-def common():
+def common_user():
     """Common."""
     return baker.make(
-        Common,
+        CommonUserFields,
         first_name="Fundi",
         last_name="Wa Magari",
-        phone_number="+254711223344",
+        phone_number="0711223344",
         description="Nimeivisha kupaka rangi",
     )
 
 
 @pytest.fixture
-def spare_dealer(store, spare_part):
+def common_item():
+    """Common."""
+    return baker.make(
+        CommonItemFields, name="Item", description="Nimeivisha kupaka rangi",
+    )
+
+
+@pytest.fixture
+def spare_dealer(store):
     """Spare dealer."""
     return baker.make(
         SpareDealer,
         first_name="Fundi",
         last_name="Wa Magari",
-        phone_number="+254711223344",
+        phone_number="0711223344",
         description="Nimeivisha kupaka rangi",
         store=store,
-        spare_parts=spare_part,
     )
 
 
@@ -108,7 +126,7 @@ def mechanic(store, speciality):
         Mechanic,
         first_name="Njoro",
         last_name="Njoro",
-        phone_number="+254712345678",
+        phone_number="0712345678",
         description="Njoro wa Uber",
         store=store,
         speciality=speciality,
@@ -122,7 +140,7 @@ def car_owner(car_model, car_make):
         CarOwner,
         first_name="Maich",
         last_name="Wetu",
-        phone_number="+254709879098",
-        car_make=car_make,
-        car_model=car_model,
+        phone_number="0709879098",
+        # car_make=car_make,
+        # car_model=car_model,
     )

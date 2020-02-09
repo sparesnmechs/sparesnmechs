@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Pip installed apps
-    'phonenumber_field',
     'crispy_forms',
 
     # local apps

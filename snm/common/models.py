@@ -1,17 +1,19 @@
+"""Models."""
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 class CommonUserFields(models.Model):
     """Common fields.
-    
+
     These fields are common to most models hence they are
     defined here to follow the DRY rule
     """
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    phone_number = PhoneNumberField(blank=False)
+    phone_number = models.CharField(
+        max_length=10
+    )  # Validate to accept phone no
     description = models.TextField()
     photo = models.ImageField(upload_to="spareparts/")
 
@@ -38,6 +40,6 @@ class CommonItemFields(models.Model):
 class Store(CommonItemFields):
     """Create stores.
 
-    Sparedealers have stores. These stores have a name and 
+    Sparedealers have stores. These stores have a name and
     description defined in class CommonFields
     """
