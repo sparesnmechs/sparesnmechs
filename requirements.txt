@@ -7,3 +7,4 @@ tox>=3.14.1
 Pillow>=6.2.1
 model-bakery>=1.0.2
 django-crispy-forms>=1.8.1
+flake8>=3.7.9
