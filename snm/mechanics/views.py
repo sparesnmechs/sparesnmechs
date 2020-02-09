@@ -1,4 +1,4 @@
-from django.shortcuts import render
+"""Views."""
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from .models import Speciality

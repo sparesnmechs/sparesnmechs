@@ -14,10 +14,11 @@ urlpatterns = [
         "speciality/create",
         views.SpecialityCreateView.as_view(),
         name="create",
-        ),
-    path("speciality/<int:pk>/",
-    views.SpecialityUpdateView.as_view(),
-    name="update",
+    ),
+    path(
+        "speciality/<int:pk>/",
+        views.SpecialityUpdateView.as_view(),
+        name="update",
     ),
     path(
         "speciality/<int:pk>/delete",

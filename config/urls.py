@@ -21,10 +21,12 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('snm.sparedealers.urls', namespace='sparedealers')),
-    path('', include('snm.mechanics.urls', namespace='mechanics')),
+    path("admin/", admin.site.urls),
+    path("", include("snm.sparedealers.urls", namespace="sparedealers")),
+    path("", include("snm.mechanics.urls", namespace="mechanics")),
 ]
 
-if settings.DEBUG: # new
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:  # new
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )
