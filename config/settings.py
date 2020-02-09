@@ -12,13 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-import environ
-
-env = environ.Env(
-    DEBUG=(bool, False)
-)
-environ.Env.read_env('.env')
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,10 +19,29 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "ugdvTVcdjwmathengeTYewqdqoohgweionkd",
+)
+
+def get_bool_env(env_var, default=False):
+    """Parse 'boolean' environment variable strings."""
+    assert default is False or default is True
+    val = os.getenv(env_var)
+    import json
+
+    if val is None:
+        return default
+    try:
+        p = json.loads(val)
+        assert p is False or p is True
+        return p
+    except ValueError:
+        raise Exception("Invalid boolean config: {}".format(val))
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = get_bool_env("DEBUG", True)
 
 ALLOWED_HOSTS = []
 
@@ -93,7 +105,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db()
+    'default': {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME", "snm"),
+        "USER": os.getenv("DB_USER", "snm"),
+        "PASSWORD": os.getenv("DB_PASS", "snm"),
+        "HOST": os.getenv("DB_HOST", ""),
+        "PORT": os.getenv("DB_PORT", ""),
+    }
 }
 
 
