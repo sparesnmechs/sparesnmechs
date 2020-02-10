@@ -14,7 +14,7 @@ class CommonUserFields(models.Model):
     phone_number = models.CharField(
         max_length=10
     )  # Validate to accept phone no
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     photo = models.ImageField(upload_to="spareparts/")
 
     def __str__(self):

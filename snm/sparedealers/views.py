@@ -1,6 +1,8 @@
 """Views."""
+from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
+from .filters import SparePartFilter
 from .models import SparePart, SparePartCategory
 
 
@@ -58,3 +60,13 @@ class SparePartCategoryListView(ListView):
     queryset = SparePartCategory.objects.all()
     context_object_name = "sparepart_category"
     template_name = "spareparts/sparepart_list.html"
+
+
+def sparepart_view(request):
+    """Search view."""
+    spareparts_filter = SparePartFilter(
+        request.GET, queryset=SparePart.objects.all()
+    )
+    return render(
+        request, "sparedealers/sparepart_list.html", {"filter": spareparts_filter}
+    )

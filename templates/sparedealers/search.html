@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br>
+<div class="container">
+<form method="get">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ filter.form.car_make|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-4">
+            {{ filter.form.car_model|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-4">
+            {{ filter.form.category|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ filter.form.sub_category|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-4">
+            {{ filter.form.condition|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-4">
+            {{ filter.form.year_of_manufacture|as_crispy_field }}
+        </div>
+    </div>
+
+<button type="submit" class="btn btn-light bt-sm btn-block" style="background-color:#D02222 !important; color:white;">Search</button>
+</form>
+</div>
+<ul>
+{% for sparepart in filter.qs %}
+<li>{{ sparepart.name }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

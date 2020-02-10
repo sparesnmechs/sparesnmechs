@@ -19,13 +19,15 @@ class SparePartCategory(CommonItemFields):
     obtianed from class CommonField
     """
 
-    photo = models.ImageField(upload_to="spareparts/category")
+    photo = models.ImageField(upload_to="spareparts/category", blank=True, null=True)
 
 
 class SparePartSubCategory(CommonItemFields):
     """Spare part subcategory for each category created."""
 
-    category = models.ForeignKey(SparePartCategory, on_delete=models.PROTECT)
+    category = models.ForeignKey(
+        SparePartCategory, on_delete=models.PROTECT, related_name="sparepartcategories"
+    )
 
 
 class SparePart(CommonItemFields):
@@ -46,9 +48,7 @@ class SparePart(CommonItemFields):
     condition = models.CharField(max_length=255, choices=CONDITION_CHOICES)
     year_of_manufacture = models.CharField(max_length=225)
     category = models.ForeignKey(SparePartCategory, on_delete=models.PROTECT)
-    sub_category = models.ForeignKey(
-        SparePartSubCategory, on_delete=models.PROTECT
-    )
+    sub_category = models.ForeignKey(SparePartSubCategory, on_delete=models.PROTECT)
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     car_model = models.ForeignKey(CarModel, on_delete=models.PROTECT)
     photo = models.ImageField(upload_to="spareparts/")  # Only for development
