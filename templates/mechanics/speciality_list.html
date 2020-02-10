@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% load static %}
 
 {% block carousel %}
@@ -42,6 +44,26 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+<br>
+
+<div class="container">
+  <form method="get" class="col-sm-10" id="searchForm">
+      <div class="form-row">
+          <div class="form-group col-md-6" style="color:white;">
+              {{ filter.form.mechanic|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-6" style="color:white;">
+              {{ filter.form.car_make|as_crispy_field }}
+          </div>
+      </div>
+  <button type="submit" class="btn btn-light bt-sm btn-block" style="background-color:#D02222 !important; color:white;">Search</button>
+  </form>
+</div>
+<ul>
+{% for speciality in filter.qs %}
+<li>{{ speciality.name }}</li>
+{% endfor %}
+</ul>
 <br>
 {% endblock carousel %}
 {% comment %} End carousel {% endcomment %}

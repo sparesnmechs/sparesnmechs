@@ -19,13 +19,19 @@ class SparePartCategory(CommonItemFields):
     obtianed from class CommonField
     """
 
-    photo = models.ImageField(upload_to="spareparts/category")
+    photo = models.ImageField(
+        upload_to="spareparts/category", blank=True, null=True
+    )
 
 
 class SparePartSubCategory(CommonItemFields):
     """Spare part subcategory for each category created."""
 
-    category = models.ForeignKey(SparePartCategory, on_delete=models.PROTECT)
+    category = models.ForeignKey(
+        SparePartCategory,
+        on_delete=models.PROTECT,
+        related_name="sparepartcategories",
+    )
 
 
 class SparePart(CommonItemFields):
