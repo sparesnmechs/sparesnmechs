@@ -3,7 +3,7 @@ import pytest
 from model_bakery import baker
 
 from snm.carowners.models import CarMake, CarModel, CarOwner
-from snm.common.models import CommonItemFields, CommonUserFields, Store
+from snm.common.models import Store
 from snm.mechanics.models import Mechanic, Speciality
 from snm.sparedealers.models import (
     SpareDealer,
@@ -86,24 +86,24 @@ def store():
     return baker.make(Store, name="duka", description="duka ya magari noma",)
 
 
-@pytest.fixture
-def common_user():
-    """Common."""
-    return baker.make(
-        CommonUserFields,
-        first_name="Fundi",
-        last_name="Wa Magari",
-        phone_number="0711223344",
-        description="Nimeivisha kupaka rangi",
-    )
+# @pytest.fixture
+# def common_user():
+#     """Common."""
+#     return baker.make(
+#         CommonUserFields,
+#         first_name="Fundi",
+#         last_name="Wa Magari",
+#         phone_number="0711223344",
+#         description="Nimeivisha kupaka rangi",
+#     )
 
 
-@pytest.fixture
-def common_item():
-    """Common."""
-    return baker.make(
-        CommonItemFields, name="Item", description="Nimeivisha kupaka rangi",
-    )
+# @pytest.fixture
+# def common_item():
+#     """Common."""
+#     return baker.make(
+#         CommonItemFields, name="Item", description="Nimeivisha kupaka rangi",
+#     )
 
 
 @pytest.fixture
