@@ -3,8 +3,11 @@ from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from .filters import SparePartFilter
-from .models import SparePart, SparePartCategory
-
+from .models import SparePart, SparePartCategory, SparePartSubCategory
+# from django_ajax.decorators import ajax
+from django.http import HttpResponse
+from django.core import serializers
+from snm.common.models import CommonItemFields
 
 class SparePartCreateView(CreateView):
     """Create view for spare parts."""
@@ -70,3 +73,16 @@ def sparepart_view(request):
     return render(
         request, "sparedealers/sparepart_list.html", {"filter": spareparts_filter}
     )
+
+
+# @ajax
+def get_subcategories(request):
+    """Filter subcatgories."""
+    category = request.GET.get("category", None)
+    print(request.GET)
+    if category:
+        sub_cat = SparePartSubCategory.objects.filter(category=category)
+        common = CommonItemFields.objects.all()
+        return HttpResponse(serializers.serialize("json", [*sub_cat, *common]), content_type="application/json")
+    else:
+        return HttpResponse(serializers.serialize("json", []), content_type="application/json")

@@ -34,4 +34,16 @@
     <button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Save</button>
 </form>
 </div>
+<!-- <script>
+    var sub_cat_select = document.querySelector("id_sub_category")
+    var cat = document.querySelector("id_category")
+    cat.onchange = () => {
+    $.ajax({url:"{% url 'sub_cat' %}",data:cat.value}).done((data) => {
+        let pk = data[0].pk
+        let sub_cat = data.find(el => el.model == 	"common.commonitemfields" && el.pk == pk)
+        sub_cat_select.innerHTML = 
+    })
+
+    }
+</script> -->
 {% endblock %}

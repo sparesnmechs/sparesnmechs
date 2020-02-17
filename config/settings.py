@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 
     # Pip installed apps
     'crispy_forms',
+    'django_ajax',
 
     # local apps
     'snm.carowners',

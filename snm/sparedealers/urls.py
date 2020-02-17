@@ -35,4 +35,9 @@ urlpatterns = [
         views.sparepart_view,
         name="sparepart-list",
     ),
+    path(
+        "sub_cat",
+        views.get_subcategories,
+        name="sub_cat",
+    ),
 ]
