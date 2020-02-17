@@ -7,7 +7,7 @@ app_name = "mechanics"
 urlpatterns = [
     path(
         "speciality/",
-        views.SpecialityListView.as_view(),
+        views.speciality_view,
         name="speciality-list",
     ),
     path(

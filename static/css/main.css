@@ -143,3 +143,8 @@ body {
     color: 
     #fff;
 }
+
+#searchForm {
+position:absolute;
+top:40%;
+}
