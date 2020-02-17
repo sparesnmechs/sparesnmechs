@@ -1,10 +1,8 @@
 """Car owner model."""
 from django.db import models
 
-from snm.common.models import CommonItemFields, CommonUserFields
 
-
-class CarMake(CommonItemFields):
+class CarMake(models.Model):
     """
     Create a make for a car.
 
@@ -13,9 +11,15 @@ class CarMake(CommonItemFields):
     """
 
     photo = models.ImageField(upload_to="spareparts/car_make")
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        """Represent name for human readability."""
+        return self.name
 
 
-class CarModel(CommonItemFields):
+class CarModel(models.Model):
     """
     Create a car model.
 
@@ -25,10 +29,27 @@ class CarModel(CommonItemFields):
 
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     photo = models.ImageField(upload_to="spareparts/car_model")
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        """Represent name for human readability."""
+        return self.name
 
 
-class CarOwner(CommonUserFields):
+class CarOwner(models.Model):
     """Create a car onwer."""
 
     car_make = models.ManyToManyField(CarMake)
     car_model = models.ManyToManyField(CarModel)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone_number = models.CharField(
+        max_length=10
+    )  # Validate to accept phone no
+    description = models.TextField(blank=True, null=True)
+    photo = models.ImageField(upload_to="spareparts/")
+
+    def __str__(self):
+        """Represent first and last name for human readability."""
+        return "{} {}".format(self.first_name, self.last_name)
