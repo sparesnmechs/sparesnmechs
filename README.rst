@@ -63,7 +63,7 @@ Create a virtual environment for your project
 
 .. code:: bash
 
-	$ cd python3 -m venv name-of-your-virtualenv
+	$ python3 -m venv name-of-your-virtualenv
 
 Activate your virtual environment.
 
