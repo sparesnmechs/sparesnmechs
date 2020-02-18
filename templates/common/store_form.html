@@ -2,29 +2,22 @@
 
 {% load crispy_forms_tags %}
 
-{% block content %}
+{% block content%}
 <div class="container">
 <br>
-<h3>Create Your Speciality</h3>
+<h3>Create Your Store</h3>
 <hr>
-<form method="post">
-{% csrf_token %}
+<form method="post">{% csrf_token %}
     <div class="form-group">
         {{ form.name|as_crispy_field }}
         <small id="passwordHelpBlock" class="form-text text-muted">
-        Fill out the name of your speciality e.g Wiring.
-        </small>
-    </div>
-    <div class="form-group">
-        {{ form.car_make|as_crispy_field }}
-        <small id="passwordHelpBlock" class="form-text text-muted">
-        Fill out the car make you specialize in.
+        Fill out the name of your store.
         </small>
     </div>
     <div class="form-group">
         {{ form.description|as_crispy_field }}
         <small id="passwordHelpBlock" class="form-text text-muted">
-        Optionally describe your speciality.
+        Optionally decribe your store.
         </small>
     </div>
     <button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Save</button>
