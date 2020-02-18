@@ -30,20 +30,27 @@ Clone the project
 
 Set up the environment variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Create a .env file in your parent project directory
+Create a env.sh file in your parent project directory
 
 .. code:: bash
 
 	$ cd path/to/your/directory/sparesnmechs
-	$ touch .env
+	$ touch env.sh
 
-Add these environment variables to your ``.env`` file:
+Add these environment variables to your ``env.sh`` file:
 
 .. code:: bash
 
-	SECRET_KEY=your-secret-key
-	DATABASE_URL=psql://db_user:db_password@localhost:5432/db_name
-	
+	#!/usr/bin/env bash
+
+	export SECRET_KEY="your-secret-key"
+	export DEBUG="true"  #For development only
+	export DB_NAME="db_name"
+	export DB_USER="db_user"
+	export DB_PASS="db_pass"
+	export DB_HOST="127.0.0.1"
+	export DB_PORT="5432"
+
 Setting up the projects dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Navigate into the projects directory from the terminal.
@@ -64,6 +71,12 @@ Activate your virtual environment.
 
 	$ source name-of-your-virtualenv/bin/activate
 
+Source your env.sh file.
+
+.. code:: bash
+
+	$ source env.sh
+
 Install the requirements.
 
 .. code:: bash
@@ -72,6 +85,15 @@ Install the requirements.
 
 Running and testing the project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Create a ``postgresql`` database with the information in ``env.sh``.
+
+Make the initial migrations:
+
+.. code:: bash
+
+	(name-of-your-virtualenv)$ ./manage.py makemigrations
+	(name-of-your-virtualenv)$ ./manage.py migrate
+
 To run the project:
 
 .. code:: bash
@@ -89,7 +111,7 @@ To test the project:
 
 .. code:: bash
 
-	(name-of-your-virtualenv)$ pytest # This will run all the tests in the project
+	(name-of-your-virtualenv)$ tox -r # This will run all the tests in the project
 
 Credits
 -------
