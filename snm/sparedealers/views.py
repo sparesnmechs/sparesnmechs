@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from .filters import SparePartFilter
-from .models import SpareDealer, SparePart, SparePartCategory
+from .models import SparePart, SparePartCategory
 
 
 class SparePartCreateView(CreateView):
@@ -60,20 +60,6 @@ class SparePartCategoryListView(ListView):
     queryset = SparePartCategory.objects.all()
     context_object_name = "sparepart_category"
     template_name = "spareparts/sparepart_list.html"
-
-
-class DealerCreateView(CreateView):
-    """Create view for mechanics."""
-
-    model = SpareDealer
-    fields = [
-        "first_name",
-        "last_name",
-        "phone_number",
-        "store",
-        "description",
-        "photo",
-    ]
 
 
 def sparepart_view(request):
