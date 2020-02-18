@@ -24,6 +24,7 @@ SECRET_KEY = os.getenv(
     "ugdvTVcdjwmathengeTYewqdqoohgweionkd",
 )
 
+
 def get_bool_env(env_var, default=False):
     """Parse 'boolean' environment variable strings."""
     assert default is False or default is True
@@ -43,7 +44,7 @@ def get_bool_env(env_var, default=False):
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_bool_env("DEBUG", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.now.sh']
 
 # Application definition
 
