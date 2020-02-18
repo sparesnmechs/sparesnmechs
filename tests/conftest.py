@@ -3,7 +3,6 @@ import pytest
 from model_bakery import baker
 
 from snm.carowners.models import CarMake, CarModel, CarOwner
-from snm.common.models import Store
 from snm.mechanics.models import Mechanic, Speciality
 from snm.sparedealers.models import (
     SpareDealer,
@@ -80,10 +79,10 @@ def speciality(car_make):
     )
 
 
-@pytest.fixture
-def store():
-    """Store."""
-    return baker.make(Store, name="duka", description="duka ya magari noma",)
+# @pytest.fixture
+# def store():
+#     """Store."""
+#     return baker.make(Store, name="duka", description="duka ya magari noma",)
 
 
 # @pytest.fixture
@@ -107,7 +106,7 @@ def store():
 
 
 @pytest.fixture
-def spare_dealer(store):
+def spare_dealer():
     """Spare dealer."""
     return baker.make(
         SpareDealer,
@@ -115,12 +114,12 @@ def spare_dealer(store):
         last_name="Wa Magari",
         phone_number="0711223344",
         description="Nimeivisha kupaka rangi",
-        store=store,
+        store="store",
     )
 
 
 @pytest.fixture
-def mechanic(store, speciality):
+def mechanic(speciality):
     """Mechanic."""
     return baker.make(
         Mechanic,
@@ -128,7 +127,7 @@ def mechanic(store, speciality):
         last_name="Njoro",
         phone_number="0712345678",
         description="Njoro wa Uber",
-        store=store,
+        store="store",
         speciality=speciality,
     )
 

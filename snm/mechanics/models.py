@@ -1,14 +1,13 @@
 """Models."""
 from django.db import models
 
-from snm.common.models import Store
 from snm.carowners.models import CarMake
 
 
 class Mechanic(models.Model):
     """Create the mechanic."""
 
-    store = models.ForeignKey(Store, on_delete=models.PROTECT)
+    store = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(

@@ -5,11 +5,7 @@ from . import views
 
 app_name = "mechanics"
 urlpatterns = [
-    path(
-        "speciality/",
-        views.speciality_view,
-        name="speciality-list",
-    ),
+    path("speciality/", views.speciality_view, name="speciality-list",),
     path(
         "speciality/create",
         views.SpecialityCreateView.as_view(),
@@ -24,5 +20,10 @@ urlpatterns = [
         "speciality/<int:pk>/delete",
         views.SpecialityDeleteView.as_view(),
         name="delete",
+    ),
+    path(
+        "mechanic/create",
+        views.MechanicCreateView.as_view(),
+        name="mech_create",
     ),
 ]
