@@ -23,10 +23,10 @@ def test_spareparts_models(
     assert spare_part.sparedealer == spare_dealer
 
 
-def test_spare_dealer(store, spare_dealer):
+def test_spare_dealer(spare_dealer):
     """Test spare dealer."""
     assert spare_dealer.first_name == "Fundi"
     assert spare_dealer.last_name == "Wa Magari"
     assert spare_dealer.phone_number == "0711223344"
-    assert spare_dealer.store.name == store.name
+    assert spare_dealer.store == "store"
     assert spare_dealer.description == "Nimeivisha kupaka rangi"
