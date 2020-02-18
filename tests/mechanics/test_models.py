@@ -12,11 +12,11 @@ def test_mechanics_models(
     assert speciality.car_make == car_make
 
 
-def test_mechanic(mechanic, speciality):
+def test_mechanic(store, mechanic, speciality):
     """Test mechanic."""
     assert mechanic.speciality == speciality
     assert mechanic.first_name == "Njoro"
     assert mechanic.last_name == "Njoro"
     assert mechanic.phone_number == "0712345678"
-    assert mechanic.store == "store"
+    assert mechanic.store.name == store.name
     assert mechanic.description == "Njoro wa Uber"

@@ -19,6 +19,14 @@
     {% comment %} <title>Sparesnmechs</title> {% endcomment %}
   </head>
   <body style="background-color: #f2f2f2;">
+        {% comment %} Top Nav {% endcomment %}
+        <ul class="nav justify-content-end", style="background-color:#0f172e !important;">
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="color:white;"><i class="fas fa-users"></i>Account</a>
+            </li>
+        </ul>
+        {% comment %} End Top Nav {% endcomment %}
+
         {% comment %} Second Nav bar {% endcomment %}
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light", style="background-color:#D02222 !important;">
             <a class="navbar-brand" href="{% url 'sparedealers:sparepart-list' %}">
@@ -30,36 +38,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link active" href="{% url 'sparedealers:sparepart-list' %}">
-                  <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Find Dealers</button>
-                  </a>
+                  <a class="nav-link active" href="{% url 'sparedealers:sparepart-list' %}"><button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Find Dealers</button></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'sparedealers:create' %}">
-                    <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Become a Dealer</button>
-                    </a>
+                    <a class="nav-link" href="{% url 'common:dealer_create' %}"><button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Become a Dealer</button></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'mechanics:speciality-list' %}">
-                  <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Find Mechanics</button>
-                  </a>
+                  <a class="nav-link" href="{% url 'mechanics:speciality-list' %}"><button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Find Mechanics</button></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'mechanics:create' %}">
-                    <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Become a Mechanic</button>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Add Profile</button>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Car Owner</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Mechanic</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Spare Dealer</a>
-                  </div>
+                    <a class="nav-link" href="{% url 'common:mech_create' %}"><button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Become a Mechanic</button></a>
                 </li>
                 </ul>
             </div>
