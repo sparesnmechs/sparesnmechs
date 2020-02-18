@@ -5,15 +5,16 @@ from . import views
 
 app_name = "sparedealers"
 urlpatterns = [
-    path("", views.sparepart_view, name="sparepart-list",),
     path(
-        "sparepart/create", views.SparePartCreateView.as_view(), name="create",
+        "",
+        views.sparepart_view,
+        name="sparepart-list",
     ),
     path(
-        "dealer/create",
-        views.DealerCreateView.as_view(),
-        name="dealer_create",
-    ),
+        "sparepart/create",
+        views.SparePartCreateView.as_view(),
+        name="create",
+        ),
     # path(
     #     "sparepart/<int:pk>/",
     #     views.SparePartUpdateView.as_view(),

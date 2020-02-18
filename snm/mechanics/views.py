@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from .filters import SpecialityFilter
-from .models import Mechanic, Speciality
+from .models import Speciality
 
 
 class SpecialityListView(ListView):
@@ -40,20 +40,6 @@ class SpecialityDeleteView(DeleteView):
 
     model = Speciality
     # success_url = reverse_lazy("#")  # TODO Create List View
-
-
-class MechanicCreateView(CreateView):
-    """Create view for mechanics."""
-
-    model = Mechanic
-    fields = [
-        "first_name",
-        "last_name",
-        "phone_number",
-        "store",
-        "description",
-        "photo",
-    ]
 
 
 def speciality_view(request):

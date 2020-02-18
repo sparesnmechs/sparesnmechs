@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 
     # local apps
     'snm.carowners',
+    'snm.common',
     'snm.mechanics',
     'snm.sparedealers',
 ]
