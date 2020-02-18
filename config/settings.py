@@ -55,10 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Pip installed apps
     'crispy_forms',
 
-    # local apps
     'snm.carowners',
     'snm.mechanics',
     'snm.sparedealers',
