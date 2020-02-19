@@ -1,9 +1,16 @@
 """Views."""
 from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.core import serializers
+from django.http import HttpResponse
 
 from .filters import SparePartFilter
-from .models import SpareDealer, SparePart, SparePartCategory
+from .models import (
+    SpareDealer,
+    SparePart,
+    SparePartCategory,
+    SparePartSubCategory,
+)
 
 
 class SparePartCreateView(CreateView):
@@ -85,4 +92,18 @@ def sparepart_view(request):
         request,
         "sparedealers/sparepart_list.html",
         {"filter": spareparts_filter},
+    )
+
+
+def get_subcategories(request):
+    category = request.GET.get("category", None)
+    if not category:
+        return HttpResponse(
+            serializers.serialize("json", SparePartSubCategory.objects.all()),
+            content_type="application/json",
+        )
+    sub_categories = SparePartSubCategory.objects.filter(category=category)
+    return HttpResponse(
+        serializers.serialize("json", sub_categories),
+        content_type="application/json",
     )
