@@ -14,7 +14,7 @@ class Mechanic(models.Model):
         max_length=10
     )  # Validate to accept phone no
     description = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to="spareparts/")
+    photo = models.ImageField(upload_to="spareparts/", blank=True, null=True)
 
     def __str__(self):
         """Represent first and last name for human readability."""

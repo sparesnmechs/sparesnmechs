@@ -10,7 +10,7 @@ urlpatterns = [
         "sparepart/create", views.SparePartCreateView.as_view(), name="create",
     ),
     path(
-        "dealer/create",
+        "dealer/create/",
         views.DealerCreateView.as_view(),
         name="dealer_create",
     ),
@@ -18,6 +18,12 @@ urlpatterns = [
         "spareparts/subcategories",
         views.get_subcategories,
         name="get_subcategories",
+    ),
+    path("dealer/<int:pk>", views.DealerDetailView.as_view(), name="dealer",),
+    path(
+        "dealer/update/<int:pk>/",
+        views.DealerUpdateView.as_view(),
+        name="dealer_update",
     ),
     # path(
     #     "sparepart/<int:pk>/",

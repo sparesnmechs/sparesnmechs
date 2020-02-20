@@ -26,7 +26,7 @@ urlpatterns = [
     path("", include("snm.mechanics.urls", namespace="mechanics")),
 ]
 
-if settings.DEBUG:  # new
+if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )

@@ -14,7 +14,7 @@ class SpareDealer(models.Model):
         max_length=10
     )  # Validate to accept phone no
     description = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to="spareparts/")
+    photo = models.ImageField(upload_to="spareparts/", blank=True, null=True)
 
     def __str__(self):
         """Represent first and last name for human readability."""
@@ -81,7 +81,9 @@ class SparePart(models.Model):
     )
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     car_model = models.ForeignKey(CarModel, on_delete=models.PROTECT)
-    photo = models.ImageField(upload_to="spareparts/")  # Only for development
+    photo = models.ImageField(
+        upload_to="spareparts/", blank=True, null=True
+    )  # Only for development
     is_featured = models.BooleanField(default=False)
 
     def __str__(self):
