@@ -2,7 +2,13 @@
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 
 from .filters import SparePartFilter
 from .models import (
@@ -81,6 +87,27 @@ class DealerCreateView(CreateView):
         "description",
         "photo",
     ]
+
+
+class DealerUpdateView(UpdateView):
+    """Update view for mechanics."""
+
+    model = SpareDealer
+    fields = [
+        "first_name",
+        "last_name",
+        "phone_number",
+        "store",
+        "description",
+        "photo",
+    ]
+
+
+class DealerDetailView(DetailView):
+    """View a dealers details."""
+
+    model = SpareDealer
+    context_object_name = "dealer"
 
 
 def sparepart_view(request):
