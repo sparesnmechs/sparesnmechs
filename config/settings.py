@@ -44,7 +44,7 @@ def get_bool_env(env_var, default=False):
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_bool_env("DEBUG", True)
 
-ALLOWED_HOSTS = ['.now.sh']
+ALLOWED_HOSTS = []
 
 # Application definition
 

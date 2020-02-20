@@ -1,8 +1,8 @@
 """Views."""
-from django.shortcuts import render
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.core import serializers
 from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from .filters import SparePartFilter
 from .models import (
