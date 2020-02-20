@@ -14,6 +14,11 @@ urlpatterns = [
         views.DealerCreateView.as_view(),
         name="dealer_create",
     ),
+    path(
+        "spareparts/subcategories",
+        views.get_subcategories,
+        name="get_subcategories",
+    ),
     # path(
     #     "sparepart/<int:pk>/",
     #     views.SparePartUpdateView.as_view(),
