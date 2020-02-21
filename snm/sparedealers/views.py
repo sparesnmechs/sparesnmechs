@@ -1,5 +1,6 @@
 """Views."""
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -20,7 +21,7 @@ from .models import (
 )
 
 
-class SparePartCreateView(LoginRequiredMixin, CreateView):
+class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Create view for spare parts."""
 
     model = SparePart
@@ -37,9 +38,10 @@ class SparePartCreateView(LoginRequiredMixin, CreateView):
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
+    success_message = "Your sparepart has been succesfully created"
 
 
-class SparePartUpdateView(LoginRequiredMixin, UpdateView):
+class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Update view for spare parts."""
 
     model = SparePart
@@ -56,6 +58,7 @@ class SparePartUpdateView(LoginRequiredMixin, UpdateView):
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
+    success_message = "Your sparepart has been succesfully updated"
 
 
 class SparePartDeleteView(LoginRequiredMixin, DeleteView):
@@ -81,7 +84,7 @@ class SparePartCategoryListView(ListView):
     template_name = "spareparts/sparepart_list.html"
 
 
-class DealerCreateView(LoginRequiredMixin, CreateView):
+class DealerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Create view for mechanics."""
 
     model = SpareDealer
@@ -95,9 +98,10 @@ class DealerCreateView(LoginRequiredMixin, CreateView):
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
+    success_message = "Your profile has been succesfully created"
 
 
-class DealerUpdateView(LoginRequiredMixin, UpdateView):
+class DealerUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Update view for mechanics."""
 
     model = SpareDealer
@@ -111,6 +115,7 @@ class DealerUpdateView(LoginRequiredMixin, UpdateView):
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
+    success_message = "Your profile has been succesfully updated"
 
 
 class DealerDetailView(DetailView):

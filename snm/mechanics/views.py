@@ -1,5 +1,6 @@
 """Views."""
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
@@ -14,7 +15,9 @@ class SpecialityListView(ListView):
     context_object_name = "speciality"
 
 
-class SpecialityCreateView(LoginRequiredMixin, CreateView):
+class SpecialityCreateView(
+    SuccessMessageMixin, LoginRequiredMixin, CreateView
+):
     """Create view for spare parts."""
 
     model = Speciality
@@ -25,9 +28,12 @@ class SpecialityCreateView(LoginRequiredMixin, CreateView):
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
+    success_message = "Your speciality has been succesfully created"
 
 
-class SpecialityUpdateView(LoginRequiredMixin, UpdateView):
+class SpecialityUpdateView(
+    SuccessMessageMixin, LoginRequiredMixin, UpdateView
+):
     """Update view for spare parts."""
 
     model = Speciality
@@ -38,6 +44,7 @@ class SpecialityUpdateView(LoginRequiredMixin, UpdateView):
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
+    success_message = "Your speciality has been succesfully updated"
 
 
 class SpecialityDeleteView(LoginRequiredMixin, DeleteView):
@@ -48,7 +55,7 @@ class SpecialityDeleteView(LoginRequiredMixin, DeleteView):
     redirect_field_name = "redirect_to"
 
 
-class MechanicCreateView(LoginRequiredMixin, CreateView):
+class MechanicCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Create view for mechanics."""
 
     model = Mechanic
@@ -62,6 +69,24 @@ class MechanicCreateView(LoginRequiredMixin, CreateView):
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
+    success_message = "Your profile has been succesfully created"
+
+
+class MechanicUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    """Create view for mechanics."""
+
+    model = Mechanic
+    fields = [
+        "first_name",
+        "last_name",
+        "phone_number",
+        "store",
+        "description",
+        "photo",
+    ]
+    login_url = "login"
+    redirect_field_name = "redirect_to"
+    success_message = "Your profile has been succesfully updated"
 
 
 def speciality_view(request):
