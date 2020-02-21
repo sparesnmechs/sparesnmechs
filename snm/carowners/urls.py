@@ -13,4 +13,7 @@ urlpatterns = [
         views.CarownerUpdateView.as_view(),
         name="update",
     ),
+    path(
+        "signup/", views.SignUp.as_view(), name="signup",
+    ),
 ]

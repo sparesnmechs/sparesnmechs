@@ -1,4 +1,5 @@
 """Views."""
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -19,7 +20,7 @@ from .models import (
 )
 
 
-class SparePartCreateView(CreateView):
+class SparePartCreateView(LoginRequiredMixin, CreateView):
     """Create view for spare parts."""
 
     model = SparePart
@@ -34,9 +35,11 @@ class SparePartCreateView(CreateView):
         "car_make",
         "car_model",
     ]
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
-class SparePartUpdateView(UpdateView):
+class SparePartUpdateView(LoginRequiredMixin, UpdateView):
     """Update view for spare parts."""
 
     model = SparePart
@@ -51,13 +54,16 @@ class SparePartUpdateView(UpdateView):
         "car_make",
         "car_model",
     ]
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
-class SparePartDeleteView(DeleteView):
+class SparePartDeleteView(LoginRequiredMixin, DeleteView):
     """Delete a sparepart."""
 
     model = SparePart
-    # success_url = reverse_lazy("#")  # TODO Create List View
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
 class SparePartListView(ListView):
@@ -75,7 +81,7 @@ class SparePartCategoryListView(ListView):
     template_name = "spareparts/sparepart_list.html"
 
 
-class DealerCreateView(CreateView):
+class DealerCreateView(LoginRequiredMixin, CreateView):
     """Create view for mechanics."""
 
     model = SpareDealer
@@ -87,9 +93,11 @@ class DealerCreateView(CreateView):
         "description",
         "photo",
     ]
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
-class DealerUpdateView(UpdateView):
+class DealerUpdateView(LoginRequiredMixin, UpdateView):
     """Update view for mechanics."""
 
     model = SpareDealer
@@ -101,6 +109,8 @@ class DealerUpdateView(UpdateView):
         "description",
         "photo",
     ]
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
 class DealerDetailView(DetailView):
