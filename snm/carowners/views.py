@@ -1,4 +1,48 @@
 """Views."""
-# from django.shortcuts import render
+from django.core import serializers
+from django.http import HttpResponse
+from django.views.generic import CreateView, UpdateView
 
-# Create your views here.
+from .models import CarModel, CarOwner
+
+
+class CarownerCreateView(CreateView):
+    """Create view for spare parts."""
+
+    model = CarOwner
+    fields = [
+        "first_name",
+        "last_name",
+        "phone_number",
+        "car_make",
+        "car_model",
+        "description",
+    ]
+
+
+class CarownerUpdateView(UpdateView):
+    """Update view for spare parts."""
+
+    model = CarOwner
+    fields = [
+        "first_name",
+        "last_name",
+        "phone_number",
+        "car_make",
+        "car_model",
+        "description",
+    ]
+
+
+def get_carmodels(request):
+    car_make = request.GET.get("car_make", None)
+    if not car_make:
+        return HttpResponse(
+            serializers.serialize("json", CarModel.objects.all()),
+            content_type="application/json",
+        )
+    car_makes = CarModel.objects.filter(car_make=car_make)
+    return HttpResponse(
+        serializers.serialize("json", car_makes),
+        content_type="application/json",
+    )
