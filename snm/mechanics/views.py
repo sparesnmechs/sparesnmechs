@@ -1,4 +1,5 @@
 """Views."""
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
@@ -13,7 +14,7 @@ class SpecialityListView(ListView):
     context_object_name = "speciality"
 
 
-class SpecialityCreateView(CreateView):
+class SpecialityCreateView(LoginRequiredMixin, CreateView):
     """Create view for spare parts."""
 
     model = Speciality
@@ -22,9 +23,11 @@ class SpecialityCreateView(CreateView):
         "description",
         "car_make",
     ]
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
-class SpecialityUpdateView(UpdateView):
+class SpecialityUpdateView(LoginRequiredMixin, UpdateView):
     """Update view for spare parts."""
 
     model = Speciality
@@ -33,16 +36,19 @@ class SpecialityUpdateView(UpdateView):
         "description",
         "car_make",
     ]
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
-class SpecialityDeleteView(DeleteView):
+class SpecialityDeleteView(LoginRequiredMixin, DeleteView):
     """Delete a sparepart."""
 
     model = Speciality
-    # success_url = reverse_lazy("#")  # TODO Create List View
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
-class MechanicCreateView(CreateView):
+class MechanicCreateView(LoginRequiredMixin, CreateView):
     """Create view for mechanics."""
 
     model = Mechanic
@@ -54,6 +60,8 @@ class MechanicCreateView(CreateView):
         "description",
         "photo",
     ]
+    login_url = "login"
+    redirect_field_name = "redirect_to"
 
 
 def speciality_view(request):

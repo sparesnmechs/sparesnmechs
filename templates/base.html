@@ -22,7 +22,7 @@
         {% comment %} Second Nav bar {% endcomment %}
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light", style="background-color:#D02222 !important;">
             <a class="navbar-brand" href="{% url 'sparedealers:sparepart-list' %}">
-                <img src="{% static "logo/spares-logo.jpg" %}" width="130" height="75" alt="">
+                <img src="{% static 'logo/spares-logo.jpg' %}" width="130" height="75" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,12 +54,23 @@
                     <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Add Profile</button>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href=""{% url 'carowners:create' %}"">Car Owner</a>
+                    <a class="dropdown-item" href="{% url 'carowners:create' %}">Car Owner</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'mechanics:mech_create' %}">Mechanic</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'sparedealers:dealer_create' %}">Spare Dealer</a>
                   </div>
+                </li>
+                <li class="nav-item active">
+                  {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'logout' %}">
+                      <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Log out</button>
+                    </a>
+                  {% else %}
+                    <a class="nav-link" href="{% url 'login' %}">
+                      <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Log in</button>
+                    </a>
+                  {% endif %}
                 </li>
                 </ul>
             </div>
@@ -102,7 +113,7 @@
         <!-- Content -->
         <h6 class="text-uppercase font-weight-bold" style="color: #fff;">Sparesnmechs</h6>
         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: white; color: #fff;">
-        {% comment %} <p><img src="{% static "logo/spares-logo.jpg" %}" width="130" height="75" alt=""></p> {% endcomment %}
+        {% comment %} <p><img src="{% static 'logo/spares-logo.jpg' %}" width="130" height="75" alt=""></p> {% endcomment %}
         <p style="color: #fff;"><small>Spares And Mechs provides a platform where automobile part dealers showcase their products 
         with ease and link with buyers efficiently. We are also providing mechanics a platform to let 
         their services known to car owners requiring the services.</small></p>
