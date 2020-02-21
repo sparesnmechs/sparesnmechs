@@ -24,6 +24,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("snm.sparedealers.urls", namespace="sparedealers")),
     path("", include("snm.mechanics.urls", namespace="mechanics")),
+    path("", include("snm.carowners.urls", namespace="carowners")),
 ]
 
 if settings.DEBUG:

@@ -10,7 +10,9 @@ class CarMake(models.Model):
     name: Toyota.
     """
 
-    photo = models.ImageField(upload_to="spareparts/car_make")
+    photo = models.ImageField(
+        upload_to="spareparts/car_make", blank=True, null=True
+    )
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
 
@@ -28,7 +30,9 @@ class CarModel(models.Model):
     """
 
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
-    photo = models.ImageField(upload_to="spareparts/car_model")
+    photo = models.ImageField(
+        upload_to="spareparts/car_model", blank=True, null=True
+    )
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
 
@@ -48,7 +52,7 @@ class CarOwner(models.Model):
         max_length=10
     )  # Validate to accept phone no
     description = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to="spareparts/")
+    photo = models.ImageField(upload_to="spareparts/", blank=True, null=True)
 
     def __str__(self):
         """Represent first and last name for human readability."""
