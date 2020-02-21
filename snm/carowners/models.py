@@ -44,8 +44,8 @@ class CarModel(models.Model):
 class CarOwner(models.Model):
     """Create a car onwer."""
 
-    car_make = models.ManyToManyField(CarMake)
-    car_model = models.ManyToManyField(CarModel)
+    car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
+    car_model = models.ForeignKey(CarModel, on_delete=models.PROTECT)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(

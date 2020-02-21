@@ -26,4 +26,9 @@ urlpatterns = [
         views.MechanicCreateView.as_view(),
         name="mech_create",
     ),
+    path(
+        "mechanic/update/<int:pk>/",
+        views.MechanicUpdateView.as_view(),
+        name="mech_update",
+    ),
 ]
