@@ -10,6 +10,12 @@
 <form method="post">
 {% csrf_token %}
     <div class="form-group">
+        {{ form.mechanic|as_crispy_field }}
+        <small id="passwordHelpBlock" class="form-text text-muted">
+        Fill out the name.
+        </small>
+    </div>
+    <div class="form-group">
         {{ form.name|as_crispy_field }}
         <small id="passwordHelpBlock" class="form-text text-muted">
         Fill out the name of your speciality e.g Wiring.

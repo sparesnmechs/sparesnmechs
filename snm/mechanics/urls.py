@@ -31,4 +31,10 @@ urlpatterns = [
         views.MechanicUpdateView.as_view(),
         name="mech_update",
     ),
+    path("mechanic/", views.MechanicListView.as_view(), name="mechanic",),
+    path(
+        "mechanic/<int:pk>",
+        views.MechanicDetailView.as_view(),
+        name="mechanic",
+    ),
 ]

@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- Add icon library -->
+<h2 style="text-align: center;">Profile details</h2>
+<hr>
 <br>
-<div class="card">
-    <img src="" alt="John" style="width:100%">
-    <br>
-    <h3><b>{{ dealer.first_name}} {{ dealer.last_name}}</b></h3>
-    <p class="title">SpareDealer</p>
-    <p>{{ dealer.store }}</p>
-    <!-- <div style="margin: 24px 0;">
-      <a href="https://www.linkedin.com/in/md-abu-talha/" target="_blank"><i class="fa fa-linkedin"></i></a>
-      <a href="https://www.facebook.com/talha.sust.cse" target="_blank"><i class="fa fa-facebook"></i></a>
-      <a href="https://github.com/talha08" target="_blank"><i class="fa fa-github"></i></a>
-      <a href="https://medium.com/@talhaqc" target="_blank"><i class="fa fa-medium"></i></a>
-    </div> -->
-    <p><a href="" class="button">Edit Profile</a></p>
-  </div>
-  {% endblock %}
 
-  {% block footer %}
-  {% endblock %}
+<div class="card">
+  {% if dealers.photo %}
+      <img src="{{ dealers.photo.url }}" alt="{{ dealers.first_name}}" style="width:100%">
+  {% endif %}
+  <h3>Name: {{ dealers.first_name }} {{ dealers.last_name }}</h3>
+  <p class="title">Spare Dealer</p>
+  <p>Store: {{ dealers.store }}</p>
+  <p>Number: {{ dealers.phone_number }}</p>
+  <a href="{% url 'sparedealers:dealer_update' dealers.id %}">Edit my profile</a>
+  <p><button>View my parts</button></p>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -2,17 +2,24 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    ListView,
+    UpdateView,
+    DetailView,
+)
 
 from .filters import SpecialityFilter
 from .models import Mechanic, Speciality
+from django.urls import reverse_lazy
 
 
-class SpecialityListView(ListView):
+class MechanicListView(ListView):
     """List view of spareparts."""
 
-    queryset = Speciality.objects.all()
-    context_object_name = "speciality"
+    queryset = Mechanic.objects.all()
+    context_object_name = "mechanics"
 
 
 class SpecialityCreateView(
@@ -25,10 +32,14 @@ class SpecialityCreateView(
         "name",
         "description",
         "car_make",
+        "mechanic",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your speciality has been succesfully created"
+
+    def get_success_url(self):
+        return reverse_lazy("mechanics:update", kwargs={"pk": self.object.pk})
 
 
 class SpecialityUpdateView(
@@ -41,6 +52,7 @@ class SpecialityUpdateView(
         "name",
         "description",
         "car_make",
+        "mechanic",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
@@ -71,6 +83,11 @@ class MechanicCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     redirect_field_name = "redirect_to"
     success_message = "Your profile has been succesfully created"
 
+    def get_success_url(self):
+        return reverse_lazy(
+            "mechanics:mechanic", kwargs={"pk": self.object.pk}
+        )
+
 
 class MechanicUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Create view for mechanics."""
@@ -87,6 +104,18 @@ class MechanicUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your profile has been succesfully updated"
+
+    def get_success_url(self):
+        return reverse_lazy(
+            "mechanics:mechanic", kwargs={"pk": self.object.pk}
+        )
+
+
+class MechanicDetailView(DetailView):
+    """View a mechanics details."""
+
+    model = Mechanic
+    context_object_name = "mechanic"
 
 
 def speciality_view(request):

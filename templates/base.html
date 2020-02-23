@@ -1,173 +1,77 @@
-<!doctype html>
 {% load static %}
-
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Alice' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>Sparesnmechs</title>
+</head>
+<body>
+  <!-- Top Navigation Menu -->
+<div class="topnav">
+  <!-- <a href="#home" class="active">Logo</a> -->
+  <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
+    <img src="{% static 'logo/spares-logo.jpg' %}" width="120" height="60" alt="">
+  </a>
+  <!-- Navigation links (hidden by default) -->
+  <div id="myLinks">
+    <a href="{% url 'sparedealers:sparepart-list' %}">Find a dealer</a>
+    <a href="{% url 'mechanics:mechanic' %}">Find a mechanic</a>
+    <a href="{% url 'sparedealers:create' %}">Become a dealer</a>
+    <a href="{% url 'mechanics:create' %}">Become a mechanic</a>
+    <a href="#about">Profile</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Log out</a>
+    {% else %}
+      <a href="{% url 'login' %}">Log in</a>
+    {% endif %}
+  </div>
+  <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
+{% if user.is_authenticated %}
+  <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    Welcome! Create your profile as either 
+    <a href="{% url 'carowners:create' %}" style="color: #0f172e;">car owner</a>, 
+    <a href="{% url 'sparedealers:dealer_create' %}" style="color: #0f172e;">dealer</a> or 
+    <a href="{% url 'mechanics:mech_create' %}" style="color: #0f172e;">mechanic</a>
+  </div>
+{% else %}
+  <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    Welcome! Please <a href="{% url 'login' %}" style="color: #0f172e;">login</a> to sparesnmechs 
+  </div>
+{% endif %}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% comment %} <title>Sparesnmechs</title> {% endcomment %}
-  </head>
-  <body style="background-color: #f2f2f2;">
-        {% comment %} Second Nav bar {% endcomment %}
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light", style="background-color:#D02222 !important;">
-            <a class="navbar-brand" href="{% url 'sparedealers:sparepart-list' %}">
-                <img src="{% static 'logo/spares-logo.jpg' %}" width="130" height="75" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link active" href="{% url 'sparedealers:sparepart-list' %}">
-                  <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Find a Dealer</button>
-                  </a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'mechanics:speciality-list' %}">
-                  <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Find a Mechanic</button>
-                  </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'sparedealers:create' %}">
-                    <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Sell a Part</button>
-                    </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'mechanics:create' %}">
-                    <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Sell a Speciality</button>
-                    </a>
-                </li>
-                <li class="nav-item dropdown dropright">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Add Profile</button>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'carowners:create' %}">Car Owner</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'mechanics:mech_create' %}">Mechanic</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'sparedealers:dealer_create' %}">Spare Dealer</a>
-                  </div>
-                </li>
-                <li class="nav-item active">
-                  {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'logout' %}">
-                      <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Log out</button>
-                    </a>
-                  {% else %}
-                    <a class="nav-link" href="{% url 'login' %}">
-                      <button class="btn btn-dark", style="background-color:#0f172e !important; color:white;" type="submit">Log in</button>
-                    </a>
-                  {% endif %}
-                </li>
-                </ul>
-            </div>
-        </nav>
-        {% comment %} End of Second Nav Bar {% endcomment %}
-
-    {% block breadcrumb %}
-    {% endblock breadcrumb %}
-
-    {% block carousel %}
-    {% endblock carousel %}
+{% block carousel %}
+{% endblock carousel %}
     
-    <div class="container">
-        {% include 'messages.html' %}
-        {% block content %}
-        {% endblock content %}
+<div class="container">
+  {% include 'messages.html' %}
+  {% block content %}
+  {% endblock content %}
+</div>
 
-        {% block categories %}
-        {% endblock categories %}
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
-
-{% block footer %}
-<!-- Footer -->
-  <!-- Footer Links -->
-  <div class="text-center text-md-left mt-5" style="background-color: #0F172E; padding: 30px 0 0 0;">
-
-    <!-- Grid row -->
-    <div class="row mt-3">
-
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
-        <!-- Content -->
-        <h6 class="text-uppercase font-weight-bold" style="color: #fff;">Sparesnmechs</h6>
-        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: white; color: #fff;">
-        {% comment %} <p><img src="{% static 'logo/spares-logo.jpg' %}" width="130" height="75" alt=""></p> {% endcomment %}
-        <p style="color: #fff;"><small>Spares And Mechs provides a platform where automobile part dealers showcase their products 
-        with ease and link with buyers efficiently. We are also providing mechanics a platform to let 
-        their services known to car owners requiring the services.</small></p>
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-        <!-- Links -->
-        <h6 class="text-uppercase font-weight-bold" style="color: #fff;">Useful links</h6>
-        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: white; color: #fff;">
-        <p>
-          <a href="#!">SpareDealers</a>
-        </p>
-        <p>
-          <a href="#!">Mechanics</a>
-        </p>
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-        <!-- Links -->
-        <h6 class="text-uppercase font-weight-bold" style="color: #fff;">Contact</h6>
-        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: white;">
-        <p style="color: #fff;">
-          <i class="fas fa-home mr-3"></i> Nairobi Kenya</p>
-        <p style="color: #fff;">
-          <i class="fas fa-envelope mr-3"></i> support@sparesnmechs.com</p>
-        <p style="color: #fff;">
-          <i class="fas fa-phone mr-3"></i> +254 745 306 677</p>
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
-
-  </div>
-  <!-- Footer Links -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3" style="background-color: #D02222;">© 2020 Copyright: <strong>SparesnMechs</strong>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
-
-    </footer>
-{% endblock footer %}
-  </body>
+</body>
 </html>
+
+<script>
+  /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
+  function myFunction() {
+    var x = document.getElementById("myLinks");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+</script>

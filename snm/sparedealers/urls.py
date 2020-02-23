@@ -35,9 +35,9 @@ urlpatterns = [
     #     views.SparePartDeleteView.as_view(),
     #     name="delete",
     # ),
-    # path(
-    #     "category/",
-    #     views.SparePartListView.as_view(),
-    #     name="category-list",
-    # ),
+    path(
+        "sparepart/category/",
+        views.SparePartCategoryListView.as_view(),
+        name="category",
+    ),
 ]

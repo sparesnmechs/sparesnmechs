@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView
 
 from .models import CarModel, CarOwner
 
@@ -33,6 +33,11 @@ class CarownerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     ]
     success_message = "Your profile has been succesfully created"
 
+    def get_success_url(self):
+        return reverse_lazy(
+            "carowners:carowner", kwargs={"pk": self.object.pk}
+        )
+
 
 class CarownerUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Update view for spare parts."""
@@ -47,6 +52,18 @@ class CarownerUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         "description",
     ]
     success_message = "Your profile has been succesfully updated"
+
+    def get_success_url(self):
+        return reverse_lazy(
+            "carowners:carowner", kwargs={"pk": self.object.pk}
+        )
+
+
+class OwnerDetailView(DetailView):
+    """View a mechanics details."""
+
+    model = CarOwner
+    context_object_name = "carowner"
 
 
 def get_carmodels(request):

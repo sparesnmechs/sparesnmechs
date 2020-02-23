@@ -4,6 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -35,6 +36,7 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         "sub_category",
         "car_make",
         "car_model",
+        "sparedealer",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
@@ -55,6 +57,7 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         "sub_category",
         "car_make",
         "car_model",
+        "sparedealer",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
@@ -80,8 +83,7 @@ class SparePartCategoryListView(ListView):
     """List view of spareparts."""
 
     queryset = SparePartCategory.objects.all()
-    context_object_name = "sparepart_category"
-    template_name = "spareparts/sparepart_list.html"
+    context_object_name = "categories"
 
 
 class DealerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -100,6 +102,11 @@ class DealerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     redirect_field_name = "redirect_to"
     success_message = "Your profile has been succesfully created"
 
+    def get_success_url(self):
+        return reverse_lazy(
+            "sparedealers:dealer", kwargs={"pk": self.object.pk}
+        )
+
 
 class DealerUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Update view for mechanics."""
@@ -117,12 +124,17 @@ class DealerUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     redirect_field_name = "redirect_to"
     success_message = "Your profile has been succesfully updated"
 
+    def get_success_url(self):
+        return reverse_lazy(
+            "sparedealers:dealer", kwargs={"pk": self.object.pk}
+        )
+
 
 class DealerDetailView(DetailView):
     """View a dealers details."""
 
     model = SpareDealer
-    context_object_name = "dealer"
+    context_object_name = "dealers"
 
 
 def sparepart_view(request):
