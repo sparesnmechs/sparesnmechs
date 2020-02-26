@@ -1,23 +1,134 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<h2>Mechanic</h2>
-{% for mechanic in mechanics %}
-    <div class="card bg-light mb-3" style="max-width: 540px">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="..." class="card-img-top" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-header">{{ mechanic.first_name}}</div>
-                    <div class="card-body">
-                        <p class="card-title">{{ mechanic.phone_number }}</p>
-                        <a href="#" class="btn btn-primary">View speciality</a>
-                    </div>
-            </div>
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block carousel %}
+<!-- Full-width images with number and caption text -->
+<div class="mySlides fade">
+  <!-- <div class="numbertext">1 / 3</div> -->
+  <img src="{% static 'carousel/mc.jpg' %}" style="width:100%">
+  <!-- <div class="text">Caption Text</div> -->
+</div>
+
+<div class="mySlides fade">
+  <!-- <div class="numbertext">2 / 3</div> -->
+  <img src="{% static 'carousel/bmw.jpg' %}" style="width:100%">
+  <!-- <div class="text">Caption Two</div> -->
+</div>
+
+<div class="mySlides fade">
+  <!-- <div class="numbertext">3 / 3</div> -->
+  <img src="{% static 'carousel/fix.jpg' %}" style="width:100%">
+  <!-- <div class="text">Caption Three</div> -->
+</div>
+<br>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+} 
+</script>
+{% endblock carousel %}
+
+
+
+<!-- <div class="container">
+<form method="get" class="col-sm-10" id="spareSearchForm">
+    <div class="form-row">
+        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
+            {{ filter.form.car_make|as_crispy_field }}
+        </div>
+        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
+            {{ filter.form.car_model|as_crispy_field }}
+        </div>
+        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
+            {{ filter.form.category|as_crispy_field }}
         </div>
     </div>
-<br>
+    <div class="form-row">
+        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
+            {{ filter.form.sub_category|as_crispy_field }}
+        </div>
+        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
+            {{ filter.form.condition|as_crispy_field }}
+        </div>
+        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
+            {{ filter.form.year_of_manufacture|as_crispy_field }}
+        </div>
+    </div>
+
+<button type="submit" class="btn btn-light bt-sm btn-block" style="background-color:#D02222 !important; color:white;">Search</button>
+</form>
+</div>
+<ul>
+{% for sparepart in filter.qs %}
+<li>{{ sparepart.name }}</li>
 {% endfor %}
 </ul>
+<br> -->
+
+{% block content %}
+<br>
+<div class="container">
+<h2 style="text-align: center;">Featured Mechanics</h2>
+<hr>
+<br>
+<div class="scrolling-wrapper">
+  {% for mechanic in mechanics %}
+  <div class="mech_card">
+    {% if mechanic.photo %}
+        <img src="{{ mechanic.photo.url }}" alt="{{ mechanic.name }}">
+      {% endif %}
+    <h3>{{ mechanic.first_name }} {{ mechanic.last_name }}</h3>
+    <p class="price">{{ mechanic.phone_number }}</p>
+    <p>Some text about the mech..</p>
+    <p><button>View mechanic</button></p>
+  </div>
+  {% endfor %}
+</div>
+<br>
+</div>
 {% endblock %}
+
+<script>
+  const categoryInput = document.querySelector("select#id_category")
+  const subcategoryInput = document.querySelector("select#id_sub_category")
+
+  categoryInput.onchange = function (e) {
+    getAndSetSubcategories(e.target.value)
+  }
+
+  function getAndSetSubcategories(category) {
+    let subCatReq = new XMLHttpRequest()
+
+    subCatReq.addEventListener("load", function (e) {
+      let subcategories = JSON.parse(e.target.response)
+
+      // Map the list of subcategory objects to a list of options
+      subcategories = subcategories.map(function (subcategory) {
+        return `<option value="${subcategory.pk}">${subcategory.fields.name}</option>`
+      })
+
+      // Add default option to start of the array
+      subcategories.splice(0,0,'<option value="" selected="">---------</option>')
+
+      subcategoryInput.innerHTML = subcategories.join(" ")
+    })
+
+    subCatReq.open("GET", `{% url 'sparedealers:get_subcategories' %}?category=${category}`)
+    subCatReq.send()
+  }
+</script>

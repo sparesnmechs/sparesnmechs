@@ -1,0 +1,12 @@
+<!-- {% block content %} -->
+<div class="row">
+{% for category in categories%}
+    <div class="column">
+        {% if category.photo %}
+        <img src="{{ category.photo.url }}" alt="{{ category.name }}">
+        <p>{{ category.name }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+</div> 
+<!-- {% endblock %} -->
