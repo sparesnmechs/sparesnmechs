@@ -90,7 +90,7 @@ function showSlides() {
   {% for mechanic in mechanics %}
   <div class="mech_card">
     {% if mechanic.photo %}
-        <img src="{{ mechanic.photo.url }}" alt="{{ mechanic.name }}">
+        <img src="{{ mechanic.photo.url }}" alt="{{ mechanic.name }}" style="width:50%">
       {% endif %}
     <h3>{{ mechanic.first_name }} {{ mechanic.last_name }}</h3>
     <p class="price">{{ mechanic.phone_number }}</p>

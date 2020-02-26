@@ -45,7 +45,7 @@ def get_bool_env(env_var, default=False):
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_bool_env("DEBUG", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -96,8 +96,6 @@ TEMPLATES = [
     },
 ]
 
-# Login redirects to homepage
-LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -172,3 +170,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+import django_heroku
+# Activate Django-Heroku.
+django_heroku.settings(locals())
