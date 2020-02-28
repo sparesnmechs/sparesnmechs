@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -13,7 +12,6 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .filters import SparePartFilter
 from .models import (
     SpareDealer,
     SparePart,
@@ -77,6 +75,14 @@ class SparePartListView(ListView):
 
     queryset = SparePart.objects.all()
     context_object_name = "spareparts"
+    template_name = "sparedealers/spareparts.html"
+
+
+class SparePartDetailView(DetailView):
+    """Detail view of spareparts."""
+
+    model = SparePart
+    context_object_name = "sparepart_detail"
 
 
 class SparePartCategoryListView(ListView):
@@ -137,16 +143,16 @@ class DealerDetailView(DetailView):
     context_object_name = "dealers"
 
 
-def sparepart_view(request):
-    """Search view."""
-    spareparts_filter = SparePartFilter(
-        request.GET, queryset=SparePart.objects.all()
-    )
-    return render(
-        request,
-        "sparedealers/sparepart_list.html",
-        {"filter": spareparts_filter},
-    )
+# def sparepart_view(request):
+#     """Search view."""
+#     spareparts_filter = SparePartFilter(
+#         request.GET, queryset=SparePart.objects.all()
+#     )
+#     return render(
+#         request,
+#         "sparedealers/sparepart_list.html",
+#         {"filter": spareparts_filter},
+#     )
 
 
 def get_subcategories(request):

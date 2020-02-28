@@ -79,32 +79,6 @@ def speciality(car_make):
     )
 
 
-# @pytest.fixture
-# def store():
-#     """Store."""
-#     return baker.make(Store, name="duka", description="duka ya magari noma",)
-
-
-# @pytest.fixture
-# def common_user():
-#     """Common."""
-#     return baker.make(
-#         CommonUserFields,
-#         first_name="Fundi",
-#         last_name="Wa Magari",
-#         phone_number="0711223344",
-#         description="Nimeivisha kupaka rangi",
-#     )
-
-
-# @pytest.fixture
-# def common_item():
-#     """Common."""
-#     return baker.make(
-#         CommonItemFields, name="Item", description="Nimeivisha kupaka rangi",
-#     )
-
-
 @pytest.fixture
 def spare_dealer():
     """Spare dealer."""
@@ -128,7 +102,7 @@ def mechanic(speciality):
         phone_number="0712345678",
         description="Njoro wa Uber",
         store="store",
-        speciality=speciality,
+        # specialities=speciality,
     )
 
 
