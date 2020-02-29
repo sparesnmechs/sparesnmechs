@@ -5,7 +5,7 @@ from . import views
 
 app_name = "sparedealers"
 urlpatterns = [
-    path("", views.sparepart_view, name="sparepart-list",),
+    path("", views.SparePartListView.as_view(), name="sparepart-list",),
     path(
         "sparepart/create", views.SparePartCreateView.as_view(), name="create",
     ),
@@ -18,6 +18,11 @@ urlpatterns = [
         "spareparts/subcategories",
         views.get_subcategories,
         name="get_subcategories",
+    ),
+    path(
+        "sparepart/<int:pk>",
+        views.SparePartDetailView.as_view(),
+        name="sparepart_detail",
     ),
     path("dealer/<int:pk>", views.DealerDetailView.as_view(), name="dealer",),
     path(

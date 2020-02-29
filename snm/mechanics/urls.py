@@ -5,7 +5,6 @@ from . import views
 
 app_name = "mechanics"
 urlpatterns = [
-    path("speciality/", views.speciality_view, name="speciality-list",),
     path(
         "speciality/create",
         views.SpecialityCreateView.as_view(),
@@ -35,6 +34,7 @@ urlpatterns = [
     path(
         "mechanic/<int:pk>",
         views.MechanicDetailView.as_view(),
-        name="mechanic",
+        name="mechanic_detail",
     ),
+    path('search/', views.SearchResultsView.as_view(), name='search_results'),
 ]

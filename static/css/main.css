@@ -277,6 +277,13 @@ clear: both;
 display: table;
 }
 
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 500px) {
+.column {
+width: 33.33%;
+}
+} 
+
 .scrolling-wrapper {
 overflow-x: scroll;
 overflow-y: hidden;
@@ -290,14 +297,9 @@ white-space: nowrap;
 .mech_card {
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 max-width: 300px;
-margin: auto;
+margin: 10px;
 text-align: center;
 font-family: arial;
-}
-
-.price {
-color: grey;
-font-size: 22px;
 }
 
 .mech_card button {
@@ -316,6 +318,20 @@ font-size: 18px;
 opacity: 0.7;
 }
 
+form.example input[type=text] {
+padding: 10px;
+font-size: 17px;
+border: 1px solid grey;
+float: left;
+width: 100%;
+background: #f1f1f1;
+}
+
+form.example::after {
+content: "";
+clear: both;
+display: table;
+}
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 @import url("https://fonts.googleapis.com/css?family=Montserrat");

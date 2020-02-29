@@ -86,25 +86,25 @@ function showSlides() {
 <h2 style="text-align: center;">Featured Spare Parts</h2>
 <hr>
 <br>
-{% for sparepart in spareparts %}
-  <div class="card">
-    {% if sparepart.photo %}
-      <img src="{{ sparepart.photo.url }}" alt="{{ sparepart.name}}" style="width:100%">
-    {% endif %}
-    <h1>{{sparepart.name}}</h1>
-    <p class="price">{{ sparepart.price }}</p>
-    <p>{{ sparepart.condition }}</p>
-    <p><button>View part</button></p>
-  </div>
-{% endfor %}
 <br>
-
-<h2 style="text-align: center;">Categories</h2>
-<hr>
-<br>
-{% include 'sparedealers/sparepartcategory_list.html' %}
-<br>
+<div class="scrolling-wrapper">
+    {% for sparepart in spareparts %}
+      <div class="mech_card">
+        {% if sparepart.photo %}
+            <img src="{{ sparepart.photo.url }}" alt="{{ sparepart.name }}" style="width:100%">
+        {% endif %}
+        <hr>
+        <p>{{ sparepart.name }}</p>
+        <hr>
+        <p>{{ sparepart.price }}</p>
+      </div>
+    {% endfor %}
 </div>
+<br>
+<hr>
+<a href="{% url 'sparedealers:category' %}"><button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Filter by categories</button></a>
+</div> 
+<br>
 {% endblock %}
 
 <script>
@@ -136,3 +136,4 @@ function showSlides() {
     subCatReq.send()
   }
 </script>
+

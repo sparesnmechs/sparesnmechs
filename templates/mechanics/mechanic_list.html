@@ -1,27 +1,18 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
-
 {% load static %}
 
 {% block carousel %}
-<!-- Full-width images with number and caption text -->
 <div class="mySlides fade">
-  <!-- <div class="numbertext">1 / 3</div> -->
   <img src="{% static 'carousel/mc.jpg' %}" style="width:100%">
-  <!-- <div class="text">Caption Text</div> -->
 </div>
 
 <div class="mySlides fade">
-  <!-- <div class="numbertext">2 / 3</div> -->
   <img src="{% static 'carousel/bmw.jpg' %}" style="width:100%">
-  <!-- <div class="text">Caption Two</div> -->
 </div>
 
 <div class="mySlides fade">
-  <!-- <div class="numbertext">3 / 3</div> -->
   <img src="{% static 'carousel/fix.jpg' %}" style="width:100%">
-  <!-- <div class="text">Caption Three</div> -->
 </div>
 <br>
 
@@ -43,61 +34,35 @@ function showSlides() {
 </script>
 {% endblock carousel %}
 
-
-
-<!-- <div class="container">
-<form method="get" class="col-sm-10" id="spareSearchForm">
-    <div class="form-row">
-        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
-            {{ filter.form.car_make|as_crispy_field }}
-        </div>
-        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
-            {{ filter.form.car_model|as_crispy_field }}
-        </div>
-        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
-            {{ filter.form.category|as_crispy_field }}
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
-            {{ filter.form.sub_category|as_crispy_field }}
-        </div>
-        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
-            {{ filter.form.condition|as_crispy_field }}
-        </div>
-        <div class="form-group col-sm-4" style="color:rgb(0, 0, 0);">
-            {{ filter.form.year_of_manufacture|as_crispy_field }}
-        </div>
-    </div>
-
-<button type="submit" class="btn btn-light bt-sm btn-block" style="background-color:#D02222 !important; color:white;">Search</button>
-</form>
-</div>
-<ul>
-{% for sparepart in filter.qs %}
-<li>{{ sparepart.name }}</li>
-{% endfor %}
-</ul>
-<br> -->
-
 {% block content %}
 <br>
 <div class="container">
-<h2 style="text-align: center;">Featured Mechanics</h2>
-<hr>
-<br>
-<div class="scrolling-wrapper">
-  {% for mechanic in mechanics %}
-  <div class="mech_card">
-    {% if mechanic.photo %}
-        <img src="{{ mechanic.photo.url }}" alt="{{ mechanic.name }}" style="width:50%">
-      {% endif %}
-    <h3>{{ mechanic.first_name }} {{ mechanic.last_name }}</h3>
-    <p class="price">{{ mechanic.phone_number }}</p>
-    <p>Some text about the mech..</p>
-    <p><button>View mechanic</button></p>
+
+  <h2 style="text-align: center;">Search</h2>
+  <hr>
+  <br>
+  <form class="example" action="{% url 'mechanics:search_results' %}" method="get">
+    <input name="q" type="text" placeholder="Search a mechanic/speciality">
+  </form>
+  <br>
+
+  <h2 style="text-align: center;">Featured Mechanics</h2>
+  <hr>
+  <br>
+  <div class="scrolling-wrapper">
+    {% for mechanic in mechanics %}
+      <div class="mech_card">
+        {% if mechanic.photo %}
+            <img src="{{ mechanic.photo.url }}" alt="{{ mechanic.name }}" style="width:50%">
+          {% endif %}
+        <p>{{ mechanic.first_name }} {{ mechanic.last_name }}</p>
+        <hr>
+        <p>{{ mechanic.phone_number }}</p>
+        <hr>
+        <p>{{ mechanic.specialities }}</p>
+      </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 <br>
 </div>

@@ -1,18 +1,17 @@
 """Views."""
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
+from django.db.models import Q
+from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DeleteView,
+    DetailView,
     ListView,
     UpdateView,
-    DetailView,
 )
 
-from .filters import SpecialityFilter
 from .models import Mechanic, Speciality
-from django.urls import reverse_lazy
 
 
 class MechanicListView(ListView):
@@ -118,13 +117,15 @@ class MechanicDetailView(DetailView):
     context_object_name = "mechanic"
 
 
-def speciality_view(request):
-    """Search view."""
-    speciality_filter = SpecialityFilter(
-        request.GET, queryset=Speciality.objects.all()
-    )
-    return render(
-        request,
-        "mechanics/speciality_list.html",
-        {"filter": speciality_filter},
-    )
+class SearchResultsView(ListView):
+    """Search view for specialities."""
+
+    model = Mechanic
+    template_name = "mechanics/search_results.html"
+
+    def get_queryset(self):
+        """Get filtered queryset."""
+        query = self.request.GET.get('q')
+        return Mechanic.objects.filter(
+            Q(specialities__name__icontains=query)
+        )
