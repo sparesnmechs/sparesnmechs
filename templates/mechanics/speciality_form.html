@@ -4,37 +4,38 @@
 
 {% block content %}
 <div class="container">
-<br>
-<h3>Create Your Speciality</h3>
-<hr>
-<form method="post">
-{% csrf_token %}
-    <div class="form-group">
-        {{ form.mechanic|as_crispy_field }}
-        <small id="passwordHelpBlock" class="form-text text-muted">
-        Fill out the name.
-        </small>
-    </div>
-    <div class="form-group">
-        {{ form.name|as_crispy_field }}
-        <small id="passwordHelpBlock" class="form-text text-muted">
-        Fill out the name of your speciality e.g Wiring.
-        </small>
-    </div>
-    <div class="form-group">
-        {{ form.car_make|as_crispy_field }}
-        <small id="passwordHelpBlock" class="form-text text-muted">
-        Fill out the car make you specialize in.
-        </small>
-    </div>
-    <div class="form-group">
-        {{ form.description|as_crispy_field }}
-        <small id="passwordHelpBlock" class="form-text text-muted">
-        Optionally describe your speciality.
-        </small>
-    </div>
-    <button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Save</button>
-</form>
+    {% if user.is_mechanic %}
+        <br>
+        <h3>Create Your Speciality</h3>
+        <hr>
+        <form method="post">
+        {% csrf_token %}
+            <div class="form-group">
+                {{ form.name|as_crispy_field }}
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                Fill out the name of your speciality e.g Wiring.
+                </small>
+            </div>
+            <div class="form-group">
+                {{ form.car_make|as_crispy_field }}
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                Fill out the car make you specialize in.
+                </small>
+            </div>
+            <div class="form-group">
+                {{ form.description|as_crispy_field }}
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                Optionally describe your speciality.
+                </small>
+            </div>
+            <button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Save</button>
+        </form>
+    {% else %}
+    <br>
+    <h3>Become a mechanic to sell a speciality</h3>
+    <hr>
+    <a href="{% url 'mechanics:mechanic_signup' %}"><p>Sign up as a mechanic</p></a>
+    {% endif %}
 </div>
 <br>
 {% endblock %}

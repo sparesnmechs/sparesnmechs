@@ -45,4 +45,7 @@ urlpatterns = [
         views.SparePartCategoryListView.as_view(),
         name="category",
     ),
+    path(
+        "signup/dealer/", views.DealerSignUp.as_view(), name="dealer_signup",
+    ),
 ]

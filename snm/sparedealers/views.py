@@ -1,23 +1,39 @@
 """Views."""
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 
-from .models import (
-    SpareDealer,
-    SparePart,
-    SparePartCategory,
-    SparePartSubCategory,
-)
+from snm.carowners.models import CustomUser
+
+from .forms import DealerSignUpForm
+from .models import (SpareDealer, SparePart, SparePartCategory,
+                     SparePartSubCategory)
+
+
+class DealerSignUp(SuccessMessageMixin, CreateView):
+    """Sign up view for all users."""
+
+    model = CustomUser
+    form_class = DealerSignUpForm
+    template_name = "registration/signup_form.html"
+    success_message = "Successfully signed up, now log in"
+
+    def get_context_data(self, **kwargs):
+        """Get the user type."""
+        kwargs["user_type"] = "dealer"
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        """Define a valid form."""
+        user = form.save()
+        login(self.request, user)
+        return redirect("sparedealers:dealer_create")
 
 
 class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -34,7 +50,6 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         "sub_category",
         "car_make",
         "car_model",
-        "sparedealer",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
@@ -55,7 +70,6 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         "sub_category",
         "car_make",
         "car_model",
-        "sparedealer",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"

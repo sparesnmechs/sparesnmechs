@@ -1,24 +1,7 @@
 """Models."""
 from django.db import models
 
-from snm.carowners.models import CarMake, CarModel
-
-
-class SpareDealer(models.Model):
-    """Create the spare dealer."""
-
-    store = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    phone_number = models.CharField(
-        max_length=10
-    )  # Validate to accept phone no
-    description = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to="spareparts/", blank=True, null=True)
-
-    def __str__(self):
-        """Represent first and last name for human readability."""
-        return "{} {}".format(self.first_name, self.last_name)
+from snm.carowners.models import CarMake, CarModel, CustomUser
 
 
 class SparePartCategory(models.Model):
@@ -71,7 +54,6 @@ class SparePart(models.Model):
 
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    sparedealer = models.ForeignKey(SpareDealer, on_delete=models.PROTECT)
     price = models.DecimalField(max_digits=14, decimal_places=2)
     condition = models.CharField(max_length=255, choices=CONDITION_CHOICES)
     year_of_manufacture = models.CharField(max_length=225)
@@ -89,3 +71,24 @@ class SparePart(models.Model):
     def __str__(self):
         """Represent name for human readability."""
         return self.name
+
+
+class SpareDealer(models.Model):
+    """Create the spare dealer."""
+
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, primary_key=True
+    )
+    store = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone_number = models.CharField(
+        max_length=10
+    )  # Validate to accept phone no
+    description = models.TextField(blank=True, null=True)
+    photo = models.ImageField(upload_to="spareparts/", blank=True, null=True)
+    spareparts = models.ManyToManyField(SparePart)
+
+    def __str__(self):
+        """Represent first and last name for human readability."""
+        return "{} {}".format(self.first_name, self.last_name)

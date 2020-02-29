@@ -36,5 +36,10 @@ urlpatterns = [
         views.MechanicDetailView.as_view(),
         name="mechanic_detail",
     ),
-    path('search/', views.SearchResultsView.as_view(), name='search_results'),
+    path("search/", views.SearchResultsView.as_view(), name="search_results"),
+    path(
+        "signup/mechanic/",
+        views.MechanicSignUp.as_view(),
+        name="mechanic_signup",
+    ),
 ]

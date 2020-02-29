@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content%}
 <br>
-<h3>Sign up</h3>
+<h3>Sign up to any one account</h3>
 <hr>
-<form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Sign up</button>
-</form>
+<br>
+<a href="{% url 'carowners:owner_signup' %}"><button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Car owner</button></a>
+<hr>
+<a href="{% url 'mechanics:mechanic_signup' %}"><button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Mechanic</button></a>
+<hr>
+<a href="{% url 'sparedealers:dealer_signup' %}"><button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Spare dealer</button></a>
+<hr>
+
+<p>Already have an account? <a href="{% url 'login' %}">login</a></p>
 {% endblock content%}
 
 {% block footer%}

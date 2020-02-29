@@ -1,5 +1,14 @@
 """Car owner model."""
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+
+class CustomUser(AbstractUser):
+    """Create a custom user."""
+
+    is_carowner = models.BooleanField(default=False)
+    is_dealer = models.BooleanField(default=False)
+    is_mechanic = models.BooleanField(default=False)
 
 
 class CarMake(models.Model):
@@ -44,6 +53,9 @@ class CarModel(models.Model):
 class CarOwner(models.Model):
     """Create a car onwer."""
 
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, primary_key=True
+    )
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     car_model = models.ForeignKey(CarModel, on_delete=models.PROTECT)
     first_name = models.CharField(max_length=100)

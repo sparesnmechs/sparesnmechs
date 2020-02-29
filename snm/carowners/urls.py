@@ -14,11 +14,10 @@ urlpatterns = [
         name="update",
     ),
     path(
-        "carowner/<int:pk>",
-        views.OwnerDetailView.as_view(),
-        name="carowner",
+        "carowner/<int:pk>", views.OwnerDetailView.as_view(), name="carowner",
     ),
     path(
-        "signup/", views.SignUp.as_view(), name="signup",
+        "signup/carowner/", views.OwnerSignUp.as_view(), name="owner_signup",
     ),
+    path("signup/", views.SignUpView.as_view(), name="signup",),
 ]

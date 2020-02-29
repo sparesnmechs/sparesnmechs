@@ -1,7 +1,7 @@
 """Models."""
 from django.db import models
 
-from snm.carowners.models import CarMake
+from snm.carowners.models import CarMake, CustomUser
 
 
 class Speciality(models.Model):
@@ -30,6 +30,9 @@ class Speciality(models.Model):
 class Mechanic(models.Model):
     """Create the mechanic."""
 
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, primary_key=True
+    )
     store = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)

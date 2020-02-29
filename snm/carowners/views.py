@@ -1,22 +1,40 @@
 """Views."""
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import (CreateView, DetailView, TemplateView,
+                                  UpdateView)
 
-from .models import CarModel, CarOwner
+from .forms import OwnerSignUpForm
+from .models import CarModel, CarOwner, CustomUser
 
 
-class SignUp(SuccessMessageMixin, CreateView):
+class SignUpView(TemplateView):
+    template_name = "registration/signup.html"
+
+
+class OwnerSignUp(SuccessMessageMixin, CreateView):
     """Sign up view for all users."""
 
-    form_class = UserCreationForm
-    success_url = reverse_lazy("login")
-    template_name = "registration/signup.html"
+    model = CustomUser
+    form_class = OwnerSignUpForm
+    template_name = "registration/signup_form.html"
     success_message = "Successfully signed up, now log in"
+
+    def get_context_data(self, **kwargs):
+        """Get the user type."""
+        kwargs["user_type"] = "carowner"
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        """Define a valid form."""
+        user = form.save()
+        login(self.request, user)
+        return redirect("carowners:carowner")
 
 
 class CarownerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):

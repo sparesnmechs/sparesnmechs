@@ -10,22 +10,7 @@
 <form method="post">
 {% csrf_token %}
     <div class="form-group">
-        {{ form.first_name|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.last_name|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.phone_number|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.store|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.description|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.photo|as_crispy_field }}
+        {{ form|crispy }}
     </div>
     <button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Save</button>
 </form>

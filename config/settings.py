@@ -174,3 +174,17 @@ MESSAGE_TAGS = {
 import django_heroku
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+AUTH_USER_MODEL = 'carowners.CustomUser'
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://c0a04892628341379ae5b9c117f3ef26@sentry.io/3317008",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
