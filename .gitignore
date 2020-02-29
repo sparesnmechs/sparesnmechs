@@ -110,4 +110,4 @@ venv.bak/
 env.sh
 
 sparesnmechs
-media/
+# media/
