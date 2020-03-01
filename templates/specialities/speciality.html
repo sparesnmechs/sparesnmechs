@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+</div> 
+{% endblock nav %}
+
+{% block jumbotron %}
+<div class="jumbotron jumbotron-fluid" style="background-color: #d02222;" >
+  <div class="container">
+    <p class="lead" style="text-align: center;">Enter your car's name or needed speciality</p>
+    <br>
+    <form class="example" action="{% url 'mechanics:search_results' %}" method="get" style="margin:auto; max-width:500px">
+        <input type="text" placeholder="e.g Toyota/BMW..." name="q">
+    </form>
+    <br>
+  </div>
+</div>
+{% endblock %}

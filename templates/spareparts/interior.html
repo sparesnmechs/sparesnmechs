@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for interior in interiors %}
+<div class="main_container">
+    {% if interior.photo %}
+        <img src="{{ interior.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ interior.name }}</span>{{ interior.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ interior.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ interior.category }} | <strong>Subcategory: </strong>{{ interior.sub_category }} | 
+        <strong>Condition:</strong> {{ interior.condition }} | <strong>Year of Manufacture: </strong>{{ interior.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ interior.car_make }}| <strong>Car Model: </strong>{{ interior.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}

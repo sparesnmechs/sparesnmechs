@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for exterior in exteriors %}
+<div class="main_container">
+    {% if exterior.photo %}
+        <img src="{{ exterior.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ exterior.name }}</span>{{ exterior.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ exterior.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ exterior.category }} | <strong>Subcategory: </strong>{{ exterior.sub_category }} | 
+        <strong>Condition:</strong> {{ exterior.condition }} | <strong>Year of Manufacture: </strong>{{ exterior.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ exterior.car_make }}| <strong>Car Model: </strong>{{ exterior.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}

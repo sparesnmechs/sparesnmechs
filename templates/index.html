@@ -1,6 +1,190 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+  <!-- Top Navigation Menu -->
+<div class="topnav">
+  <!-- <a href="#home" class="active">Logo</a> -->
+  <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
+    <img src="{% static 'logo/spares-logo.jpg' %}" width="120" height="60" alt="">
+  </a>
+  <!-- Navigation links (hidden by default) -->
+  <div id="myLinks">
+    <a href="{% url 'sparedealers:create' %}" style="text-align: center;">Sell a part</a>
+    <a href="{% url 'mechanics:create' %}" style="text-align: center;">Sell a speciality</a>
+    <a href="#about" style="text-align: center;">Profile</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}" style="text-align: center;">Log out</a>
+    {% else %}
+      <a href="{% url 'login' %}" style="text-align: center;">Log in</a>
+    {% endif %}
+  </div>
+  <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+{% endblock nav %}
+
+{% block jumbotron %}
+<div class="jumbotron jumbotron-fluid" style="background-color: #d02222;" >
+  <div class="container">
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <a href="{% url 'mechanics:speciality' %}" style="color: white;">Find a mechanic instead?</a>
+    </div>
+    <p class="lead" style="text-align: center;">Find anything in sparesnmechs</p>
+    <br>
+    <form class="example" action="" style="margin:auto; max-width:500px">
+        <input type="text" placeholder="Search.." name="search">
+    </form>
+    <br>
+  </div>
+</div>
+{% endblock %}
 
 {% block content %}
-<h2>Home</h2>
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:accessories' %}">
+            <img src="{% static 'svg/accessories.jpg' %}">
+            <p>Accessories</p>
+            </a>
+        </div>
+    </div>
 
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:audio' %}">
+            <img src="{% static 'svg/audio_n_video.jpg' %}">
+            <p>Audio & Video</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:electrical' %}">
+            <img src="{% static 'svg/electrical.jpg' %}">
+            <p>Electrical</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:engine' %}">
+            <img src="{% static 'svg/engine.jpg' %}">
+            <p>Engine</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:exterior' %}">
+            <img src="{% static 'svg/exterior.jpg' %}">
+            <p>Exterior</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:interior' %}">
+            <img src="{% static 'svg/interior.jpg' %}">
+            <p>Interior</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:performance' %}">
+            <img src="{% static 'svg/performance.jpg' %}">
+            <p>Performance</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:suspension' %}">
+            <img src="{% static 'svg/suspension.jpg' %}">
+            <p>Suspension</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:transmission' %}">
+            <img src="{% static 'svg/transmission.jpg' %}">
+            <p>Transmission</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <a href="{% url 'sparedealers:wheels' %}">
+            <img src="{% static 'svg/wheels_n_tyres.jpg' %}">
+            <p>Wheels & Tyres</p>
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<h3 style="text-align: center;">What we offer</h3>
+<hr>
+<div class="scrolling-wrapper">
+    {% for sparepart in spareparts %}
+      <div class="mech_card">
+        {% if sparepart.photo %}
+            <img src="{{ sparepart.photo.url }}" alt="{{ sparepart.name }}" style="width:80%; height: 180px;">
+        {% endif %}
+        <hr>
+        <p>{{ sparepart.name }}</p>
+        <hr>
+        <ul style="text-align: left; list-style: none; font-size: 14px;">
+            <li><strong>Ksh </strong>{{ sparepart.price }}</li>
+            <li><strong><i class="fa fa-phone" aria-hidden="true"></i></strong> {{ sparepart.phone_number }}</li>
+            <li><strong>Condition: </strong>{{ sparepart.condition }}</li>
+        </ul>
+      </div>
+    {% endfor %}
+</div>
+<br>
 {% endblock %}
+
+
+<script>
+    const categoryInput = document.querySelector("select#id_category")
+    const subcategoryInput = document.querySelector("select#id_sub_category")
+  
+    categoryInput.onchange = function (e) {
+      getAndSetSubcategories(e.target.value)
+    }
+  
+    function getAndSetSubcategories(category) {
+      let subCatReq = new XMLHttpRequest()
+  
+      subCatReq.addEventListener("load", function (e) {
+        let subcategories = JSON.parse(e.target.response)
+  
+        // Map the list of subcategory objects to a list of options
+        subcategories = subcategories.map(function (subcategory) {
+          return `<option value="${subcategory.pk}">${subcategory.fields.name}</option>`
+        })
+  
+        // Add default option to start of the array
+        subcategories.splice(0,0,'<option value="" selected="">---------</option>')
+  
+        subcategoryInput.innerHTML = subcategories.join(" ")
+      })
+  
+      subCatReq.open("GET", `{% url 'sparedealers:get_subcategories' %}?category=${category}`)
+      subCatReq.send()
+    }
+  </script>

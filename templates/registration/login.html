@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
+
+{% block nav %}
+  <!-- Top Navigation Menu -->
+<div class="topnav">
+  <!-- <a href="#home" class="active">Logo</a> -->
+  <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
+    <img src="{% static 'logo/spares-logo.jpg' %}" width="120" height="60" alt="">
+  </a>
+</div>
+{% endblock nav %}
 
 {% block content%}
 <br>

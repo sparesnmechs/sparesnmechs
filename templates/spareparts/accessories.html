@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for accessory in accessories %}
+<div class="main_container">
+    {% if accessory.photo %}
+        <img src="{{ accessory.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ accessory.name }}</span>{{ accessory.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ accessory.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ accessory.category }} | <strong>Subcategory: </strong>{{ accessory.sub_category }} | 
+        <strong>Condition:</strong> {{ accessory.condition }} | <strong>Year of Manufacture: </strong>{{ accessory.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ accessory.car_make }}| <strong>Car Model: </strong>{{ accessory.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}

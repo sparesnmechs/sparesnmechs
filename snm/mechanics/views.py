@@ -1,24 +1,19 @@
-"""Views."""
+"""Mechanic views."""
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from .models import Mechanic, Speciality
+from .models import Speciality
 
 
-class MechanicListView(ListView):
+class SpecialityListView(ListView):
     """List view of spareparts."""
 
-    queryset = Mechanic.objects.all()
-    context_object_name = "mechanics"
+    queryset = Speciality.objects.all()
+    context_object_name = "specialities"
+    template_name = "specialities/speciality.html"
 
 
 class SpecialityCreateView(
@@ -31,11 +26,19 @@ class SpecialityCreateView(
         "name",
         "description",
         "car_make",
-        "mechanic",
+        "first_name",
+        "last_name",
+        "phone_number",
+        "store",
+        "photo",
+        "region",
+        "place",
+        "price",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your speciality has been succesfully created"
+    template_name = "specialities/sell_a_speciality.html"
 
     def get_success_url(self):
         return reverse_lazy("mechanics:update", kwargs={"pk": self.object.pk})
@@ -51,11 +54,23 @@ class SpecialityUpdateView(
         "name",
         "description",
         "car_make",
-        "mechanic",
+        "first_name",
+        "last_name",
+        "phone_number",
+        "store",
+        "photo",
+        "region",
+        "place",
+        "price",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your speciality has been succesfully updated"
+    template_name = "specialities/sell_a_speciality.html"
+    template_name = "specialities/update_a_speciality.html"
+
+    def get_success_url(self):
+        return reverse_lazy("mechanics:speciality")
 
 
 class SpecialityDeleteView(LoginRequiredMixin, DeleteView):
@@ -66,66 +81,15 @@ class SpecialityDeleteView(LoginRequiredMixin, DeleteView):
     redirect_field_name = "redirect_to"
 
 
-class MechanicCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    """Create view for mechanics."""
-
-    model = Mechanic
-    fields = [
-        "first_name",
-        "last_name",
-        "phone_number",
-        "store",
-        "description",
-        "photo",
-    ]
-    login_url = "login"
-    redirect_field_name = "redirect_to"
-    success_message = "Your profile has been succesfully created"
-
-    def get_success_url(self):
-        return reverse_lazy(
-            "mechanics:mechanic", kwargs={"pk": self.object.pk}
-        )
-
-
-class MechanicUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    """Create view for mechanics."""
-
-    model = Mechanic
-    fields = [
-        "first_name",
-        "last_name",
-        "phone_number",
-        "store",
-        "description",
-        "photo",
-    ]
-    login_url = "login"
-    redirect_field_name = "redirect_to"
-    success_message = "Your profile has been succesfully updated"
-
-    def get_success_url(self):
-        return reverse_lazy(
-            "mechanics:mechanic", kwargs={"pk": self.object.pk}
-        )
-
-
-class MechanicDetailView(DetailView):
-    """View a mechanics details."""
-
-    model = Mechanic
-    context_object_name = "mechanic"
-
-
 class SearchResultsView(ListView):
     """Search view for specialities."""
 
-    model = Mechanic
-    template_name = "mechanics/search_results.html"
+    model = Speciality
+    template_name = "specialities/search_results.html"
 
     def get_queryset(self):
         """Get filtered queryset."""
-        query = self.request.GET.get('q')
-        return Mechanic.objects.filter(
-            Q(specialities__name__icontains=query)
+        query = self.request.GET.get("q")
+        return Speciality.objects.filter(
+            Q(name__icontains=query) | Q(car_make__name__icontains=query)
         )

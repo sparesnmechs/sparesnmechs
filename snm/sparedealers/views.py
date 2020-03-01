@@ -12,12 +12,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .models import (
-    SpareDealer,
-    SparePart,
-    SparePartCategory,
-    SparePartSubCategory,
-)
+from .models import SparePart, SparePartCategory, SparePartSubCategory
 
 
 class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -34,11 +29,22 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         "sub_category",
         "car_make",
         "car_model",
-        "sparedealer",
+        "first_name",
+        "last_name",
+        "phone_number",
+        "region",
+        "place",
+        "store",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your sparepart has been succesfully created"
+    template_name = "spareparts/sell_a_part.html"
+
+    def get_success_url(self):
+        return reverse_lazy(
+            "sparedealers:update", kwargs={"pk": self.object.pk}
+        )
 
 
 class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
@@ -55,11 +61,22 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         "sub_category",
         "car_make",
         "car_model",
-        "sparedealer",
+        "first_name",
+        "last_name",
+        "phone_number",
+        "region",
+        "place",
+        "store",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your sparepart has been succesfully updated"
+    template_name = "spareparts/update_a_part.html"
+
+    def get_success_url(self):
+        return reverse_lazy(
+            "sparedealers:sparepart-list", kwargs={"pk": self.object.pk}
+        )
 
 
 class SparePartDeleteView(LoginRequiredMixin, DeleteView):
@@ -75,7 +92,7 @@ class SparePartListView(ListView):
 
     queryset = SparePart.objects.all()
     context_object_name = "spareparts"
-    template_name = "sparedealers/spareparts.html"
+    template_name = "index.html"
 
 
 class SparePartDetailView(DetailView):
@@ -90,72 +107,101 @@ class SparePartCategoryListView(ListView):
 
     queryset = SparePartCategory.objects.all()
     context_object_name = "categories"
+    template_name = "index.html"
 
 
-class DealerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    """Create view for mechanics."""
+class ExteriorSparepartsListiew(ListView):
+    """Exterior spareparts."""
 
-    model = SpareDealer
-    fields = [
-        "first_name",
-        "last_name",
-        "phone_number",
-        "store",
-        "description",
-        "photo",
-    ]
-    login_url = "login"
-    redirect_field_name = "redirect_to"
-    success_message = "Your profile has been succesfully created"
-
-    def get_success_url(self):
-        return reverse_lazy(
-            "sparedealers:dealer", kwargs={"pk": self.object.pk}
-        )
+    category = SparePartCategory.objects.get(name="Exterior")
+    queryset = category.part_categories.all()
+    context_object_name = "exteriors"
+    template_name = "spareparts/exterior.html"
 
 
-class DealerUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    """Update view for mechanics."""
+class InteriorSparepartsListiew(ListView):
+    """Exterior spareparts."""
 
-    model = SpareDealer
-    fields = [
-        "first_name",
-        "last_name",
-        "phone_number",
-        "store",
-        "description",
-        "photo",
-    ]
-    login_url = "login"
-    redirect_field_name = "redirect_to"
-    success_message = "Your profile has been succesfully updated"
-
-    def get_success_url(self):
-        return reverse_lazy(
-            "sparedealers:dealer", kwargs={"pk": self.object.pk}
-        )
+    category = SparePartCategory.objects.get(name="Interior")
+    queryset = category.part_categories.all()
+    context_object_name = "interiors"
+    template_name = "spareparts/interior.html"
 
 
-class DealerDetailView(DetailView):
-    """View a dealers details."""
+class AccessoriesSparepartsListiew(ListView):
+    """Exterior spareparts."""
 
-    model = SpareDealer
-    context_object_name = "dealers"
+    category = SparePartCategory.objects.get(name="Accessories")
+    queryset = category.part_categories.all()
+    context_object_name = "accessories"
+    template_name = "spareparts/accessories.html"
 
 
-# def sparepart_view(request):
-#     """Search view."""
-#     spareparts_filter = SparePartFilter(
-#         request.GET, queryset=SparePart.objects.all()
-#     )
-#     return render(
-#         request,
-#         "sparedealers/sparepart_list.html",
-#         {"filter": spareparts_filter},
-#     )
+class AudioSparepartsListiew(ListView):
+    """Exterior spareparts."""
+
+    category = SparePartCategory.objects.get(id=2)  # Audio&Video
+    queryset = category.part_categories.all()
+    context_object_name = "audios"
+    template_name = "spareparts/audio_n_video.html"
+
+
+class ElectricalSparepartsListiew(ListView):
+    """Exterior spareparts."""
+
+    category = SparePartCategory.objects.get(name="Electrical")  # Audio&Video
+    queryset = category.part_categories.all()
+    context_object_name = "electricals"
+    template_name = "spareparts/electrical.html"
+
+
+class EngineSparepartsListiew(ListView):
+    """Exterior spareparts."""
+
+    category = SparePartCategory.objects.get(name="Engine")
+    queryset = category.part_categories.all()
+    context_object_name = "engines"
+    template_name = "spareparts/engine.html"
+
+
+class PerformanceSparepartsListiew(ListView):
+    """Exterior spareparts."""
+
+    category = SparePartCategory.objects.get(name="Performance")
+    queryset = category.part_categories.all()
+    context_object_name = "performances"
+    template_name = "spareparts/performance.html"
+
+
+class SuspensionSparepartsListiew(ListView):
+    """Exterior spareparts."""
+
+    category = SparePartCategory.objects.get(name="Suspension")
+    queryset = category.part_categories.all()
+    context_object_name = "suspensions"
+    template_name = "spareparts/suspension.html"
+
+
+class TransmissionSparepartsListiew(ListView):
+    """Exterior spareparts."""
+
+    category = SparePartCategory.objects.get(name="Transmission")
+    queryset = category.part_categories.all()
+    context_object_name = "transmissions"
+    template_name = "spareparts/transmission.html"
+
+
+class WheelsSparepartsListiew(ListView):
+    """Exterior spareparts."""
+
+    category = SparePartCategory.objects.get(id=10)
+    queryset = category.part_categories.all()
+    context_object_name = "wheels"
+    template_name = "spareparts/wheels_n_tyres.html"
 
 
 def get_subcategories(request):
+    """Get subcategories based on their categories."""
     category = request.GET.get("category", None)
     if not category:
         return HttpResponse(

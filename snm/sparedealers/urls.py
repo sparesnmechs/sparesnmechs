@@ -10,9 +10,9 @@ urlpatterns = [
         "sparepart/create", views.SparePartCreateView.as_view(), name="create",
     ),
     path(
-        "dealer/create/",
-        views.DealerCreateView.as_view(),
-        name="dealer_create",
+        "sparepart/update/<int:pk>",
+        views.SparePartUpdateView.as_view(),
+        name="update",
     ),
     path(
         "spareparts/subcategories",
@@ -24,25 +24,59 @@ urlpatterns = [
         views.SparePartDetailView.as_view(),
         name="sparepart_detail",
     ),
-    path("dealer/<int:pk>", views.DealerDetailView.as_view(), name="dealer",),
-    path(
-        "dealer/update/<int:pk>/",
-        views.DealerUpdateView.as_view(),
-        name="dealer_update",
-    ),
-    # path(
-    #     "sparepart/<int:pk>/",
-    #     views.SparePartUpdateView.as_view(),
-    #     name="update",
-    #     ),
-    # path(
-    #     "sparepart/<int:pk>/delete",
-    #     views.SparePartDeleteView.as_view(),
-    #     name="delete",
-    # ),
     path(
         "sparepart/category/",
         views.SparePartCategoryListView.as_view(),
         name="category",
+    ),
+    path(
+        "sparepart/category/exterior/",
+        views.ExteriorSparepartsListiew.as_view(),
+        name="exterior",
+    ),
+    path(
+        "sparepart/category/interior/",
+        views.InteriorSparepartsListiew.as_view(),
+        name="interior",
+    ),
+    path(
+        "sparepart/category/accessories/",
+        views.AccessoriesSparepartsListiew.as_view(),
+        name="accessories",
+    ),
+    path(
+        "sparepart/category/audios/",
+        views.AudioSparepartsListiew.as_view(),
+        name="audio",
+    ),
+    path(
+        "sparepart/category/engine/",
+        views.EngineSparepartsListiew.as_view(),
+        name="engine",
+    ),
+    path(
+        "sparepart/category/performance/",
+        views.PerformanceSparepartsListiew.as_view(),
+        name="performance",
+    ),
+    path(
+        "sparepart/category/suspension/",
+        views.SuspensionSparepartsListiew.as_view(),
+        name="suspension",
+    ),
+    path(
+        "sparepart/category/transmission/",
+        views.TransmissionSparepartsListiew.as_view(),
+        name="transmission",
+    ),
+    path(
+        "sparepart/category/wheels/",
+        views.WheelsSparepartsListiew.as_view(),
+        name="wheels",
+    ),
+    path(
+        "sparepart/category/electrical/",
+        views.ElectricalSparepartsListiew.as_view(),
+        name="electrical",
     ),
 ]

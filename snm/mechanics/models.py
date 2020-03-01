@@ -1,4 +1,5 @@
 """Models."""
+from django.core.validators import RegexValidator
 from django.db import models
 
 from snm.carowners.models import CarMake
@@ -16,6 +17,23 @@ class Speciality(models.Model):
     description = models.TextField(blank=True, null=True)
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     is_featured = models.BooleanField(default=False)  # Half Baked
+    price = models.DecimalField(max_digits=14, decimal_places=2)
+
+    # Contact information
+    store = models.CharField(max_length=100, blank=True, null=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone_number = models.CharField(
+        max_length=10,
+        validators=[
+            RegexValidator(
+                regex="^07[0-9]", message="Enter a valid phone number"
+            )
+        ],
+    )
+    photo = models.ImageField(upload_to="mechanic/", blank=True, null=True)
+    region = models.CharField(max_length=20)
+    place = models.CharField(max_length=20)
 
     class Meta:
         """Speciality in its correct plural."""
@@ -25,21 +43,3 @@ class Speciality(models.Model):
     def __str__(self):
         """Represent name for human readability."""
         return self.name
-
-
-class Mechanic(models.Model):
-    """Create the mechanic."""
-
-    store = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    phone_number = models.CharField(
-        max_length=10
-    )  # Validate to accept phone no
-    description = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to="spareparts/", blank=True, null=True)
-    specialities = models.ManyToManyField(Speciality)
-
-    def __str__(self):
-        """Represent first and last name for human readability."""
-        return "{} {}".format(self.first_name, self.last_name)

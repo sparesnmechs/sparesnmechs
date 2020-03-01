@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from .models import CarModel, CarOwner
 
@@ -14,7 +14,7 @@ class SignUp(SuccessMessageMixin, CreateView):
     """Sign up view for all users."""
 
     form_class = UserCreationForm
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy("carowner:carowner")
     template_name = "registration/signup.html"
     success_message = "Successfully signed up, now log in"
 

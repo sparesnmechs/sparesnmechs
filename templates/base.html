@@ -11,49 +11,13 @@
   <title>Sparesnmechs</title>
 </head>
 <body>
-  <!-- Top Navigation Menu -->
-<div class="topnav">
-  <!-- <a href="#home" class="active">Logo</a> -->
-  <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
-    <img src="{% static 'logo/spares-logo.jpg' %}" width="120" height="60" alt="">
-  </a>
-  <!-- Navigation links (hidden by default) -->
-  <div id="myLinks">
-    <a href="{% url 'sparedealers:sparepart-list' %}">Find a dealer</a>
-    <a href="{% url 'mechanics:mechanic' %}">Find a mechanic</a>
-    <a href="{% url 'sparedealers:create' %}">Become a dealer</a>
-    <a href="{% url 'mechanics:create' %}">Become a mechanic</a>
-    <a href="#about">Profile</a>
-    {% if user.is_authenticated %}
-      <a href="{% url 'logout' %}">Log out</a>
-    {% else %}
-      <a href="{% url 'login' %}">Log in</a>
-    {% endif %}
-  </div>
-  <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-    <i class="fa fa-bars"></i>
-  </a>
-</div>
 
-{% if user.is_authenticated %}
-  <div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    Welcome! Create your profile as either 
-    <a href="{% url 'carowners:create' %}" style="color: #0f172e;">car owner</a>, 
-    <a href="{% url 'sparedealers:dealer_create' %}" style="color: #0f172e;">dealer</a> or 
-    <a href="{% url 'mechanics:mech_create' %}" style="color: #0f172e;">mechanic</a>
-  </div>
-{% else %}
-  <div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    Welcome! Please <a href="{% url 'login' %}" style="color: #0f172e;">login</a> to sparesnmechs 
-  </div>
-{% endif %}
+{% block nav %}
+{% endblock nav %}
 
-{% block carousel %}
-{% endblock carousel %}
-{% include 'messages.html' %}
+
+{% block jumbotron %}
+{% endblock %}
 
 <div class="container">
   {% block content %}
