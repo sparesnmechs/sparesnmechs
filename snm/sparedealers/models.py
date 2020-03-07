@@ -1,5 +1,5 @@
 """Models."""
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinLengthValidator
 from django.db import models
 
 from snm.carowners.models import CarMake, CarModel
@@ -66,7 +66,7 @@ class SparePart(models.Model):
     year_of_manufacture = models.CharField(
         max_length=225,
         validators=[
-            RegexValidator(regex="[0-9],", message="Enter a valid year")
+            RegexValidator(regex="[0-9,]", message="Enter a valid year"),
         ],
     )
     category = models.ForeignKey(
@@ -92,7 +92,10 @@ class SparePart(models.Model):
         validators=[
             RegexValidator(
                 regex="^07[0-9]", message="Enter a valid phone number"
-            )
+            ),
+            MinLengthValidator(
+                limit_value=10, message="Phone number should have 10 values"
+            ),
         ],
     )
     first_name = models.CharField(max_length=20)

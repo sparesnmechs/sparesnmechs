@@ -1,5 +1,5 @@
 """Models."""
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinLengthValidator
 from django.db import models
 
 from snm.carowners.models import CarMake
@@ -28,7 +28,10 @@ class Speciality(models.Model):
         validators=[
             RegexValidator(
                 regex="^07[0-9]", message="Enter a valid phone number"
-            )
+            ),
+            MinLengthValidator(
+                limit_value=10, message="Phone number should have 10 values"
+            ),
         ],
     )
     photo = models.ImageField(upload_to="mechanic/", blank=True, null=True)
