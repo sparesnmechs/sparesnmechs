@@ -35,8 +35,8 @@
     </div>
     <p class="lead" style="text-align: center;">Find anything in sparesnmechs</p>
     <br>
-    <form class="example" action="" style="margin:auto; max-width:500px">
-        <input type="text" placeholder="Search.." name="search">
+    <form class="example" method="get" action="{% url 'sparedealers:search_results' %}" style="margin:auto; max-width:500px">
+        <input type="text" placeholder="Search.." name="q">
     </form>
     <br>
   </div>
