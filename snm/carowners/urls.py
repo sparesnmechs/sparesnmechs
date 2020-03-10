@@ -16,6 +16,5 @@ urlpatterns = [
     path(
         "carowner/<int:pk>", views.OwnerDetailView.as_view(), name="carowner",
     ),
-    path("signup/", views.SignUp.as_view(), name="signup",),
     path("cars/car_models", views.get_carmodels, name="get_carmodels",),
 ]

@@ -35,6 +35,7 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         "region",
         "place",
         "store",
+        "photo",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
@@ -67,6 +68,7 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         "region",
         "place",
         "store",
+        "photo",
     ]
     login_url = "login"
     redirect_field_name = "redirect_to"
@@ -74,9 +76,7 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     template_name = "spareparts/update_a_part.html"
 
     def get_success_url(self):
-        return reverse_lazy(
-            "sparedealers:sparepart-list", kwargs={"pk": self.object.pk}
-        )
+        return reverse_lazy("sparedealers:sparepart-list")
 
 
 class SparePartDeleteView(LoginRequiredMixin, DeleteView):
@@ -149,7 +149,7 @@ class AudioSparepartsListiew(ListView):
 class ElectricalSparepartsListiew(ListView):
     """Exterior spareparts."""
 
-    category = SparePartCategory.objects.get(name="Electrical")  # Audio&Video
+    category = SparePartCategory.objects.get(name="Electrical")
     queryset = category.part_categories.all()
     context_object_name = "electricals"
     template_name = "spareparts/electrical.html"
