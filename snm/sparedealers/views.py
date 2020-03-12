@@ -2,6 +2,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
+from django.db.models import Q
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -213,3 +214,21 @@ def get_subcategories(request):
         serializers.serialize("json", sub_categories),
         content_type="application/json",
     )
+
+
+class SearchResultsView(ListView):
+    """Search view for spareparts."""
+
+    model = SparePart
+    template_name = "spareparts/search_results.html"
+
+    def get_queryset(self):
+        """Get filtered queryset."""
+        query = self.request.GET.get("q")
+        return SparePart.objects.filter(
+            Q(name__icontains=query)
+            | Q(car_make__name__icontains=query)
+            | Q(car_model__name__icontains=query)
+            | Q(category__name__icontains=query)
+            | Q(sub_category__name__icontains=query)
+        )

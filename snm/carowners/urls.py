@@ -17,4 +17,5 @@ urlpatterns = [
         "carowner/<int:pk>", views.OwnerDetailView.as_view(), name="carowner",
     ),
     path("cars/car_models", views.get_carmodels, name="get_carmodels",),
+    path("signup/", views.SignUp.as_view(), name="signup",),
 ]

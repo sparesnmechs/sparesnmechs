@@ -79,4 +79,5 @@ urlpatterns = [
         views.ElectricalSparepartsListiew.as_view(),
         name="electrical",
     ),
+    path("spareparts/search/", views.SearchResultsView.as_view(), name="search_results")
 ]
