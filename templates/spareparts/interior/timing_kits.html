@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:interior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Interior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for timing_kit in timing_kits %}
+<div class="main_container">
+    {% if timing_kit.photo %}
+        <img src="{{ timing_kit.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ timing_kit.name }}</span>{{ timing_kit.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ timing_kit.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ timing_kit.category }} | <strong>Subcategory: </strong>{{ timing_kit.sub_category }} | 
+        <strong>Condition:</strong> {{ timing_kit.condition }} | <strong>Year of Manufacture: </strong>{{ timing_kit.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ timing_kit.car_make }}| <strong>Car Model: </strong>{{ timing_kit.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}

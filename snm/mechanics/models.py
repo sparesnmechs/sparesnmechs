@@ -1,5 +1,6 @@
 """Models."""
-from django.core.validators import RegexValidator, MinLengthValidator
+from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator, RegexValidator
 from django.db import models
 
 from snm.carowners.models import CarMake
@@ -13,6 +14,7 @@ class Speciality(models.Model):
     For example Wiring.
     """
 
+    mechanic = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)

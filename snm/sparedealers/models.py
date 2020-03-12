@@ -1,5 +1,6 @@
 """Models."""
-from django.core.validators import RegexValidator, MinLengthValidator
+from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator, RegexValidator
 from django.db import models
 
 from snm.carowners.models import CarMake, CarModel
@@ -59,6 +60,7 @@ class SparePart(models.Model):
         ("FOREIGN USED", "Foreign Used"),
     ]
 
+    dealer = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=14, decimal_places=2)

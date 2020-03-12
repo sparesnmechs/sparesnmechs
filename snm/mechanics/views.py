@@ -43,6 +43,11 @@ class SpecialityCreateView(
     def get_success_url(self):
         return reverse_lazy("mechanics:update", kwargs={"pk": self.object.pk})
 
+    def form_valid(self, form):
+        """Add the logged in user."""
+        form.instance.mechanic = self.request.user
+        return super().form_valid(form)
+
 
 class SpecialityUpdateView(
     SuccessMessageMixin, LoginRequiredMixin, UpdateView
@@ -71,6 +76,11 @@ class SpecialityUpdateView(
 
     def get_success_url(self):
         return reverse_lazy("mechanics:speciality")
+
+    def form_valid(self, form):
+        """Add the logged in user."""
+        form.instance.mechanic = self.request.user
+        return super().form_valid(form)
 
 
 class SpecialityDeleteView(LoginRequiredMixin, DeleteView):

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for tail_light in tail_lights %}
+<div class="main_container">
+    {% if tail_light.photo %}
+        <img src="{{ tail_light.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ tail_light.name }}</span>{{ tail_light.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ tail_light.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ tail_light.category }} | <strong>Subcategory: </strong>{{ tail_light.sub_category }} | 
+        <strong>Condition:</strong> {{ tail_light.condition }} | <strong>Year of Manufacture: </strong>{{ tail_light.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ tail_light.car_make }}| <strong>Car Model: </strong>{{ tail_light.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}

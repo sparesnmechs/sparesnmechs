@@ -1,7 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block nav %}
+<style>
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: white;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #0f172e;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: #0f172e;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+} 
+</style>
+
   <!-- Top Navigation Menu -->
 <div class="topnav">
   <!-- <a href="#home" class="active">Logo</a> -->
@@ -39,8 +98,96 @@
         <input type="text" placeholder="Search.." name="q">
     </form>
     <br>
+    <button onclick="document.getElementById('id01').style.display='block'" style="width: auto; background-color: #0f172e;">Filter spareparts</button>
+
+    <!-- The Modal -->
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'"
+    class="close" title="Close Modal">&times;</span>
+
+    <!-- Modal Content -->
+    <form method="get" class="modal-content animate">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <div class="container">
+        {{ filter.form|crispy }}
+      </div>
+      <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Filter Spareparts</button>
+    <br>
+    </form>
+    <br>
   </div>
 </div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+const categoryInput = document.querySelector("select#id_category")
+const subcategoryInput = document.querySelector("select#id_sub_category")
+
+categoryInput.onchange = function (e) {
+  getAndSetSubcategories(e.target.value)
+}
+
+function getAndSetSubcategories(category) {
+  let subCatReq = new XMLHttpRequest()
+
+  subCatReq.addEventListener("load", function (e) {
+    let subcategories = JSON.parse(e.target.response)
+
+    // Map the list of subcategory objects to a list of options
+    subcategories = subcategories.map(function (subcategory) {
+      return `<option value="${subcategory.pk}">${subcategory.fields.name}</option>`
+    })
+
+    // Add default option to start of the array
+    subcategories.splice(0,0,'<option value="" selected="">---------</option>')
+
+    subcategoryInput.innerHTML = subcategories.join(" ")
+  })
+
+  subCatReq.open("GET", `{% url 'sparedealers:get_subcategories' %}?category=${category}`)
+  subCatReq.send()
+}
+
+// Get car model car_make == category
+const car_makeInput = document.querySelector("select#id_car_make")
+const car_modelInput = document.querySelector("select#id_car_model")
+
+car_makeInput.onchange = function (e) {
+getAndSetCarmodels(e.target.value)
+}
+
+function getAndSetCarmodels(car_make) { //subCatReg == carmodelReq
+let carModelReq = new XMLHttpRequest()
+
+carModelReq.addEventListener("load", function (e) { //subcategories ==car_models
+    let car_models = JSON.parse(e.target.response)
+
+    // Map the list of subcategory objects to a list of options
+    subcategories = car_models.map(function (car_model) {
+    return `<option value="${car_model.pk}">${car_model.fields.name}</option>`
+    })
+
+    // Add default option to start of the array
+    car_models.splice(0,0,'<option value="" selected="">---------</option>')
+
+    car_modelInput.innerHTML = subcategories.join(" ")
+})
+
+carModelReq.open("GET", `{% url 'carowners:get_carmodels' %}?car_make=${car_make}`)
+carModelReq.send()
+}
+</script>
+
 {% endblock %}
 
 {% block content %}
@@ -139,7 +286,7 @@
 <h3 style="text-align: center;">What we offer</h3>
 <hr>
 <div class="scrolling-wrapper">
-    {% for sparepart in spareparts %}
+    {% for sparepart in filter.qs %}
       <div class="mech_card">
         {% if sparepart.photo %}
             <img src="{{ sparepart.photo.url }}" alt="{{ sparepart.name }}" style="width:80%; height: 180px;">
@@ -157,34 +304,3 @@
 </div>
 <br>
 {% endblock %}
-
-
-<script>
-    const categoryInput = document.querySelector("select#id_category")
-    const subcategoryInput = document.querySelector("select#id_sub_category")
-  
-    categoryInput.onchange = function (e) {
-      getAndSetSubcategories(e.target.value)
-    }
-  
-    function getAndSetSubcategories(category) {
-      let subCatReq = new XMLHttpRequest()
-  
-      subCatReq.addEventListener("load", function (e) {
-        let subcategories = JSON.parse(e.target.response)
-  
-        // Map the list of subcategory objects to a list of options
-        subcategories = subcategories.map(function (subcategory) {
-          return `<option value="${subcategory.pk}">${subcategory.fields.name}</option>`
-        })
-  
-        // Add default option to start of the array
-        subcategories.splice(0,0,'<option value="" selected="">---------</option>')
-  
-        subcategoryInput.innerHTML = subcategories.join(" ")
-      })
-  
-      subCatReq.open("GET", `{% url 'sparedealers:get_subcategories' %}?category=${category}`)
-      subCatReq.send()
-    }
-  </script>

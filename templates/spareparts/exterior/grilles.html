@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for grille in grilles %}
+<div class="main_container">
+    {% if grille.photo %}
+        <img src="{{ grille.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ grille.name }}</span>{{ grille.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ grille.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ grille.category }} | <strong>Subcategory: </strong>{{ grille.sub_category }} | 
+        <strong>Condition:</strong> {{ grille.condition }} | <strong>Year of Manufacture: </strong>{{ grille.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ grille.car_make }}| <strong>Car Model: </strong>{{ grille.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}
