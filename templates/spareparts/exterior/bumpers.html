@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for bumper in bumpers %}
+<div class="main_container">
+    {% if bumper.photo %}
+        <img src="{{ bumper.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ bumper.name }}</span>{{ bumper.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ bumper.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ bumper.category }} | <strong>Subcategory: </strong>{{ bumper.sub_category }} | 
+        <strong>Condition:</strong> {{ bumper.condition }} | <strong>Year of Manufacture: </strong>{{ bumper.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ bumper.car_make }}| <strong>Car Model: </strong>{{ bumper.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}

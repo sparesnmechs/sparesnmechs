@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for fog_lamp in fog_lamps %}
+<div class="main_container">
+    {% if fog_lamp.photo %}
+        <img src="{{ fog_lamp.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ fog_lamp.name }}</span>{{ fog_lamp.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ fog_lamp.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ fog_lamp.category }} | <strong>Subcategory: </strong>{{ fog_lamp.sub_category }} | 
+        <strong>Condition:</strong> {{ fog_lamp.condition }} | <strong>Year of Manufacture: </strong>{{ fog_lamp.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ fog_lamp.car_make }}| <strong>Car Model: </strong>{{ fog_lamp.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}

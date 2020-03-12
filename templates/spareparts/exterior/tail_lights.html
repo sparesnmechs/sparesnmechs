@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for hood in hoods %}
+<div class="main_container">
+    {% if hood.photo %}
+        <img src="{{ hood.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ hood.name }}</span>{{ hood.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ hood.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ hood.category }} | <strong>Subcategory: </strong>{{ hood.sub_category }} | 
+        <strong>Condition:</strong> {{ hood.condition }} | <strong>Year of Manufacture: </strong>{{ hood.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ hood.car_make }}| <strong>Car Model: </strong>{{ hood.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}

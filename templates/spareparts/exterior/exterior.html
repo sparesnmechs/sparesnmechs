@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+<br>
+<ul class="list-group">
+    <a href="{% url 'sparedealers:tail_lights' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Tail lights
+    <span class="badge badge-primary badge-pill">{{ tail_lights|length }}</span>
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:side_mirrors' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Side mirrors
+    <span class="badge badge-primary badge-pill">{{ side_mirrors|length }}</span>
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:hoods' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Hoods
+    <span class="badge badge-primary badge-pill">{{ hoods|length }}</span>
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:bumpers_and_valances' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Bumpers and Valances
+    <span class="badge badge-primary badge-pill">{{ bumpers_and_valances|length }}</span>
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:led_lights' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    LED lights
+    <span class="badge badge-primary badge-pill">{{ led_lights|length }}</span>
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:signal_lights' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Signal lights
+    <span class="badge badge-primary badge-pill">{{ signal_lights|length }}</span>
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:doors' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Doors
+    <span class="badge badge-primary badge-pill">{{ doors|length }}</span>
+  </li>
+    </a>
+  <a href="{% url 'sparedealers:headlamps' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Headlamps
+    <span class="badge badge-primary badge-pill">{{ headlamps|length }}</span>
+  </li>
+    </a>
+  <a href="{% url 'sparedealers:nose_cut' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Nose cut
+    <span class="badge badge-primary badge-pill">{{ nose_cut|length }}</span>
+  </li>
+    </a>
+  <a href="{% url 'sparedealers:grilles' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Grilles
+    <span class="badge badge-primary badge-pill">{{ grilles|length }}</span>
+  </li>
+    </a>
+  <a href="{% url 'sparedealers:fog_lamps' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Fog Lamps
+    <span class="badge badge-primary badge-pill">{{ fog_lamps|length }}</span>
+  </li>
+    </a>
+</ul>
+{% endblock %}

@@ -14,6 +14,8 @@ from django.views.generic import (
 )
 
 from .models import SparePart, SparePartCategory, SparePartSubCategory
+from .filters import SparePartFilter
+from django.shortcuts import render
 
 
 class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -48,6 +50,11 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
             "sparedealers:update", kwargs={"pk": self.object.pk}
         )
 
+    def form_valid(self, form):
+        """Add the logged in user."""
+        form.instance.dealer = self.request.user
+        return super().form_valid(form)
+
 
 class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Update view for spare parts."""
@@ -79,6 +86,11 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy("sparedealers:sparepart-list")
 
+    def form_valid(self, form):
+        """Add the logged in user."""
+        form.instance.dealer = self.request.user
+        return super().form_valid(form)
+
 
 class SparePartDeleteView(LoginRequiredMixin, DeleteView):
     """Delete a sparepart."""
@@ -86,14 +98,6 @@ class SparePartDeleteView(LoginRequiredMixin, DeleteView):
     model = SparePart
     login_url = "login"
     redirect_field_name = "redirect_to"
-
-
-class SparePartListView(ListView):
-    """List view of spareparts."""
-
-    queryset = SparePart.objects.all()
-    context_object_name = "spareparts"
-    template_name = "index.html"
 
 
 class SparePartDetailView(DetailView):
@@ -111,24 +115,173 @@ class SparePartCategoryListView(ListView):
     template_name = "index.html"
 
 
+# ==========Exterior category & subcategories==========
 class ExteriorSparepartsListiew(ListView):
     """Exterior spareparts."""
 
     category = SparePartCategory.objects.get(name="Exterior")
     queryset = category.part_categories.all()
     context_object_name = "exteriors"
-    template_name = "spareparts/exterior.html"
+    template_name = "spareparts/exterior/exterior.html"
 
 
+class TailLightsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Tail lights")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "tail_lights"
+    template_name = "spareparts/exterior/tail_lights.html"
+
+
+class SideMirrorsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Side mirrors")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "side_mirrors"
+    template_name = "spareparts/exterior/side_mirrors.html"
+
+
+class HoodListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Hoods")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "hoods"
+    template_name = "spareparts/exterior/hoods.html"
+
+
+class BumperListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(
+        name="Bumpers and Valances"
+    )
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "bumpers"
+    template_name = "spareparts/exterior/bumpers.html"
+
+
+class LEDLightsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="LED lights")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "led_lights"
+    template_name = "spareparts/exterior/LED_lights.html"
+
+
+class SignalLightsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Signal lights")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "signal_lights"
+    template_name = "spareparts/exterior/signal_lights.html"
+
+
+class DoorsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Doors")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "doors"
+    template_name = "spareparts/exterior/doors.html"
+
+
+class HeadlampsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Headlamps")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "headlamps"
+    template_name = "spareparts/exterior/headlamps.html"
+
+
+class NoseCutListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Nose cut")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "nose_cut"
+    template_name = "spareparts/exterior/nose_cut.html"
+
+
+class GrillesListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Grilles")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "grilles"
+    template_name = "spareparts/exterior/grilles.html"
+
+
+class FogLampsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Fog lamps")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "fog_lamps"
+    template_name = "spareparts/exterior/fog_lamps.html"
+
+
+# ==========Interior category & subcategories==========
 class InteriorSparepartsListiew(ListView):
     """Exterior spareparts."""
 
     category = SparePartCategory.objects.get(name="Interior")
     queryset = category.part_categories.all()
     context_object_name = "interiors"
-    template_name = "spareparts/interior.html"
+    template_name = "spareparts/interior/interior.html"
 
 
+class FloorMatsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Floor mats")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "floor_mats"
+    template_name = "spareparts/interior/floor_mats.html"
+
+
+class CamerasListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Cameras")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "cameras"
+    template_name = "spareparts/interior/cameras.html"
+
+
+class SeatCoversListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Seat covers")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "seat_covers"
+    template_name = "spareparts/interior/seat_covers.html"
+
+
+class CoolingSystemsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Cooling systems")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "cooling_systems"
+    template_name = "spareparts/interior/cooling_systems.html"
+
+
+class TimingKitsListiew(ListView):
+    """Exterior spareparts."""
+
+    sub_category = SparePartSubCategory.objects.get(name="Timing kits")
+    queryset = sub_category.part_subcategories.all()
+    context_object_name = "timing_kits"
+    template_name = "spareparts/interior/timing_kits.html"
+
+
+# ==========Accessories category & subcategories==========
 class AccessoriesSparepartsListiew(ListView):
     """Exterior spareparts."""
 
@@ -138,15 +291,17 @@ class AccessoriesSparepartsListiew(ListView):
     template_name = "spareparts/accessories.html"
 
 
+# ==========Audio category & subcategories==========
 class AudioSparepartsListiew(ListView):
     """Exterior spareparts."""
 
-    category = SparePartCategory.objects.get(id=2)  # Audio&Video
+    category = SparePartCategory.objects.get(name="Audio")  # Audio&Video
     queryset = category.part_categories.all()
     context_object_name = "audios"
     template_name = "spareparts/audio_n_video.html"
 
 
+# ==========Electrical category & subcategories==========
 class ElectricalSparepartsListiew(ListView):
     """Exterior spareparts."""
 
@@ -156,6 +311,7 @@ class ElectricalSparepartsListiew(ListView):
     template_name = "spareparts/electrical.html"
 
 
+# ==========Engine category & subcategories==========
 class EngineSparepartsListiew(ListView):
     """Exterior spareparts."""
 
@@ -165,6 +321,7 @@ class EngineSparepartsListiew(ListView):
     template_name = "spareparts/engine.html"
 
 
+# ==========Performance category & subcategories==========
 class PerformanceSparepartsListiew(ListView):
     """Exterior spareparts."""
 
@@ -174,6 +331,7 @@ class PerformanceSparepartsListiew(ListView):
     template_name = "spareparts/performance.html"
 
 
+# ==========Suspsension category & subcategories==========
 class SuspensionSparepartsListiew(ListView):
     """Exterior spareparts."""
 
@@ -183,6 +341,7 @@ class SuspensionSparepartsListiew(ListView):
     template_name = "spareparts/suspension.html"
 
 
+# ==========Transmission category & subcategories==========
 class TransmissionSparepartsListiew(ListView):
     """Exterior spareparts."""
 
@@ -192,10 +351,11 @@ class TransmissionSparepartsListiew(ListView):
     template_name = "spareparts/transmission.html"
 
 
+# ==========Wheels category & subcategories==========
 class WheelsSparepartsListiew(ListView):
     """Exterior spareparts."""
 
-    category = SparePartCategory.objects.get(id=10)
+    category = SparePartCategory.objects.get(name="Wheels")
     queryset = category.part_categories.all()
     context_object_name = "wheels"
     template_name = "spareparts/wheels_n_tyres.html"
@@ -232,3 +392,8 @@ class SearchResultsView(ListView):
             | Q(category__name__icontains=query)
             | Q(sub_category__name__icontains=query)
         )
+
+
+def filtered_sparepart_list(request):
+    f = SparePartFilter(request.GET, queryset=SparePart.objects.all())
+    return render(request, "index.html", {"filter": f})

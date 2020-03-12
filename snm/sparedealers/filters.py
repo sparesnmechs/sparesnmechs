@@ -1,16 +1,20 @@
 """Filter spareparts."""
 import django_filters
 
-from .models import SparePartCategory
+from .models import SparePart
 
 
-class SparePartCategoryFilter(django_filters.FilterSet):
+class SparePartFilter(django_filters.FilterSet):
     """Filterset for spareparts."""
 
     class Meta:
         """Meta."""
 
-        model = SparePartCategory
+        model = SparePart
         fields = [
+            "category",
             "sub_category",
+            "car_make",
+            "car_model",
+            "condition",
         ]

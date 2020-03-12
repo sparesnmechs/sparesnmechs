@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% for nose_cut in nose_cuts %}
+<div class="main_container">
+    {% if nose_cut.photo %}
+        <img src="{{ nose_cut.photo.url}}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ nose_cut.name }}</span>{{ nose_cut.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ nose_cut.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ nose_cut.category }} | <strong>Subcategory: </strong>{{ nose_cut.sub_category }} | 
+        <strong>Condition:</strong> {{ nose_cut.condition }} | <strong>Year of Manufacture: </strong>{{ nose_cut.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ nose_cut.car_make }}| <strong>Car Model: </strong>{{ nose_cut.car_model }}</p>
+</div>
+{% endfor %}
+{% endblock %}
