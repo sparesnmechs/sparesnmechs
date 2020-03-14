@@ -14,7 +14,7 @@ class Speciality(models.Model):
     For example Wiring.
     """
 
-    mechanic = models.OneToOneField(User, on_delete=models.CASCADE)
+    mechanic = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)

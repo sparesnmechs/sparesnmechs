@@ -41,7 +41,7 @@ class SpecialityCreateView(
     template_name = "specialities/sell_a_speciality.html"
 
     def get_success_url(self):
-        return reverse_lazy("mechanics:update", kwargs={"pk": self.object.pk})
+        return reverse_lazy("mechanics:listings")
 
     def form_valid(self, form):
         """Add the logged in user."""
@@ -75,7 +75,7 @@ class SpecialityUpdateView(
     template_name = "specialities/update_a_speciality.html"
 
     def get_success_url(self):
-        return reverse_lazy("mechanics:speciality")
+        return reverse_lazy("mechanics:listings")
 
     def form_valid(self, form):
         """Add the logged in user."""
@@ -83,12 +83,22 @@ class SpecialityUpdateView(
         return super().form_valid(form)
 
 
+class MechanicListingsListView(LoginRequiredMixin, ListView):
+    """A user can see their listings."""
+
+    template_name = "mechanic_listings.html"
+    context_object_name = "listings"
+
+    def get_queryset(self):
+        """Filter by user."""
+        return Speciality.objects.filter(mechanic=self.request.user)
+
+
 class SpecialityDeleteView(LoginRequiredMixin, DeleteView):
     """Delete a sparepart."""
 
     model = Speciality
-    login_url = "login"
-    redirect_field_name = "redirect_to"
+    success_url = reverse_lazy('mechanics:listings')
 
 
 class SearchResultsView(ListView):

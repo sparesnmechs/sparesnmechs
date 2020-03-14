@@ -46,9 +46,7 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     template_name = "spareparts/sell_a_part.html"
 
     def get_success_url(self):
-        return reverse_lazy(
-            "sparedealers:update", kwargs={"pk": self.object.pk}
-        )
+        return reverse_lazy("sparedealers:listings")
 
     def form_valid(self, form):
         """Add the logged in user."""
@@ -84,7 +82,7 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     template_name = "spareparts/update_a_part.html"
 
     def get_success_url(self):
-        return reverse_lazy("sparedealers:sparepart-list")
+        return reverse_lazy("sparedealers:listings")
 
     def form_valid(self, form):
         """Add the logged in user."""
@@ -92,12 +90,22 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
+class DealerListingsListView(LoginRequiredMixin, ListView):
+    """A user can see their listings."""
+
+    template_name = "listings.html"
+    context_object_name = "listings"
+
+    def get_queryset(self):
+        """Filter by user."""
+        return SparePart.objects.filter(dealer=self.request.user)
+
+
 class SparePartDeleteView(LoginRequiredMixin, DeleteView):
     """Delete a sparepart."""
 
     model = SparePart
-    login_url = "login"
-    redirect_field_name = "redirect_to"
+    success_url = reverse_lazy('sparedealers:listings')
 
 
 class SparePartDetailView(DetailView):

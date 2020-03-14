@@ -60,7 +60,7 @@ class SparePart(models.Model):
         ("FOREIGN USED", "Foreign Used"),
     ]
 
-    dealer = models.OneToOneField(User, on_delete=models.CASCADE)
+    dealer = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=14, decimal_places=2)

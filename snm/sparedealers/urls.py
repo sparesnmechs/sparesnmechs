@@ -29,6 +29,16 @@ urlpatterns = [
         views.SparePartCategoryListView.as_view(),
         name="category",
     ),
+    path(
+        "listings/",
+        views.DealerListingsListView.as_view(),
+        name="listings",
+    ),
+    path(
+        "delete/<int:pk>",
+        views.SparePartDeleteView.as_view(),
+        name="delete",
+    ),
     # ==========Exterior category & subcategories==========
     path(
         "sparepart/category/exterior/",
