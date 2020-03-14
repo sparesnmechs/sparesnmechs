@@ -65,17 +65,17 @@
 <div class="topnav">
   <!-- <a href="#home" class="active">Logo</a> -->
   <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
-    <img src="{% static 'logo/spares-logo.jpg' %}" width="120" height="60" alt="">
+    <img src="{% static 'logo/spares-logo.svg' %}" width="120" height="60" alt="">
   </a>
   <!-- Navigation links (hidden by default) -->
   <div id="myLinks">
-    <a href="{% url 'sparedealers:create' %}" style="text-align: center;">Sell a part</a>
-    <a href="{% url 'mechanics:create' %}" style="text-align: center;">Sell a speciality</a>
-    <a href="#about" style="text-align: center;">Profile</a>
+    <a href="{% url 'sparedealers:create' %}" style="text-align: left;">Sell a part</a>
+    <a href="{% url 'mechanics:create' %}" style="text-align: left;">Sell a speciality</a>
+    <a href="{% url 'sparedealers:listings' %}" style="text-align: left;">View my listings</a>
     {% if user.is_authenticated %}
-      <a href="{% url 'logout' %}" style="text-align: center;">Log out</a>
+      <a href="{% url 'logout' %}" style="text-align: left;">Log out</a>
     {% else %}
-      <a href="{% url 'login' %}" style="text-align: center;">Log in</a>
+      <a href="{% url 'login' %}" style="text-align: left;">Log in</a>
     {% endif %}
   </div>
   <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
@@ -283,7 +283,7 @@ carModelReq.send()
     </div>
 </div>
 <br>
-<h3 style="text-align: center;">What we offer</h3>
+<h3 style="text-align: center;">Parts</h3>
 <hr>
 <div class="scrolling-wrapper">
     {% for sparepart in filter.qs %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+<br>
+<div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <a href="{% url 'mechanics:listings' %}" style="color: white;">View mechanic listings instead?</a>
+</div>
+    {% if listings %}
+        {% for listing in listings %}
+            <a href="{% url 'sparedealers:update' listing.id %}">
+            <div class="main_container">
+                {% if listing.photo %}
+                    <img src="{{ listing.photo.url}}" alt="Avatar" style="width:100px">
+                {% endif %}
+                <p><span>{{ listing.name }}</span> - KSH: {{ listing.price }}</p>
+                <p><i class="fa fa-phone" aria-hidden="true"></i>
+                    {{ listing.phone_number }}</p>
+                <br>
+                <hr>
+                <p><strong>Category: </strong>{{ listing.category }} | <strong>Subcategory: </strong>{{ listing.sub_category }} | 
+                    <strong>Condition:</strong> {{ listing.condition }} | <strong>Year of Manufacture: </strong>{{ listing.year_of_manufacture }} 
+                    | <strong>Car make: </strong>{{ listing.car_make }}| <strong>Car Model: </strong>{{ listing.car_model }}</p>
+                <a href="{% url 'sparedealers:delete' listing.id %}"><button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Delete</button></a>
+            </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <br>
+        <img src="{% static 'svg/car.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+        <br>
+        <p style="text-align: center;">Start posting your parts to your clients</p>
+        <a href="{% url 'sparedealers:create' %}"><button type="submit" class="btn btn-light" 
+            style="background-color:#0f172e !important; color:white;">Post new part</button></a>
+    {% endif %}
+    
+{% endblock %}

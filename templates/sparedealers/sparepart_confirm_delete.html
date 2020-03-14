@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:listings' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Listings</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+<br>
+<form method="post">{% csrf_token %}
+    <br>
+        <img src="{% static 'svg/cross.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+    <br>
+    <p style="text-align: center;">Are you sure you want to delete <strong>{{ object }}</strong>?</p>
+    <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Delete</button> 
+</form>
+{% endblock %}

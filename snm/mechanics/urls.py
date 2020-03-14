@@ -24,4 +24,9 @@ urlpatterns = [
         name="delete",
     ),
     path("search/", views.SearchResultsView.as_view(), name="search_results"),
+    path(
+        "mechanic/listings/",
+        views.MechanicListingsListView.as_view(),
+        name="listings",
+    ),
 ]

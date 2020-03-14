@@ -5,14 +5,12 @@
 
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+    <a class="active" href="{% url 'mechanics:listings' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Listings</a>
 </div> 
 {% endblock nav %}
 
 {% block content %}
 <div class="container">
-<h3 style="text-align: center;">Confirm you posting details</h3>
-    <hr>
     <br>
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
@@ -64,7 +62,7 @@
     <div class="form-group">
         {{ form.photo|as_crispy_field }}
     </div>
-    <button type="submit" class="btn btn-light" style="background-color:#D02222 !important; color:white;">Confirm</button>
+    <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Confirm</button>
 </form>
 </div>
 <br>
