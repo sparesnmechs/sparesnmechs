@@ -21,6 +21,7 @@
 
 
 {% block content %}
+{% if object_list %}
 {% for speciality in object_list %}
 <div class="main_container">
     {% if speciality.photo %}
@@ -36,4 +37,9 @@
         <strong>Place:</strong> {{ speciality.place }}</p>
 </div>
 {% endfor %}
+{% else %}
+<h3 style="text-align: center;">Search results not found</h3>
+{% endif %}
+<hr>
+<br>
 {% endblock %}
