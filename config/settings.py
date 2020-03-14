@@ -45,7 +45,7 @@ def get_bool_env(env_var, default=False):
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_bool_env("DEBUG", True)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.127.0.0.1']
 
 # Application definition
 
@@ -106,9 +106,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "test_db"),
-        "USER": os.getenv("DB_USER", "postgres"),
-        "PASSWORD": os.getenv("DB_PASS", "secret"),
+        "NAME": os.getenv("DB_NAME", "sparesnmechs"),
+        "USER": os.getenv("DB_USER", "sparesnmechs"),
+        "PASSWORD": os.getenv("DB_PASS", "sparesnmechs"),
         "HOST": os.getenv("DB_HOST", "127.0.0.1"),
         "PORT": os.getenv("DB_PORT", "5432"),
     }
