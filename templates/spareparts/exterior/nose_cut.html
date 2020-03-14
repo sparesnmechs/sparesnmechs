@@ -7,10 +7,13 @@
 {% endblock nav %}
 
 {% block content %}
-{% for nose_cut in nose_cuts %}
+{% if nose_cut %}
+{% for nose_cut in nose_cut %}
 <div class="main_container">
     {% if nose_cut.photo %}
         <img src="{{ nose_cut.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
     {% endif %}
     <p><span>{{ nose_cut.name }}</span>{{ nose_cut.price }}</p>
     <p><i class="fa fa-phone" aria-hidden="true"></i>
@@ -22,4 +25,10 @@
         | <strong>Car make: </strong>{{ nose_cut.car_make }}| <strong>Car Model: </strong>{{ nose_cut.car_model }}</p>
 </div>
 {% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
 {% endblock %}

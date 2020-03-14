@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+<br>
+<ul class="list-group">
+    <a href="{% url 'sparedealers:dash_kits' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Dash kits
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:seat_covers' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Seat covers
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:steering_covers' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Steering covers
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:cameras' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Cameras
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:tire_inflator_compressor' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Tire inflator compressor
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:radar_detectors' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Radar detectors
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:mounts_and_chargers' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Mounts and chargers
+  </li>
+    </a>
+  <a href="{% url 'sparedealers:gps_systems' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    GPS systems
+  </li>
+    </a>
+  <a href="{% url 'sparedealers:floor_mats' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Floor mats
+  </li>
+    </a>
+  <a href="{% url 'sparedealers:spare_tire_covers' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Spare tire covers
+  </li>
+    </a>
+  <a href="{% url 'sparedealers:lock_nuts_and_locks' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Lock nuts and locks
+  </li>
+    </a>
+</ul>
+{% endblock %}

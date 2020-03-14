@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:electrical' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Electrical</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% if control_units %}
+{% for control_units in control_units %}
+<div class="main_container">
+    {% if control_units.photo %}
+        <img src="{{ control_units.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ control_units.name }}</span>{{ control_units.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ control_units.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ control_units.category }} | <strong>Subcategory: </strong>{{ control_units.sub_category }} | 
+        <strong>Condition:</strong> {{ control_units.condition }} | <strong>Year of Manufacture: </strong>{{ control_units.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ control_units.car_make }}| <strong>Car Model: </strong>{{ control_units.car_model }}</p>
+</div>
+{% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
+{% endblock %}

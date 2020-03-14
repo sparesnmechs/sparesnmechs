@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% if fendors %}
+{% for fendors in fendors %}
+<div class="main_container">
+    {% if fendors.photo %}
+        <img src="{{ fendors.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ fendors.name }}</span>{{ fendors.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ fendors.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ fendors.category }} | <strong>Subcategory: </strong>{{ fendors.sub_category }} | 
+        <strong>Condition:</strong> {{ fendors.condition }} | <strong>Year of Manufacture: </strong>{{ fendors.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ fendors.car_make }}| <strong>Car Model: </strong>{{ fendors.car_model }}</p>
+</div>
+{% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
+{% endblock %}

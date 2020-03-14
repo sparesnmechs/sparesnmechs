@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:wheels' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Wheels and tires</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% if brake_and_rotors %}
+{% for brake_and_rotors in brake_and_rotors %}
+<div class="main_container">
+    {% if brake_and_rotors.photo %}
+        <img src="{{ brake_and_rotors.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
+    {% endif %}
+    <p><span>{{ brake_and_rotors.name }}</span>{{ brake_and_rotors.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ brake_and_rotors.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ brake_and_rotors.category }} | <strong>Subcategory: </strong>{{ brake_and_rotors.sub_category }} | 
+        <strong>Condition:</strong> {{ brake_and_rotors.condition }} | <strong>Year of Manufacture: </strong>{{ brake_and_rotors.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ brake_and_rotors.car_make }}| <strong>Car Model: </strong>{{ brake_and_rotors.car_model }}</p>
+</div>
+{% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
+{% endblock %}

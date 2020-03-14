@@ -25,8 +25,7 @@
 
 {% block content %}
 <br>
-<h3 style="text-align: center;">Search results</h3>
-<hr>
+{% if object_list %}
 <div class="scrolling-wrapper">
     {% for sparepart in object_list %}
       <div class="mech_card">
@@ -44,5 +43,11 @@
       </div>
     {% endfor %}
 </div>
+{% else %}
 <br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">Search results not found...</p>
+<br>
+{% endif %}
 {% endblock %}

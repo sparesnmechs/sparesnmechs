@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+<br>
+<ul class="list-group">
+    <a href="{% url 'sparedealers:coilovers' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Coilovers
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:racing_tow_hooks' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Racing tow hooks
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:diffusers' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Diffusers
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:racing_gears' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Racing gears
+  </li>
+    </a>
+    <a href="{% url 'sparedealers:performance_chips' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Performance chips
+  </li>
+  </a>
+  <a href="{% url 'sparedealers:cooling_systems' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Cooling systems
+  </li>
+  </a>
+  <a href="{% url 'sparedealers:air_intake_systems' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Air intake systems
+  </li>
+  </a>
+  <a href="{% url 'sparedealers:pedals' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Pedals
+  </li>
+  </a>
+  <a href="{% url 'sparedealers:custom_gauges' %}">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Custom gauges
+  </li>
+  </a>
+</ul>
+{% endblock %}
