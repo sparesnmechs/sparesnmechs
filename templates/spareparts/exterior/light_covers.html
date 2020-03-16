@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% if light_covers %}
+{% for light_covers in light_covers %}
+<div class="main_container">
+    {% if light_covers.photo %}
+        <img src="{{ light_covers.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+    {% endif %}
+    <p><span>{{ light_covers.name }}</span>{{ light_covers.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ light_covers.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ light_covers.category }} | <strong>Subcategory: </strong>{{ light_covers.sub_category }} | 
+        <strong>Condition:</strong> {{ light_covers.condition }} | <strong>Year of Manufacture: </strong>{{ light_covers.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ light_covers.car_make }}| <strong>Car Model: </strong>{{ light_covers.car_model }}</p>
+</div>
+{% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
+{% endblock %}

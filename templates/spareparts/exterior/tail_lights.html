@@ -7,19 +7,28 @@
 {% endblock nav %}
 
 {% block content %}
-{% for hood in hoods %}
+{% if tail_lights %}
+{% for tail_lights in tail_lights %}
 <div class="main_container">
-    {% if hood.photo %}
-        <img src="{{ hood.photo.url}}" alt="Avatar" style="width:100px">
+    {% if tail_lights.photo %}
+        <img src="{{ tail_lights.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
     {% endif %}
-    <p><span>{{ hood.name }}</span>{{ hood.price }}</p>
+    <p><span>{{ tail_lights.name }}</span>{{ tail_lights.price }}</p>
     <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ hood.phone_number }}</p>
+        {{ tail_lights.phone_number }}</p>
     <br>
     <hr>
-    <p><strong>Category: </strong>{{ hood.category }} | <strong>Subcategory: </strong>{{ hood.sub_category }} | 
-        <strong>Condition:</strong> {{ hood.condition }} | <strong>Year of Manufacture: </strong>{{ hood.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ hood.car_make }}| <strong>Car Model: </strong>{{ hood.car_model }}</p>
+    <p><strong>Category: </strong>{{ tail_lights.category }} | <strong>Subcategory: </strong>{{ tail_lights.sub_category }} | 
+        <strong>Condition:</strong> {{ tail_lights.condition }} | <strong>Year of Manufacture: </strong>{{ tail_lights.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ tail_lights.car_make }}| <strong>Car Model: </strong>{{ tail_lights.car_model }}</p>
 </div>
 {% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
 {% endblock %}

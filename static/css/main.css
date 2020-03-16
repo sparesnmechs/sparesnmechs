@@ -1,3 +1,14 @@
+p {
+  font-family: 'Baloo Chettan 2', cursive;
+}
+a {
+  font-family: 'Baloo Chettan 2', cursive;
+}
+li {
+  font-family: 'Baloo Chettan 2', cursive;
+}
+
+
 /* Style the navigation menu */
 .topnav {
 overflow: hidden;

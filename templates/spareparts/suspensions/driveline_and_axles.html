@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:suspension' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Suspension</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% if driveline_and_axles %}
+{% for driveline_and_axles in driveline_and_axles %}
+<div class="main_container">
+    {% if driveline_and_axles.photo %}
+        <img src="{{ driveline_and_axles.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
+    {% endif %}
+    <p><span>{{ driveline_and_axles.name }}</span>{{ driveline_and_axles.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ driveline_and_axles.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ driveline_and_axles.category }} | <strong>Subcategory: </strong>{{ driveline_and_axles.sub_category }} | 
+        <strong>Condition:</strong> {{ driveline_and_axles.condition }} | <strong>Year of Manufacture: </strong>{{ driveline_and_axles.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ driveline_and_axles.car_make }}| <strong>Car Model: </strong>{{ driveline_and_axles.car_model }}</p>
+</div>
+{% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
+{% endblock %}

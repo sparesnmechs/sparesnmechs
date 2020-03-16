@@ -44,8 +44,11 @@
     {% endfor %}
 </div>
 {% else %}
-<h3 style="text-align: center;">Search results not found</h3>
-<hr>
+
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">Search results not found...</p>
 <br>
 {% endif %}
 {% endblock %}

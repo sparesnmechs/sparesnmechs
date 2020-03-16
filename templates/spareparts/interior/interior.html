@@ -9,34 +9,24 @@
 {% block content %}
 <br>
 <ul class="list-group">
-    <a href="{% url 'sparedealers:floor_mats' %}">
+    <a href="{% url 'sparedealers:shift_knobs' %}">
   <li class="list-group-item d-flex justify-content-between align-items-center">
-    Floor mats
-    <span class="badge badge-primary badge-pill">{{ floor_mats|length }}</span>
+    Shift knobs
   </li>
     </a>
-    <a href="{% url 'sparedealers:cameras' %}">
+    <a href="{% url 'sparedealers:dash_covers' %}">
   <li class="list-group-item d-flex justify-content-between align-items-center">
-    Cameras
-    <span class="badge badge-primary badge-pill">{{ cameras|length }}</span>
+    Dash covers
   </li>
     </a>
-    <a href="{% url 'sparedealers:seat_covers' %}">
+    <a href="{% url 'sparedealers:sun_shades' %}">
   <li class="list-group-item d-flex justify-content-between align-items-center">
-    Seat covers
-    <span class="badge badge-primary badge-pill">{{ seat_covers|length }}</span>
+    Sun shades
   </li>
     </a>
-    <a href="{% url 'sparedealers:cooling_systems' %}">
+    <a href="{% url 'sparedealers:steering_wheels' %}">
   <li class="list-group-item d-flex justify-content-between align-items-center">
-    Cooling systems
-    <span class="badge badge-primary badge-pill">{{ cooling_systems|length }}</span>
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:timing_kits' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Timing kits
-    <span class="badge badge-primary badge-pill">{{ timing_kits|length }}</span>
+    Steering wheels
   </li>
 </ul>
 {% endblock %}

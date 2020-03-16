@@ -7,19 +7,28 @@
 {% endblock nav %}
 
 {% block content %}
-{% for grille in grilles %}
+{% if grilles %}
+{% for grilles in grilles %}
 <div class="main_container">
-    {% if grille.photo %}
-        <img src="{{ grille.photo.url}}" alt="Avatar" style="width:100px">
+    {% if grilles.photo %}
+        <img src="{{ grilles.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
     {% endif %}
-    <p><span>{{ grille.name }}</span>{{ grille.price }}</p>
+    <p><span>{{ grilles.name }}</span>{{ grilles.price }}</p>
     <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ grille.phone_number }}</p>
+        {{ grilles.phone_number }}</p>
     <br>
     <hr>
-    <p><strong>Category: </strong>{{ grille.category }} | <strong>Subcategory: </strong>{{ grille.sub_category }} | 
-        <strong>Condition:</strong> {{ grille.condition }} | <strong>Year of Manufacture: </strong>{{ grille.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ grille.car_make }}| <strong>Car Model: </strong>{{ grille.car_model }}</p>
+    <p><strong>Category: </strong>{{ grilles.category }} | <strong>Subcategory: </strong>{{ grilles.sub_category }} | 
+        <strong>Condition:</strong> {{ grilles.condition }} | <strong>Year of Manufacture: </strong>{{ grilles.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ grilles.car_make }}| <strong>Car Model: </strong>{{ grilles.car_model }}</p>
 </div>
 {% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
 {% endblock %}

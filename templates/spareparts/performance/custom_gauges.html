@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:performance' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Performance</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% if custom_gauges %}
+{% for custom_gauges in custom_gauges %}
+<div class="main_container">
+    {% if custom_gauges.photo %}
+        <img src="{{ custom_gauges.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
+    {% endif %}
+    <p><span>{{ custom_gauges.name }}</span>{{ custom_gauges.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ custom_gauges.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ custom_gauges.category }} | <strong>Subcategory: </strong>{{ custom_gauges.sub_category }} | 
+        <strong>Condition:</strong> {{ custom_gauges.condition }} | <strong>Year of Manufacture: </strong>{{ custom_gauges.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ custom_gauges.car_make }}| <strong>Car Model: </strong>{{ custom_gauges.car_model }}</p>
+</div>
+{% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
+{% endblock %}

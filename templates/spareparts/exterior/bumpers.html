@@ -7,19 +7,28 @@
 {% endblock nav %}
 
 {% block content %}
-{% for bumper in bumpers %}
+{% if bumpers %}
+{% for bumpers in bumpers %}
 <div class="main_container">
-    {% if bumper.photo %}
-        <img src="{{ bumper.photo.url}}" alt="Avatar" style="width:100px">
+    {% if bumpers.photo %}
+        <img src="{{ bumpers.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
     {% endif %}
-    <p><span>{{ bumper.name }}</span>{{ bumper.price }}</p>
+    <p><span>{{ bumpers.name }}</span>{{ bumpers.price }}</p>
     <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ bumper.phone_number }}</p>
+        {{ bumpers.phone_number }}</p>
     <br>
     <hr>
-    <p><strong>Category: </strong>{{ bumper.category }} | <strong>Subcategory: </strong>{{ bumper.sub_category }} | 
-        <strong>Condition:</strong> {{ bumper.condition }} | <strong>Year of Manufacture: </strong>{{ bumper.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ bumper.car_make }}| <strong>Car Model: </strong>{{ bumper.car_model }}</p>
+    <p><strong>Category: </strong>{{ bumpers.category }} | <strong>Subcategory: </strong>{{ bumpers.sub_category }} | 
+        <strong>Condition:</strong> {{ bumpers.condition }} | <strong>Year of Manufacture: </strong>{{ bumpers.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ bumpers.car_make }}| <strong>Car Model: </strong>{{ bumpers.car_model }}</p>
 </div>
 {% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
 {% endblock %}

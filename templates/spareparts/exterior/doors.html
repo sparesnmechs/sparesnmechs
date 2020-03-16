@@ -7,19 +7,28 @@
 {% endblock nav %}
 
 {% block content %}
-{% for door in doors %}
+{% if doors %}
+{% for doors in doors %}
 <div class="main_container">
-    {% if door.photo %}
-        <img src="{{ door.photo.url}}" alt="Avatar" style="width:100px">
+    {% if doors.photo %}
+        <img src="{{ doors.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
     {% endif %}
-    <p><span>{{ door.name }}</span>{{ door.price }}</p>
+    <p><span>{{ doors.name }}</span>{{ doors.price }}</p>
     <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ door.phone_number }}</p>
+        {{ doors.phone_number }}</p>
     <br>
     <hr>
-    <p><strong>Category: </strong>{{ door.category }} | <strong>Subcategory: </strong>{{ door.sub_category }} | 
-        <strong>Condition:</strong> {{ door.condition }} | <strong>Year of Manufacture: </strong>{{ door.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ door.car_make }}| <strong>Car Model: </strong>{{ door.car_model }}</p>
+    <p><strong>Category: </strong>{{ doors.category }} | <strong>Subcategory: </strong>{{ doors.sub_category }} | 
+        <strong>Condition:</strong> {{ doors.condition }} | <strong>Year of Manufacture: </strong>{{ doors.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ doors.car_make }}| <strong>Car Model: </strong>{{ doors.car_model }}</p>
 </div>
 {% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
 {% endblock %}

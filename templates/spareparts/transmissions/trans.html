@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:transmission' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Transmission</a>
+</div> 
+{% endblock nav %}
+
+{% block content %}
+{% if trans %}
+{% for trans in trans %}
+<div class="main_container">
+    {% if trans.photo %}
+        <img src="{{ trans.photo.url}}" alt="Avatar" style="width:100px">
+    {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
+    {% endif %}
+    <p><span>{{ trans.name }}</span>{{ trans.price }}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i>
+        {{ trans.phone_number }}</p>
+    <br>
+    <hr>
+    <p><strong>Category: </strong>{{ trans.category }} | <strong>Subcategory: </strong>{{ trans.sub_category }} | 
+        <strong>Condition:</strong> {{ trans.condition }} | <strong>Year of Manufacture: </strong>{{ trans.year_of_manufacture }} 
+        | <strong>Car make: </strong>{{ trans.car_make }}| <strong>Car Model: </strong>{{ trans.car_model }}</p>
+</div>
+{% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}
+{% endblock %}
