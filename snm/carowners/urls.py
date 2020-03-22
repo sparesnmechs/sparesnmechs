@@ -18,4 +18,5 @@ urlpatterns = [
     ),
     path("cars/car_models", views.get_carmodels, name="get_carmodels",),
     path("signup/", views.SignUp.as_view(), name="signup",),
+    path("contact_us/", views.ContactUs.as_view(), name="contact",),
 ]
