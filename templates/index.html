@@ -283,7 +283,7 @@ carModelReq.send()
     </div>
 </div>
 <hr>
-{% if filter.qs %}
+{% comment %} {% if filter.qs %}
 <div class="scrolling-wrapper">
     {% for sparepart in filter.qs %}
       <div class="mech_card">
@@ -307,5 +307,13 @@ carModelReq.send()
 <br>
 <p style="text-align: center;">Search results not found...</p>
 {% endif %}
+<br> {% endcomment %}
+ <div class="hero-image">
+  <div class="hero-text">
+    <h1>Sparesnmechs featured ADs</h1>
+    <p>Would you like your AD to appear on this front page?</p>
+    <button>Contact us</button>
+  </div>
+</div>
 <br>
 {% endblock %}
