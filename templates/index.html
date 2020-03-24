@@ -283,31 +283,6 @@ carModelReq.send()
     </div>
 </div>
 <hr>
-{% comment %} {% if filter.qs %}
-<div class="scrolling-wrapper">
-    {% for sparepart in filter.qs %}
-      <div class="mech_card">
-        {% if sparepart.photo %}
-            <img src="{{ sparepart.photo.url }}" alt="{{ sparepart.name }}" style="width:80%; height: 180px;">
-        {% endif %}
-        <hr>
-        <p>{{ sparepart.name }}</p>
-        <hr>
-        <ul style="text-align: left; list-style: none; font-size: 14px;">
-            <li><strong>Ksh </strong>{{ sparepart.price }}</li>
-            <li><strong><i class="fa fa-phone" aria-hidden="true"></i></strong> {{ sparepart.phone_number }}</li>
-            <li><strong>Condition: </strong>{{ sparepart.condition }}</li>
-        </ul>
-      </div>
-    {% endfor %}
-</div>
-{% else %}
-<br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
-<br>
-<p style="text-align: center;">Search results not found...</p>
-{% endif %}
-<br> {% endcomment %}
  <div class="hero-image">
   <div class="hero-text">
     <h1>Sparesnmechs featured ADs</h1>
@@ -316,4 +291,67 @@ carModelReq.send()
   </div>
 </div>
 <br>
+{% if filter.qs %}
+<div class="scrolling-wrapper">
+  <div class="row">
+    {% for sparepart in filter.qs %}
+      <!-- ADS -->
+      <div id="owl-demo">
+        <div class="item">
+          <div class="col-md-4 col-sm-4">
+            <div class="thumbnail thumb-shadow">
+              <div class="property-header">
+                {% if sparepart.photo %}
+                <img class="property-header-image" src="{{ sparepart.photo.url }}" alt="" style="width:250px; height:200px">
+                {% else %}
+                <img src="{% static 'svg/no.png' %}" style="width:250px; height:200px">
+                {% endif %}
+                <span class="property-contract-type new"><span style="font-size: 11px">{{ sparepart.condition }}</span>
+
+                </span>
+                <div class="property-thumb-meta">
+                  <span class="property-price">&#x4b;&#x73;&#x68;&#x73;{{ sparepart.price }}</span>
+                </div>
+              </div>
+              <div class="caption">
+                <p class="auto-title-car">{{ sparepart.name}}</p>
+                <!-- <p class="auto-description">{{ sparepart.description }}</p> -->
+
+                <span>{{ sparepart.car_make}} {{ sparepart.car_model}}</span>
+                <div style="clear:both;">
+                  <span class="rtl-right" style="float:left; font-weight:bold;">Category:</span>
+                  <span class="rtl-left" style="float:right; ">{{ sparepart.category }}</span>
+                </div>
+                <div style="clear:both;">
+                <span class="rtl-right" style="float:left; font-weight:bold;">Sub-Category:</span>
+                <span class="rtl-left" style="float:right; ">{{ sparepart.sub_category }}</span>
+
+                </div>
+                <div style="clear:both;" class="property-utilities">
+                <div style="float: right; padding-top: 0px;">
+                <div></div>
+
+                </div>
+                <div style="float: left; padding-top: 0px;">
+                <div></div>
+
+                </div>
+                <div class="clearfix"></div>
+                </div>
+                <div style="clear:both; border-bottom:1px solid #ccc; margin:10px 0px;"></div>
+                <p style="text-align: center;"><i class="fa fa-phone" aria-hidden="true"></i> {{ sparepart.phone_number }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+</div>
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">Search results not found...</p>
+{% endif %}
 {% endblock %}

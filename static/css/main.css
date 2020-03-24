@@ -7,6 +7,9 @@ a {
 li {
   font-family: 'Baloo Chettan 2', cursive;
 }
+span {
+  font-family: 'Baloo Chettan 2', cursive;
+}
 
 
 /* Style the navigation menu */
@@ -262,34 +265,6 @@ overflow-y: hidden;
 white-space: nowrap;
 }
 
-.mech_card {
-	display: inline-block;
-}
-
-.mech_card {
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-max-width: 300px;
-margin: 10px;
-text-align: center;
-font-family: arial;
-}
-
-.mech_card button {
-border: none;
-outline: 0;
-padding: 12px;
-color: white;
-background-color: #0f172e;
-text-align: center;
-cursor: pointer;
-width: 100%;
-font-size: 18px;
-}
-
-.mech_card button:hover {
-opacity: 0.7;
-}
-
 form.example input[type=text] {
 padding: 10px;
 font-size: 17px;
@@ -410,4 +385,98 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 color: white;
+}
+
+#owl-demo .item {
+  margin: 3px;
+}
+
+.thumb-shadow {
+    background-color: #fff;
+}
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.428571429;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    width: 250px;
+}
+
+.property-contract-type.new {
+    background: none repeat scroll 0 0 #528D47;
+}
+.property-contract-type {
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    height: 30px;
+    left: -33px;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 12px;
+    transform: scale(1) rotate(-45deg) translate(0px);
+    -webkit-transform: scale(1) rotate(-45deg) translate(0px);
+    -ms-transform: scale(1) rotate(-45deg) translate(0px);
+    width: 120px;
+    z-index: 1;
+}
+
+.property-contract-type span {
+  color: #ffffff;
+}
+.property-thumb-meta .property-price {
+    clear: both;
+    color: #ffffff;
+    float: right;
+    font-size: 16px;
+    padding: 2px 4px;
+    background-color: #3498db;
+}
+
+.thumbnail .caption {
+    padding: 9px;
+    color: #333;
+}
+
+.property-thumb-meta {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+
+.property-header {
+    overflow: hidden;
+    position: relative;
+    height: auto;
+}
+
+.view-listing-button {
+    border: medium none;
+    border-radius: 3px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 1;
+    margin-right: 0;
+    padding: 13px 18px;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    background: none repeat scroll 0 0 #0F172E;
+}
+
+.property-header-image {
+  border: 0 none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
 }
