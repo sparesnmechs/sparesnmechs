@@ -292,8 +292,8 @@ carModelReq.send()
 </div>
 <br>
 {% if filter.qs %}
+<div class="card-deck"></div>
     {% for sparepart in filter.qs %}
-    <div class="card-deck">
       <div class="card">
         {% if sparepart.photo %}
             <img class="card-img-top" src="{{ sparepart.photo.url }}" alt="">
@@ -306,8 +306,8 @@ carModelReq.send()
           <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
         </div>
       </div>
-    </div>
     {% endfor %}
+  </div>
 {% else %}
 <br>
 <img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
