@@ -16,7 +16,7 @@ class Speciality(models.Model):
 
     mechanic = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField()
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     is_featured = models.BooleanField(default=False)  # Half Baked
     price = models.DecimalField(max_digits=14, decimal_places=2)
@@ -28,9 +28,7 @@ class Speciality(models.Model):
     phone_number = models.CharField(
         max_length=10,
         validators=[
-            RegexValidator(
-                regex="^07[0-9]", message="Enter a valid phone number"
-            ),
+            RegexValidator(regex="^07[0-9]", message="Enter a valid phone number"),
             MinLengthValidator(
                 limit_value=10, message="Phone number should have 10 values"
             ),

@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Home</a>
+</div>
+{% endblock nav %}
+
 {% block content%}
 <br>
-<h3>Sign up</h3>
-<hr>
 <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit" class="btn btn-light btn-lg btn-block" style="background-color:#D02222 !important; color:white;">Sign up</button>
+    <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Sign
+        up</button>
 </form>
 {% endblock content%}
 

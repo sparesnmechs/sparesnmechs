@@ -2,31 +2,32 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
-</div> 
+  <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Home</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 <br>
 <ul class="list-group">
-    <a href="{% url 'sparedealers:shift_knobs' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Shift knobs
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:dash_covers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Dash covers
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:sun_shades' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Sun shades
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:steering_wheels' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Steering wheels
-  </li>
+  <a href="{% url 'sparedealers:shift_knobs' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Shift knobs
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:dash_covers' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Dash covers
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:sun_shades' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Sun shades
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:steering_wheels' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Steering wheels
+    </li>
 </ul>
 {% endblock %}
