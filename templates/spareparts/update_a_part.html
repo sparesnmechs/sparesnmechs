@@ -5,126 +5,130 @@
 {% include 'spareparts/sell_a_part.html' %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:category' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:listings' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        My listings</a>
+</div>
 
 {% endblock nav %}
 {% block content%}
 <br>
 <div class="container">
-    <br>
-<form method="post" enctype="multipart/form-data">
-{% csrf_token %}
-    <div class="form-group">
-        {{ form.name|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.condition|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.year_of_manufacture|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.category|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.sub_category|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.car_make|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.car_model|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.price|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.description|as_crispy_field }}
-    </div>
-    <br>
-    <h3>Contact information</h3>
-    <hr>
-    <div class="form-group">
-        {{ form.first_name|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.last_name|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.phone_number|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.region|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.place|as_crispy_field }}
-    </div>
-    <div class="form-group">
-        {{ form.store|as_crispy_field }}
-    </div>
-    <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Update</button>
-</form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.condition|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.year_of_manufacture|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.category|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.sub_category|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.car_make|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.car_model|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.price|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.description|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.photo|as_crispy_field }}
+        </div>
+        <br>
+        <h3>Contact information</h3>
+        <hr>
+        <div class="form-group">
+            {{ form.first_name|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.last_name|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.phone_number|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.region|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.place|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            {{ form.store|as_crispy_field }}
+        </div>
+        <button type="submit" class="btn btn-light"
+            style="background-color:#0f172e !important; color:white;">Update</button>
+    </form>
 </div>
 <br>
-
+<br>
 <script>
-  const categoryInput = document.querySelector("select#id_category")
-  const subcategoryInput = document.querySelector("select#id_sub_category")
+    const categoryInput = document.querySelector("select#id_category")
+    const subcategoryInput = document.querySelector("select#id_sub_category")
 
-  categoryInput.onchange = function (e) {
-    getAndSetSubcategories(e.target.value)
-  }
+    categoryInput.onchange = function (e) {
+        getAndSetSubcategories(e.target.value)
+    }
 
-  function getAndSetSubcategories(category) {
-    let subCatReq = new XMLHttpRequest()
+    function getAndSetSubcategories(category) {
+        let subCatReq = new XMLHttpRequest()
 
-    subCatReq.addEventListener("load", function (e) {
-      let subcategories = JSON.parse(e.target.response)
+        subCatReq.addEventListener("load", function (e) {
+            let subcategories = JSON.parse(e.target.response)
 
-      // Map the list of subcategory objects to a list of options
-      subcategories = subcategories.map(function (subcategory) {
-        return `<option value="${subcategory.pk}">${subcategory.fields.name}</option>`
-      })
+            // Map the list of subcategory objects to a list of options
+            subcategories = subcategories.map(function (subcategory) {
+                return `<option value="${subcategory.pk}">${subcategory.fields.name}</option>`
+            })
 
-      // Add default option to start of the array
-      subcategories.splice(0,0,'<option value="" selected="">---------</option>')
+            // Add default option to start of the array
+            subcategories.splice(0, 0, '<option value="" selected="">---------</option>')
 
-      subcategoryInput.innerHTML = subcategories.join(" ")
-    })
+            subcategoryInput.innerHTML = subcategories.join(" ")
+        })
 
-    subCatReq.open("GET", `{% url 'sparedealers:get_subcategories' %}?category=${category}`)
-    subCatReq.send()
-  }
+        subCatReq.open("GET", `{% url 'sparedealers:get_subcategories' %}?category=${category}`)
+        subCatReq.send()
+    }
 
-// Get car model car_make == category
-const car_makeInput = document.querySelector("select#id_car_make")
-const car_modelInput = document.querySelector("select#id_car_model")
+    // Get car model car_make == category
+    const car_makeInput = document.querySelector("select#id_car_make")
+    const car_modelInput = document.querySelector("select#id_car_model")
 
-car_makeInput.onchange = function (e) {
-getAndSetCarmodels(e.target.value)
-}
+    car_makeInput.onchange = function (e) {
+        getAndSetCarmodels(e.target.value)
+    }
 
-function getAndSetCarmodels(car_make) { //subCatReg == carmodelReq
-let carModelReq = new XMLHttpRequest()
+    function getAndSetCarmodels(car_make) { //subCatReg == carmodelReq
+        let carModelReq = new XMLHttpRequest()
 
-carModelReq.addEventListener("load", function (e) { //subcategories ==car_models
-    let car_models = JSON.parse(e.target.response)
+        carModelReq.addEventListener("load", function (e) { //subcategories ==car_models
+            let car_models = JSON.parse(e.target.response)
 
-    // Map the list of subcategory objects to a list of options
-    subcategories = car_models.map(function (car_model) {
-    return `<option value="${car_model.pk}">${car_model.fields.name}</option>`
-    })
+            // Map the list of subcategory objects to a list of options
+            subcategories = car_models.map(function (car_model) {
+                return `<option value="${car_model.pk}">${car_model.fields.name}</option>`
+            })
 
-    // Add default option to start of the array
-    car_models.splice(0,0,'<option value="" selected="">---------</option>')
+            // Add default option to start of the array
+            car_models.splice(0, 0, '<option value="" selected="">---------</option>')
 
-    car_modelInput.innerHTML = subcategories.join(" ")
-})
+            car_modelInput.innerHTML = subcategories.join(" ")
+        })
 
-carModelReq.open("GET", `{% url 'carowners:get_carmodels' %}?car_make=${car_make}`)
-carModelReq.send()
-}
+        carModelReq.open("GET", `{% url 'carowners:get_carmodels' %}?car_make=${car_make}`)
+        carModelReq.send()
+    }
 </script>
 
 {% endblock %}

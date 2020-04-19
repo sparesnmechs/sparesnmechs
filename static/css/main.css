@@ -11,55 +11,66 @@ span {
   font-family: 'Baloo Chettan 2', cursive;
 }
 
-
-/* Style the navigation menu */
+/* Add a black background color to the top navigation */
 .topnav {
-overflow: hidden;
-background-color: #0f172e;
-position: relative;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #d02222;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
 }
 
-/* Hide the links inside the navigation menu (except for logo/home) */
-.topnav #myLinks {
-display: none;
-}
-
-/* Style navigation menu links */
+/* Style the links inside the navigation bar */
 .topnav a {
-color: white;
-padding: 14px 16px;
-text-decoration: none;
-font-size: 17px;
-display: block;
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-/* Style the hamburger menu */
-.topnav a.icon {
-background: #0f172e;
-display: block;
-position: absolute;
-right: 0;
-top: 0;
-height: 60;
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #d02222;
+  color: white;
 }
 
-/* Add a grey background color on mouse-over */
-.topnav a:hover {
-background-color: #ddd;
-color: black;
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar {
+  background-color: #D3D3D3;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-/* Style the active link (or home/logo) */
-.active {
-background-color: #d02222;
-color: white;
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #000;
+  text-align: center;
+  padding: 10px 14px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-* 
-{
-  box-sizing: border-box;
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
 }
+
+/* Add a color to the active/current link */
+.navbar a.active {
+  /* background-color: #d02222; */
+  color: #d02222;
+}
+
+
+
+
+
 
 /* Style the search field */
 form.example input[type=text] {
@@ -222,7 +233,7 @@ opacity: 0.7;
 /* Three image containers (use 25% for four, and 50% for two, etc) */
 .column {
   float: left;
-  width: 15%;
+  /* width: 15%; */
   padding: 5 5px;
 }
 
@@ -235,10 +246,10 @@ display: table;
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-  padding: 20 20px;
+  /* padding: 20 20px; */
   text-align: center;
   background-color: #f1f1f1;
-  height: 100%;
+  /* height: 100%; */
   /* width: 50%; */
 }
 
@@ -254,8 +265,6 @@ padding: 0 0px;
   padding: 0 0px;
   text-align: center;
   background-color: #f1f1f1;
-  height: 90%;
-  /* width: 50%; */
 }
 }
 

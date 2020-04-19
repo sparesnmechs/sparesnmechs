@@ -11,10 +11,11 @@ class SparePartFilter(django_filters.FilterSet):
         """Meta."""
 
         model = SparePart
-        fields = [
-            "category",
-            "sub_category",
-            "car_make",
-            "car_model",
-            "condition",
-        ]
+        fields = {
+            "category": ["exact"],
+            "sub_category": ["exact"],
+            "car_make": ["exact"],
+            "car_model": ["exact"],
+            "condition": ["exact"],
+            "year_of_manufacture": ["lt", "gt",],
+        }

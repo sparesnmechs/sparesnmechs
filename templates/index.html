@@ -88,7 +88,7 @@
     <img src="{% static 'logo/spares-logo.svg' %}" width="120" height="60" alt="">
   </a>
   <!-- Navigation links (hidden by default) -->
-  <div id="myLinks">
+  <!-- <div id="myLinks">
     <a href="{% url 'sparedealers:create' %}" style="text-align: left;">Sell a part</a>
     <a href="{% url 'mechanics:create' %}" style="text-align: left;">Sell a speciality</a>
     <a href="{% url 'sparedealers:listings' %}" style="text-align: left;">View my listings</a>
@@ -97,11 +97,11 @@
     {% else %}
     <a href="{% url 'login' %}" style="text-align: left;">Log in</a>
     {% endif %}
-  </div>
+  </div> -->
   <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+  <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
-  </a>
+  </a> -->
 </div>
 {% endblock nav %}
 
@@ -110,17 +110,35 @@
   <div class="container">
     <div class="alert">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <a href="{% url 'mechanics:speciality' %}" style="color: white;">Find a mechanic instead?</a>
+      <a href="{% url 'mechanics:speciality' %}" style="color: white;">Find a garage or mechanic instead?</a>
     </div>
     <p class="lead" style="text-align: center;">Find anything in sparesnmechs</p>
-    <br>
-    <form class="example" method="get" action="{% url 'sparedealers:search_results' %}"
+    <form>
+      <div class="container">
+        <div class="row">
+          <div class="col-10" style="background-color: #D3D3D3">
+            <span>
+              <div class="row">
+                <div class="col">{{ filter.form.car_make|as_crispy_field }}</div>
+                <div class="col">{{ filter.form.car_model|as_crispy_field }}</div>
+              </div>
+            </span>
+          </div>
+          <div class="col-2" style="background-color: #0f172e">
+            <br><button type="submit"
+              style="width: auto; background-color: #0f172e; margin-top: 15%; margin-bottom: auto; display: block;"><i
+                class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- {% comment %} <form class="example" method="get" action="{% url 'sparedealers:search_results' %}"
       style="margin:auto; max-width:500px">
       <input type="text" placeholder="Search.." name="q">
-    </form>
-    <br>
-    <button onclick="document.getElementById('id01').style.display='block'"
-      style="width: auto; background-color: #0f172e;">Filter spareparts</button>
+    </form> {% endcomment %} -->
+    <span><button onclick="document.getElementById('id01').style.display='block'"
+        style="width: auto; background-color: #0f172e; margin-left: auto; margin-right: auto; display: block;">Advanced
+        Search</button></span>
 
     <!-- The Modal -->
     <div id="id01" class="modal">
@@ -132,11 +150,26 @@
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
           title="Close Modal">&times;</span>
         <div class="container">
-          {{ filter.form|crispy }}
+          <br>
+          <div class="row">
+            <div class="col">{{ filter.form.category|as_crispy_field }}</div>
+            <div class="col">{{ filter.form.sub_category|as_crispy_field }}</div>
+          </div>
+          <div class="row">
+            <div class="col">{{ filter.form.car_make|as_crispy_field }}</div>
+            <div class="col">{{ filter.form.car_model|as_crispy_field }}</div>
+          </div>
+          <div class="row">
+            <div class="col">{{ filter.form.year_of_manufacture__lt|as_crispy_field }}</div>
+            <div class="col">{{ filter.form.year_of_manufacture__gt|as_crispy_field }}</div>
+          </div>
+          <div class="row">
+            <div class="col">{{ filter.form.condition|as_crispy_field }}</div>
+          </div>
         </div>
-        <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Filter
-          Spareparts</button>
-        <br>
+        <button type="submit" class="btn btn-light"
+          style="background-color:#0f172e !important; color:white; margin-left: auto; margin-right: auto; display: block;">Advanced
+          Search</button>
       </form>
       <br>
     </div>
@@ -215,6 +248,7 @@
 {% endblock %}
 
 {% block content %}
+{% if filter.qs %}
 <div class="row">
   <div class="column">
     <div class="card">
@@ -315,26 +349,27 @@
   </div>
 </div>
 <br>
-<!-- {% if filter.qs %}
-<div class="card-deck"></div>
-    {% for sparepart in filter.qs %}
-      <div class="card">
-        {% if sparepart.photo %}
-            <img class="card-img-top" src="{{ sparepart.photo.url }}" alt="">
-        {% else %}
-            <img src="{% static 'svg/no.png' %}" style="width:250px; height:200px">
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{ sparepart.name }}</h5>
-          <p class="card-text">{{ sparepart.price }}</p>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+<span>
+  <p class="text-muted" style="text-align: center;">Products coming soon!</p>
+</span>
+<br>
+<br>
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/search.png' %}" width="200" height="200" alt=""
+  style="margin-left: auto; margin-right: auto; display: block; margin-top: auto; margin-bottom: auto;">
 <br>
-<p style="text-align: center;">Search results not found...</p>
-{% endif %} -->
+<span>
+  <h3 style="text-align: center;"><strong>Oops! Part Not Found</strong></h3>
+  <p class="text-muted" style="text-align: center;">Change filter keywords or add a new part</p>
+
+  <br>
+  <a href="{% url 'sparedealers:create' %}"><button type="submit" class="btn btn-light"
+      style="background-color:#0f172e !important; color:white; margin-left: auto; margin-right: auto; display: block;">Add
+      sparepart</button></a>
+</span>
+<br>
+<br>
+<br>
+{% endif %}
 {% endblock %}
