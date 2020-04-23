@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Exterior</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if windows %}
-{% for window in windows %}
-<div class="main_container">
-    {% if window.photo %}
-        <img src="{{ window.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
+{% for windows in windows %}
+<a href="{% url 'sparedealers:sparepart_detail' windows.id %}">
+    <div class="main_container">
+        {% if windows.photo %}
+        <img src="{{ windows.photo.url}}" alt="Avatar" style="width:100px">
+        {% else %}
         <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-    {% endif %}
-    <p><span>{{ window.name }}</span>{{ window.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ window.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ window.category }} | <strong>Subcategory: </strong>{{ window.sub_category }} | 
-        <strong>Condition:</strong> {{ window.condition }} | <strong>Year of Manufacture: </strong>{{ window.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ window.car_make }}| <strong>Car Model: </strong>{{ window.car_model }}</p>
-</div>
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ windows.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ windows.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ windows.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

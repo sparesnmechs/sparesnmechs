@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:interior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Interior</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:interior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Interior</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if steering_wheels %}
 {% for steering_wheels in steering_wheels %}
-<div class="main_container">
-    {% if steering_wheels.photo %}
+<a href="{% url 'sparedealers:sparepart_detail' steering_wheels.id %}">
+    <div class="main_container">
+        {% if steering_wheels.photo %}
         <img src="{{ steering_wheels.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
-    {% endif %}
-    <p><span>{{ steering_wheels.name }}</span>{{ steering_wheels.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ steering_wheels.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ steering_wheels.category }} | <strong>Subcategory: </strong>{{ steering_wheels.sub_category }} | 
-        <strong>Condition:</strong> {{ steering_wheels.condition }} | <strong>Year of Manufacture: </strong>{{ steering_wheels.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ steering_wheels.car_make }}| <strong>Car Model: </strong>{{ steering_wheels.car_model }}</p>
-</div>
+        {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ steering_wheels.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ steering_wheels.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ steering_wheels.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

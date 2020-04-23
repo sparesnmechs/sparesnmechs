@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:interior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Interior</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:interior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Interior</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if shift_knobs %}
 {% for shift_knobs in shift_knobs %}
-<div class="main_container">
-    {% if shift_knobs.photo %}
+<a href="{% url 'sparedealers:sparepart_detail' shift_knobs.id %}">
+    <div class="main_container">
+        {% if shift_knobs.photo %}
         <img src="{{ shift_knobs.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
-    {% endif %}
-    <p><span>{{ shift_knobs.name }}</span>{{ shift_knobs.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ shift_knobs.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ shift_knobs.category }} | <strong>Subcategory: </strong>{{ shift_knobs.sub_category }} | 
-        <strong>Condition:</strong> {{ shift_knobs.condition }} | <strong>Year of Manufacture: </strong>{{ shift_knobs.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ shift_knobs.car_make }}| <strong>Car Model: </strong>{{ shift_knobs.car_model }}</p>
-</div>
+        {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ shift_knobs.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ shift_knobs.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ shift_knobs.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

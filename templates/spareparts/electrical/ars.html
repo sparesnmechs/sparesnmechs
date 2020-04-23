@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:electrical' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Electrical</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:electrical' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Electrical</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if ars %}
 {% for ars in ars %}
-<div class="main_container">
-    {% if ars.photo %}
+<a href="{% url 'sparedealers:sparepart_detail' ars.id %}">
+    <div class="main_container">
+        {% if ars.photo %}
         <img src="{{ ars.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
+        {% else %}
         <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-    {% endif %}
-    <p><span>{{ ars.name }}</span>{{ ars.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ ars.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ ars.category }} | <strong>Subcategory: </strong>{{ ars.sub_category }} | 
-        <strong>Condition:</strong> {{ ars.condition }} | <strong>Year of Manufacture: </strong>{{ ars.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ ars.car_make }}| <strong>Car Model: </strong>{{ ars.car_model }}</p>
-</div>
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ ars.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ ars.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ ars.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}
