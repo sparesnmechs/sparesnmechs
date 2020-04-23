@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+<div class="topnav">
+    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Home</a>
+</div>
+{% endblock nav %}
+
+{% block content %}
+<br>
+<div class="contianer" style="background-color: #D3D3D3;">
+    {% if engine_components.photo %}
+    <img src="{{ object.photo.url}}" alt="Avatar"
+        style="width:300px; margin-left: auto; margin-right: auto; display: block;">
+    {% else %}
+    <img src="{% static 'default/process.png' %}" alt="Avatar"
+        style="width:300px; margin-left: auto; margin-right: auto; display: block;">
+    {% endif %}
+    <hr>
+    <div class="row">
+        <div class="col">
+            <span>
+                <p style="font-size: smaller;"><strong>Name:</strong> {{ object.name }}</p>
+            </span>
+        </div>
+        <div class="col">
+            <span>
+                <p style="font-size: smaller;"><strong>Price:</strong> {{ object.price }}</p>
+            </span>
+        </div>
+    </div>
+    <hr>
+    <span>
+        <p style="font-size: smaller;"><strong>Contact info:</strong> {{ object.phone_number }}</p>
+    </span>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <span>
+                <p style="font-size: smaller;"><strong>Sub category:</strong> {{ object.sub_category }}</p>
+            </span>
+        </div>
+        <div class="col">
+            <span>
+                <p style="font-size: smaller;"><strong>Category:</strong> {{ object.category }}</p>
+            </span>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <span>
+                <p style="font-size: smaller;"><strong>Car Make:</strong> {{ object.car_make }}</p>
+            </span>
+        </div>
+        <div class="col">
+            <span>
+                <p style="font-size: smaller;"><strong>Car Model:</strong> {{ object.car_model }}</p>
+            </span>
+        </div>
+    </div>
+    <hr>
+    <span>
+        <p style="font-size: smaller;"><strong>Year of Manufacture:</strong> {{ object.year_of_manufacture }}</p>
+    </span>
+    <hr>
+    <span>
+        <p style="font-size: smaller;"><strong>Description:</strong> {{ object.description }}</p>
+    </span>
+    <hr>
+</div>
+<br><br>
+{% endblock %}

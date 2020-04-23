@@ -112,7 +112,7 @@ class SparePartDetailView(DetailView):
     """Detail view of spareparts."""
 
     model = SparePart
-    context_object_name = "sparepart_detail"
+    template_name = "details.html"
 
 
 class SparePartCategoryListView(ListView):
@@ -280,9 +280,7 @@ class HoodListiew(ListView):
 class BumperListiew(ListView):
     """Exterior spareparts."""
 
-    sub_category = SparePartSubCategory.objects.get(
-        name="Bumpers and Valances"
-    )
+    sub_category = SparePartSubCategory.objects.get(name="Bumpers and Valances")
     queryset = sub_category.part_subcategories.all()
     context_object_name = "bumpers"
     template_name = "spareparts/exterior/bumpers.html"
@@ -410,9 +408,7 @@ class CamerasListiew(ListView):
 class TICListiew(ListView):
     """accessories spareparts."""
 
-    sub_category = SparePartSubCategory.objects.get(
-        name="Tire inflator compressor"
-    )
+    sub_category = SparePartSubCategory.objects.get(name="Tire inflator compressor")
     queryset = sub_category.part_subcategories.all()
     context_object_name = "tire_inflator_compressor"
     template_name = "spareparts/accessories/tire_inflator_compressor.html"
@@ -558,9 +554,7 @@ class CUListiew(ListView):
 class ARSListiew(ListView):
     """Electrical spareparts."""
 
-    sub_category = SparePartSubCategory.objects.get(
-        name="Alarm and remote start"
-    )
+    sub_category = SparePartSubCategory.objects.get(name="Alarm and remote start")
     queryset = sub_category.part_subcategories.all()
     context_object_name = "ars"
     template_name = "spareparts/electrical/ars.html"
@@ -843,9 +837,7 @@ class TransMountListiew(ListView):
 class TransComponentsListiew(ListView):
     """Suspensions spareparts."""
 
-    sub_category = SparePartSubCategory.objects.get(
-        name="Transmission components"
-    )
+    sub_category = SparePartSubCategory.objects.get(name="Transmission components")
     queryset = sub_category.part_subcategories.all()
     context_object_name = "transmission_components"
     template_name = "spareparts/transmissions/transmission_components.html"
@@ -961,8 +953,7 @@ def get_subcategories(request):
         )
     sub_categories = SparePartSubCategory.objects.filter(category=category)
     return HttpResponse(
-        serializers.serialize("json", sub_categories),
-        content_type="application/json",
+        serializers.serialize("json", sub_categories), content_type="application/json",
     )
 
 
