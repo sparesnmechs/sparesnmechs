@@ -17,5 +17,5 @@ class SparePartFilter(django_filters.FilterSet):
             "car_make": ["exact"],
             "car_model": ["exact"],
             "condition": ["exact"],
-            "year_of_manufacture": ["lt", "gt",],
+            "year_of_manufacture": ["lt", "gt"],
         }
