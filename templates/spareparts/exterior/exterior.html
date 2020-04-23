@@ -2,112 +2,116 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
-</div> 
+  <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Home</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 <br>
 <ul class="list-group">
-    <a href="{% url 'sparedealers:panels' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Panels
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:side_mirrors' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Side mirrors
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:hoods' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Hoods
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:bumpers_and_valances' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Bumpers and Valances
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:windows' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Windows
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:window_louvers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Window louvers
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:doors' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Doors
-  </li>
-    </a>
+  <a href="{% url 'sparedealers:panels' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Panels
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:side_mirrors' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Side mirrors
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:hoods' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Hoods
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:bumpers_and_valances' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Bumpers and Valances
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:windows' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Windows
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:window_louvers' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Window louvers
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:doors' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Doors
+    </li>
+  </a>
   <a href="{% url 'sparedealers:fenders' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Fender flares
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Fender flares
+    </li>
+  </a>
   <a href="{% url 'sparedealers:nose_cut' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Nose cut
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Nose cut
+    </li>
+  </a>
   <a href="{% url 'sparedealers:grilles' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Grilles
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Grilles
+    </li>
+  </a>
   <a href="{% url 'sparedealers:trunk_lids' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Trunk lids
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Trunk lids
+    </li>
+  </a>
   <a href="{% url 'sparedealers:spoilers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Spoilers
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Spoilers
+    </li>
+  </a>
   <a href="{% url 'sparedealers:light_covers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Light covers
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Light covers
+    </li>
+  </a>
   <a href="{% url 'sparedealers:eye_lids' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Eye lids
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Eye lids
+    </li>
+  </a>
   <a href="{% url 'sparedealers:roofs' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Roofs
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Roofs
+    </li>
+  </a>
   <a href="{% url 'sparedealers:fendors' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Fendors
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Fendors
+    </li>
+  </a>
   <a href="{% url 'sparedealers:body_kit' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Body Kit
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Body Kit
+    </li>
+  </a>
   <a href="{% url 'sparedealers:canards' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Canards
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Canards
+    </li>
+  </a>
   <a href="{% url 'sparedealers:bumper_lips' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Bumper lips
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Bumper lips
+    </li>
+  </a>
   <a href="{% url 'sparedealers:cargo_liners' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Cargo liners
-  </li>
-    </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Cargo liners
+    </li>
+  </a>
 </ul>
+<br>
+<br>
+<br>
 {% endblock %}
