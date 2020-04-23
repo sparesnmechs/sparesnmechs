@@ -10,22 +10,24 @@
 {% block content %}
 {% if engine_components %}
 {% for engine_components in engine_components %}
-<div class="main_container">
-    {% if engine_components.photo %}
-    <img src="{{ engine_components.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-    <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-    {% endif %}
-    <span>
-        <p style="color: #0f172e;">{{ engine_components.name }}</p>
-    </span>
-    <span>
-        <p style="font-size: smaller;"><strong>Price:</strong> {{ engine_components.price }}</p>
-    </span>
-    <span>
-        <p style="font-size: smaller;"><strong>Contact info:</strong> {{ engine_components.phone_number }}</p>
-    </span>
-</div>
+<a href="{% url 'sparedealers:sparepart_detail' engine_components.id %}">
+    <div class="main_container">
+        {% if engine_components.photo %}
+        <img src="{{ engine_components.photo.url}}" alt="Avatar" style="width:100px">
+        {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ engine_components.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ engine_components.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ engine_components.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
