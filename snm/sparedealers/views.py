@@ -125,12 +125,13 @@ class SparePartCategoryListView(ListView):
     template_name = "index.html"
 
 
-class EmailCreateView(FormView):
+class EmailCreateView(SuccessMessageMixin, FormView):
     """Create email view."""
 
     template_name = "requests.html"
     form_class = EmailForm
-    success_url = "/"  # TODO Implement messsaging
+    success_url = "/"
+    success_message = "Your email has been sent"
 
     def form_valid(self, form):
         form.send_email()
