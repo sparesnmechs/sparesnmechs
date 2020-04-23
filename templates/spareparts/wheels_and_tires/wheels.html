@@ -2,51 +2,53 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
-</div> 
+  <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Home</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 <br>
 <ul class="list-group">
-    <a href="{% url 'sparedealers:tires' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Tires
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:rims' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Rims
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:wheel_spacers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Spacers
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:wheel_covers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Wheel covers
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:locking_nuts' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Locking nuts
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:center_caps' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Center caps
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:brake_caliper_covers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Brake caliper covers
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:brakes_and_rotors' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Brakes and rotors
-  </li>
+  <a href="{% url 'sparedealers:tires' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Tires
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:rims' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Rims
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:wheel_spacers' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Spacers
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:wheel_covers' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Wheel covers
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:locking_nuts' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Locking nuts
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:center_caps' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Center caps
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:brake_caliper_covers' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Brake caliper covers
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:brakes_and_rotors' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Brakes and rotors
+    </li>
+  </a>
 </ul>
 {% endblock %}

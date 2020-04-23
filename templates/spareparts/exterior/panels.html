@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Exterior</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if panels %}
 {% for panels in panels %}
-<div class="main_container">
-    {% if panels.photo %}
+<a href="{% url 'sparedealers:sparepart_detail' panels.id %}">
+    <div class="main_container">
+        {% if panels.photo %}
         <img src="{{ panels.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
+        {% else %}
         <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-    {% endif %}
-    <p><span>{{ panels.name }}</span>{{ panels.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ panels.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ panels.category }} | <strong>Subcategory: </strong>{{ panels.sub_category }} | 
-        <strong>Condition:</strong> {{ panels.condition }} | <strong>Year of Manufacture: </strong>{{ panels.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ panels.car_make }}| <strong>Car Model: </strong>{{ panels.car_model }}</p>
-</div>
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ panels.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ panels.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ panels.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

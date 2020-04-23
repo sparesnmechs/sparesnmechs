@@ -2,32 +2,33 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
-</div> 
+  <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Home</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 <br>
 <ul class="list-group">
-    <a href="{% url 'sparedealers:driveline_and_axles' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Driveline and axles
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:spacers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Spacers
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:shock_absorbers' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Shock absorbers
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:ecus' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Ecus
-  </li>
-    </a>
+  <a href="{% url 'sparedealers:driveline_and_axles' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Driveline and axles
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:spacers' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Spacers
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:shock_absorbers' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Shock absorbers
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:ecus' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Ecus
+    </li>
+  </a>
 </ul>
 {% endblock %}

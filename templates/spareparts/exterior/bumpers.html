@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Exterior</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Exterior</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if bumpers %}
 {% for bumpers in bumpers %}
-<div class="main_container">
-    {% if bumpers.photo %}
+<a href="{% url 'sparedealers:sparepart_detail' bumpers.id %}">
+    <div class="main_container">
+        {% if bumpers.photo %}
         <img src="{{ bumpers.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
+        {% else %}
         <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-    {% endif %}
-    <p><span>{{ bumpers.name }}</span>{{ bumpers.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ bumpers.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ bumpers.category }} | <strong>Subcategory: </strong>{{ bumpers.sub_category }} | 
-        <strong>Condition:</strong> {{ bumpers.condition }} | <strong>Year of Manufacture: </strong>{{ bumpers.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ bumpers.car_make }}| <strong>Car Model: </strong>{{ bumpers.car_model }}</p>
-</div>
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ bumpers.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ bumpers.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ bumpers.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

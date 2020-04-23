@@ -2,32 +2,36 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:suspension' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Suspension</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:suspension' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Suspension</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
-{% if shcok_absorbers %}
-{% for shcok_absorbers in shcok_absorbers %}
-<div class="main_container">
-    {% if shcok_absorbers.photo %}
-        <img src="{{ shcok_absorbers.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
-    {% endif %}
-    <p><span>{{ shcok_absorbers.name }}</span>{{ shcok_absorbers.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ shcok_absorbers.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ shcok_absorbers.category }} | <strong>Subcategory: </strong>{{ shcok_absorbers.sub_category }} | 
-        <strong>Condition:</strong> {{ shcok_absorbers.condition }} | <strong>Year of Manufacture: </strong>{{ shcok_absorbers.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ shcok_absorbers.car_make }}| <strong>Car Model: </strong>{{ shcok_absorbers.car_model }}</p>
-</div>
-{% endfor %}
+{% if shock_absorbers %}
+{% for shock_absorbers in shock_absorbers %}
+<a href="{% url 'sparedealers:sparepart_detail' shock_absorbers.id %}">
+    <div class="main_container">
+        {% if shock_absorbers.photo %}
+        <img src="{{ shock_absorbers.photo.url}}" alt="Avatar" style="width:100px">
+        {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ shock_absorbers.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ shock_absorbers.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ shock_absorbers.phone_number }}</p>
+        </span>
+    </div>
+</a>for %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

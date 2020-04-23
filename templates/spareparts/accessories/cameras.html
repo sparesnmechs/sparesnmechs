@@ -10,22 +10,24 @@
 {% block content %}
 {% if cameras %}
 {% for cameras in cameras %}
-<div class="main_container">
-    {% if cameras.photo %}
-    <img src="{{ cameras.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-    <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-    {% endif %}
-    <span>
-        <p style="color: #0f172e;">{{ cameras.name }}</p>
-    </span>
-    <span>
-        <p style="font-size: smaller;"><strong>Price:</strong> {{ cameras.price }}</p>
-    </span>
-    <span>
-        <p style="font-size: smaller;"><strong>Contact info:</strong> {{ cameras.phone_number }}</p>
-    </span>
-</div>
+<a href="{% url 'sparedealers:sparepart_detail' cameras.id %}">
+    <div class="main_container">
+        {% if cameras.photo %}
+        <img src="{{ cameras.photo.url}}" alt="Avatar" style="width:100px">
+        {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ cameras.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ cameras.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ cameras.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>

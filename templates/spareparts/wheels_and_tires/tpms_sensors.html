@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:wheels' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Wheels and tires</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:wheels' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Wheels
+        and tires</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if tpms_sensors %}
 {% for tpms_sensors in tpms_sensors %}
-<div class="main_container">
-    {% if tpms_sensors.photo %}
+<a href="{% url 'sparedealers:sparepart_detail' tpms_sensors.id %}">
+    <div class="main_container">
+        {% if tpms_sensors.photo %}
         <img src="{{ tpms_sensors.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
-    {% endif %}
-    <p><span>{{ tpms_sensors.name }}</span>{{ tpms_sensors.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ tpms_sensors.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ tpms_sensors.category }} | <strong>Subcategory: </strong>{{ tpms_sensors.sub_category }} | 
-        <strong>Condition:</strong> {{ tpms_sensors.condition }} | <strong>Year of Manufacture: </strong>{{ tpms_sensors.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ tpms_sensors.car_make }}| <strong>Car Model: </strong>{{ tpms_sensors.car_model }}</p>
-</div>
+        {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ tpms_sensors.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ tpms_sensors.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ tpms_sensors.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

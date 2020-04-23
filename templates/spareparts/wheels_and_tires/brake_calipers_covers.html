@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:wheels' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Wheels and tires</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:wheels' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Wheels
+        and tires</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if brake_calipers_cover %}
 {% for brake_calipers_cover in brake_calipers_cover %}
-<div class="main_container">
-    {% if brake_calipers_cover.photo %}
+<a href="{% url 'sparedealers:sparepart_detail' brake_calipers_cover.id %}">
+    <div class="main_container">
+        {% if brake_calipers_cover.photo %}
         <img src="{{ brake_calipers_cover.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
-    {% endif %}
-    <p><span>{{ brake_calipers_cover.name }}</span>{{ brake_calipers_cover.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ brake_calipers_cover.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ brake_calipers_cover.category }} | <strong>Subcategory: </strong>{{ brake_calipers_cover.sub_category }} | 
-        <strong>Condition:</strong> {{ brake_calipers_cover.condition }} | <strong>Year of Manufacture: </strong>{{ brake_calipers_cover.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ brake_calipers_cover.car_make }}| <strong>Car Model: </strong>{{ brake_calipers_cover.car_model }}</p>
-</div>
+        {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ brake_calipers_cover.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ brake_calipers_cover.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ brake_calipers_cover.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

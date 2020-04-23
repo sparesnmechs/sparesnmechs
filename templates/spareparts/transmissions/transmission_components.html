@@ -2,32 +2,37 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:transmission' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Transmission</a>
-</div> 
+    <a class="active" href="{% url 'sparedealers:transmission' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Transmission</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 {% if transmission_components %}
 {% for transmission_components in transmission_components %}
-<div class="main_container">
-    {% if transmission_components.photo %}
+<a href="{% url 'sparedealers:sparepart_detail' transmission_components.id %}">
+    <div class="main_container">
+        {% if transmission_components.photo %}
         <img src="{{ transmission_components.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px
-    {% endif %}
-    <p><span>{{ transmission_components.name }}</span>{{ transmission_components.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ transmission_components.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ transmission_components.category }} | <strong>Subcategory: </strong>{{ transmission_components.sub_category }} | 
-        <strong>Condition:</strong> {{ transmission_components.condition }} | <strong>Year of Manufacture: </strong>{{ transmission_components.year_of_manufacture }} 
-        | <strong>Car make: </strong>{{ transmission_components.car_make }}| <strong>Car Model: </strong>{{ transmission_components.car_model }}</p>
-</div>
+        {% else %}
+        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
+        {% endif %}
+        <span>
+            <p style="color: #0f172e;">{{ transmission_components.name }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Price:</strong> {{ transmission_components.price }}</p>
+        </span>
+        <span>
+            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ transmission_components.phone_number }}</p>
+        </span>
+    </div>
+</a>
 {% endfor %}
 {% else %}
 <br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">No parts found yet...</p>
 {% endif %}

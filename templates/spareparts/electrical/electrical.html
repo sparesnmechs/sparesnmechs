@@ -2,42 +2,43 @@
 {% load static %}
 {% block nav %}
 <div class="topnav">
-    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
-</div> 
+  <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Home</a>
+</div>
 {% endblock nav %}
 
 {% block content %}
 <br>
 <ul class="list-group">
-    <a href="{% url 'sparedealers:headlamps' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Headlamps
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:control_units' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Control units
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:alarm_and_remote_start' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Alarm and remote start
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:fog_lamps' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Fog lamps
-  </li>
-    </a>
-    <a href="{% url 'sparedealers:car_bulbs' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Car bulbs
-  </li>
+  <a href="{% url 'sparedealers:headlamps' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Headlamps
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:control_units' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Control units
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:alarm_and_remote_start' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Alarm and remote start
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:fog_lamps' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Fog lamps
+    </li>
+  </a>
+  <a href="{% url 'sparedealers:car_bulbs' %}">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Car bulbs
+    </li>
   </a>
   <a href="{% url 'sparedealers:battery' %}">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Battery
-  </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Battery
+    </li>
   </a>
 </ul>
 {% endblock %}

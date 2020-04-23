@@ -11,6 +11,9 @@ span {
   font-family: 'Baloo Chettan 2', cursive;
 }
 
+a, a:hover, a:active, a:visited, a:focus {
+  text-decoration:none;
+}
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: #d02222;
