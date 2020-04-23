@@ -5,7 +5,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView, TemplateView
+from django.views.generic import (
+    CreateView,
+    DetailView,
+    UpdateView,
+    TemplateView,
+)
 
 from .models import CarModel, CarOwner
 
@@ -21,7 +26,7 @@ class SignUp(CreateView):
 class ContactUs(TemplateView):
     """Create a contact us page."""
 
-    template_name = 'contact_us.html'
+    template_name = "contact_us.html"
 
 
 class CarownerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):

@@ -11,11 +11,13 @@ from django.views.generic import (
     DetailView,
     ListView,
     UpdateView,
+    FormView,
 )
 
 from .models import SparePart, SparePartCategory, SparePartSubCategory
 from .filters import SparePartFilter
 from django.shortcuts import render
+from .forms import EmailForm
 
 
 class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -121,6 +123,18 @@ class SparePartCategoryListView(ListView):
     queryset = SparePartCategory.objects.all()
     context_object_name = "categories"
     template_name = "index.html"
+
+
+class EmailCreateView(FormView):
+    """Create email view."""
+
+    template_name = "requests.html"
+    form_class = EmailForm
+    success_url = "/"  # TODO Implement messsaging
+
+    def form_valid(self, form):
+        form.send_email()
+        return super().form_valid(form)
 
 
 # ==========Exterior category & subcategories==========
@@ -280,7 +294,9 @@ class HoodListiew(ListView):
 class BumperListiew(ListView):
     """Exterior spareparts."""
 
-    sub_category = SparePartSubCategory.objects.get(name="Bumpers and Valances")
+    sub_category = SparePartSubCategory.objects.get(
+        name="Bumpers and Valances"
+    )
     queryset = sub_category.part_subcategories.all()
     context_object_name = "bumpers"
     template_name = "spareparts/exterior/bumpers.html"
@@ -408,7 +424,9 @@ class CamerasListiew(ListView):
 class TICListiew(ListView):
     """accessories spareparts."""
 
-    sub_category = SparePartSubCategory.objects.get(name="Tire inflator compressor")
+    sub_category = SparePartSubCategory.objects.get(
+        name="Tire inflator compressor"
+    )
     queryset = sub_category.part_subcategories.all()
     context_object_name = "tire_inflator_compressor"
     template_name = "spareparts/accessories/tire_inflator_compressor.html"
@@ -554,7 +572,9 @@ class CUListiew(ListView):
 class ARSListiew(ListView):
     """Electrical spareparts."""
 
-    sub_category = SparePartSubCategory.objects.get(name="Alarm and remote start")
+    sub_category = SparePartSubCategory.objects.get(
+        name="Alarm and remote start"
+    )
     queryset = sub_category.part_subcategories.all()
     context_object_name = "ars"
     template_name = "spareparts/electrical/ars.html"
@@ -837,7 +857,9 @@ class TransMountListiew(ListView):
 class TransComponentsListiew(ListView):
     """Suspensions spareparts."""
 
-    sub_category = SparePartSubCategory.objects.get(name="Transmission components")
+    sub_category = SparePartSubCategory.objects.get(
+        name="Transmission components"
+    )
     queryset = sub_category.part_subcategories.all()
     context_object_name = "transmission_components"
     template_name = "spareparts/transmissions/transmission_components.html"
@@ -953,7 +975,8 @@ def get_subcategories(request):
         )
     sub_categories = SparePartSubCategory.objects.filter(category=category)
     return HttpResponse(
-        serializers.serialize("json", sub_categories), content_type="application/json",
+        serializers.serialize("json", sub_categories),
+        content_type="application/json",
     )
 
 

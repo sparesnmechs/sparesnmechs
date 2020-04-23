@@ -16,7 +16,9 @@ class SparePartCategory(models.Model):
 
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to="spareparts/category", blank=True, null=True)
+    photo = models.ImageField(
+        upload_to="spareparts/category", blank=True, null=True
+    )
 
     class Meta:
         """Rep in its correct plural."""
@@ -65,10 +67,14 @@ class SparePart(models.Model):
     condition = models.CharField(max_length=255, choices=CONDITION_CHOICES)
     year_of_manufacture = models.CharField(
         max_length=4,
-        validators=[RegexValidator(regex="[0-9,]", message="Enter a valid year"),],
+        validators=[
+            RegexValidator(regex="[0-9,]", message="Enter a valid year"),
+        ],
     )
     category = models.ForeignKey(
-        SparePartCategory, on_delete=models.PROTECT, related_name="part_categories",
+        SparePartCategory,
+        on_delete=models.PROTECT,
+        related_name="part_categories",
     )
     sub_category = models.ForeignKey(
         SparePartSubCategory,
@@ -86,7 +92,9 @@ class SparePart(models.Model):
     phone_number = models.CharField(
         max_length=10,
         validators=[
-            RegexValidator(regex="^07[0-9]", message="Enter a valid phone number"),
+            RegexValidator(
+                regex="^07[0-9]", message="Enter a valid phone number"
+            ),
             MinLengthValidator(
                 limit_value=10, message="Phone number should have 10 values"
             ),

@@ -28,7 +28,9 @@ class Speciality(models.Model):
     phone_number = models.CharField(
         max_length=10,
         validators=[
-            RegexValidator(regex="^07[0-9]", message="Enter a valid phone number"),
+            RegexValidator(
+                regex="^07[0-9]", message="Enter a valid phone number"
+            ),
             MinLengthValidator(
                 limit_value=10, message="Phone number should have 10 values"
             ),
