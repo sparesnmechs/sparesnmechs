@@ -1,5 +1,4 @@
 """Views."""
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
@@ -13,12 +12,13 @@ from django.views.generic import (
 )
 
 from .models import CarModel, CarOwner
+from snm.sparedealers.forms import CustomUserCreationForm
 
 
 class SignUp(CreateView):
     """Sign up view for all users."""
 
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
 

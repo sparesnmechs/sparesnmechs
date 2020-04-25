@@ -87,31 +87,16 @@
   <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
     <img src="{% static 'logo/spares-logo.svg' %}" width="120" height="60" alt="">
   </a>
-  <!-- Navigation links (hidden by default) -->
-  <!-- <div id="myLinks">
-    <a href="{% url 'sparedealers:create' %}" style="text-align: left;">Sell a part</a>
-    <a href="{% url 'mechanics:create' %}" style="text-align: left;">Sell a speciality</a>
-    <a href="{% url 'sparedealers:listings' %}" style="text-align: left;">View my listings</a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'logout' %}" style="text-align: left;">Log out</a>
-    {% else %}
-    <a href="{% url 'login' %}" style="text-align: left;">Log in</a>
-    {% endif %}
-  </div> -->
-  <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
-  <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-    <i class="fa fa-bars"></i>
-  </a> -->
 </div>
 {% endblock nav %}
 
 {% block jumbotron %}
 <div class="jumbotron jumbotron-fluid" style="background-color: #d02222;">
-{% include "messages.html" %}
+  {% include "messages.html" %}
   <div class="container">
     <div class="alert">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <a href="{% url 'mechanics:speciality' %}" style="color: white;">Find a garage or mechanic instead?</a>
+      <a href="{% url 'mechanics:speciality' %}" style="color: white !important;">Find a garage or mechanic instead?</a>
     </div>
     <p class="lead" style="text-align: center;">Find anything in sparesnmechs</p>
     <form>

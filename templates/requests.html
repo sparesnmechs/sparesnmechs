@@ -11,9 +11,15 @@
 
 {% block content %}
 <br>
+<span>
+    <p class="text-muted" style="margin-left: auto; margin-right: auto; display: block;">
+        Send a short message describing your requests and we will get right back to you.
+    </p>
+</span>
 <form method="post">{% csrf_token %}
-    {{ form|crispy }}
+    {{ form.message|as_crispy_field }}
     <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Request a
         part</button>
 </form>
+<br><br>
 {% endblock %}

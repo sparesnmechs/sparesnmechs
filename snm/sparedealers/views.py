@@ -12,6 +12,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
     FormView,
+    TemplateView,
 )
 
 from .models import SparePart, SparePartCategory, SparePartSubCategory
@@ -34,8 +35,6 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         "sub_category",
         "car_make",
         "car_model",
-        "first_name",
-        "last_name",
         "phone_number",
         "region",
         "place",
@@ -53,7 +52,9 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         """Add the logged in user."""
         form.instance.dealer = self.request.user
-        return super().form_valid(form)
+        form.instance.first_name = self.request.user.first_name
+        form.instance.last_name = self.request.user.last_name
+        return super(SparePartCreateView, self).form_valid(form)
 
 
 class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
@@ -136,6 +137,12 @@ class EmailCreateView(SuccessMessageMixin, FormView):
     def form_valid(self, form):
         form.send_email()
         return super().form_valid(form)
+
+
+class ProfileView(TemplateView):
+    """Profile view."""
+
+    template_name = "registration/profile.html"
 
 
 # ==========Exterior category & subcategories==========

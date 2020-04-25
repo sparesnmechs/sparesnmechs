@@ -100,8 +100,8 @@ class SparePart(models.Model):
             ),
         ],
     )
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=20, blank=True, null=True)
+    last_name = models.CharField(max_length=20, blank=True, null=True)
     region = models.CharField(max_length=20)
     place = models.CharField(max_length=20)
     store = models.CharField(max_length=100, blank=True, null=True)
