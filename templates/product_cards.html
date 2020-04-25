@@ -1,0 +1,29 @@
+{% load static %}
+
+{% if object_list %}
+<br>
+<div class="row" style="margin-left: auto; margin-right: auto; display: block;">
+    {% for object_list in object_list %}
+    <a href="{% url 'sparedealers:sparepart_detail' object_list.id %}">
+        <div class="column prod_col">
+            <div class="card">
+                {% if object_list.photo %}
+                <img src="{{ object_list.photo.url}}" alt="Avatar">
+                {% else %}
+                <img src="{% static 'default/process.png' %}" alt="Avatar">
+                {% endif %}
+                <br>
+                <p style="text-align: left;">{{ object_list.name }}</p>
+                <p style="text-align: left; margin-top: -20; color: #d02222;">{{ object_list.price }}</p>
+            </div>
+        </div>
+</div>
+</a>
+{% endfor %}
+{% else %}
+<br>
+<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">No parts found yet...</p>
+{% endif %}

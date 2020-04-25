@@ -84,9 +84,35 @@
 <!-- Top Navigation Menu -->
 <div class="topnav">
   <!-- <a href="#home" class="active">Logo</a> -->
-  <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
-    <img src="{% static 'logo/spares-logo.svg' %}" width="120" height="60" alt="">
-  </a>
+  <div class="row">
+    <div class="col-8">
+      <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
+        <img src="{% static 'logo/spares-logo.svg' %}" width="120" height="60" alt="">
+      </a>
+    </div>
+    <div class="col-4 nav_details">
+      <div class="row">
+        <div class="col" style="margin-top: 2%; margin-left: 10%;">
+          {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}">
+            <p style="color: white;">Log out</p>
+          </a>
+          {% else %}
+          <a href="{% url 'login' %}">
+            <p style="color: white;">Log in</p>
+          </a>
+          {% endif %}
+          <a href="{% url 'carowners:signup' %}">
+            <p style="color: white;">Register</p>
+          </a>
+        </div>
+        <div class="col">
+          <a href="{% url 'sparedealers:create' %}"><button type="button" class="btn btn-light btn-lg btn-block"
+              style="width: auto; background-color: #0f172e; color: white;">SELL</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock nav %}
 
@@ -94,12 +120,13 @@
 <div class="jumbotron jumbotron-fluid" style="background-color: #d02222;">
   {% include "messages.html" %}
   <div class="container">
-    <div class="alert">
+    <div class="alert" style="margin:auto; max-width:320px">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <a href="{% url 'mechanics:speciality' %}" style="color: white !important;">Find a garage or mechanic instead?</a>
     </div>
     <p class="lead" style="text-align: center;">Find anything in sparesnmechs</p>
-    <form>
+    <!-- Phone filter -->
+    <form style="margin:auto; max-width:500px">
       <div class="container">
         <div class="row">
           <div class="col-10" style="background-color: #D3D3D3">
@@ -118,10 +145,12 @@
         </div>
       </div>
     </form>
-    <!-- {% comment %} <form class="example" method="get" action="{% url 'sparedealers:search_results' %}"
+    <br>
+    <!-- Desktop search bar -->
+    <!-- <form class="example" method="get" action="{% url 'sparedealers:search_results' %}"
       style="margin:auto; max-width:500px">
       <input type="text" placeholder="Search.." name="q">
-    </form> {% endcomment %} -->
+    </form> -->
     <span><button onclick="document.getElementById('id01').style.display='block'"
         style="width: auto; background-color: #0f172e; margin-left: auto; margin-right: auto; display: block;">Advanced
         Search</button></span>
@@ -233,9 +262,21 @@
 
 {% endblock %}
 
-{% block content %}
+{% block sidebar %}
+<div class="sidebar" style="margin-left: 20px;">
+  <form action="">
+    {{ filter.form|crispy }}
+    <button type="submit" class="btn btn-light"
+      style="background-color:#0f172e !important; color:white; margin-left: auto; margin-right: auto; display: block;">Filter
+      Parts</button>
+  </form>
+  <br><br>
+</div>
+{% endblock %}
+
+{% block index %}
 {% if filter.qs %}
-<div class="row">
+<div class="row" style="margin-left: auto; margin-right: auto; display: block;">
   <div class="column">
     <div class="card">
       <a href="{% url 'sparedealers:accessories' %}">
@@ -350,7 +391,7 @@
   <p class="text-muted" style="text-align: center;">Change filter keywords or add a new part</p>
 
   <br>
-  <a href="{% url 'sparedealers:create' %}"><button type="submit" class="btn btn-light"
+  <a href="{% url 'sparedealers:create' %}"><button type="submit" class="btn btn-light col-md-4"
       style="background-color:#0f172e !important; color:white; margin-left: auto; margin-right: auto; display: block;">Add
       sparepart</button></a>
 </span>

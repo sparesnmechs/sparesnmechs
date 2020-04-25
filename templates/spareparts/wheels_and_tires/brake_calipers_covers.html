@@ -1,39 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-<div class="topnav">
-    <a class="active" href="{% url 'sparedealers:wheels' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Wheels
-        and tires</a>
-</div>
+{% include "top_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
-{% if brake_calipers_cover %}
-{% for brake_calipers_cover in brake_calipers_cover %}
-<a href="{% url 'sparedealers:sparepart_detail' brake_calipers_cover.id %}">
-    <div class="main_container">
-        {% if brake_calipers_cover.photo %}
-        <img src="{{ brake_calipers_cover.photo.url}}" alt="Avatar" style="width:100px">
-        {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-        {% endif %}
-        <span>
-            <p style="color: #0f172e;">{{ brake_calipers_cover.name }}</p>
-        </span>
-        <span>
-            <p style="font-size: smaller;"><strong>Price:</strong> {{ brake_calipers_cover.price }}</p>
-        </span>
-        <span>
-            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ brake_calipers_cover.phone_number }}</p>
-        </span>
-    </div>
-</a>
-{% endfor %}
-{% else %}
-<br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
-    style="margin-left: auto; margin-right: auto; display: block;">
-<br>
-<p style="text-align: center;">No parts found yet...</p>
-{% endif %}
+{% include "product_cards.html" %}
 {% endblock %}

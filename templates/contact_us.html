@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-<div class="topnav">
-    <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
-</div> 
+{% include "top_nav.html" %} 
 {% endblock nav %}
 
 {% block content %}

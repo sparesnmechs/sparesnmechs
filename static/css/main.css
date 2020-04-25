@@ -232,7 +232,7 @@ opacity: 0.7;
 /* Three image containers (use 25% for four, and 50% for two, etc) */
 .column {
   float: left;
-  /* width: 15%; */
+  width: 20%;
   padding: 5 5px;
 }
 
@@ -250,21 +250,6 @@ display: table;
   background-color: #f1f1f1;
   /* height: 100%; */
   /* width: 50%; */
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 500px) {
-.column {
-width: 33.33%;
-padding: 0 0px;
-}
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-  padding: 0 0px;
-  text-align: center;
-  background-color: #f1f1f1;
-}
 }
 
 .scrolling-wrapper {
@@ -286,88 +271,6 @@ form.example::after {
 content: "";
 clear: both;
 display: table;
-}
-
- /* Style the container with a rounded border, grey background and some padding and margin */
-.main_container {
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 16px;
-  margin: 16px 0;
-}
-
-/* Clear floats after containers */
-.main_container::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Float images inside the container to the left. Add a right margin, and style the image as a circle */
-.main_container img {
-  float: left;
-  margin-right: 50px;
-  /* border-radius: 50%; */
-  width: 150px;
-  height: 100px;
-}
-
-/* Increase the font-size of a span element */
-.main_container span {
-  font-size: 20px;
-  margin-right: auto;
-  text-align: right;
-}
-
-
-/* Add media queries for responsiveness. This will center both the text and the image inside the container */
-@media (max-width: 500px) {
-  .main_container {
-    text-align: center;
-  }
-
-  .main_container img {
-    margin-right: 5px;
-    float: left;
-	display: block;
-	width: 80px;
-	/* height: 80px; */
-  }
-  .main_container span {
-  font-size: 20px;
-  margin-right: auto;
-}
-
- /* The alert message box */
-.alert {
-  padding: 20px;
-  background-color: #0f172e; /* Red */
-  color: white;
-  margin-bottom: 15px;
-  position: relative;
-}
-
-/* The close button */
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-/* When moving the mouse over the close button */
-.closebtn:hover {
-  color: black;
-} 
-} 
-
-body, html {
-  height: 100%;
 }
 
 /* The hero image */
@@ -393,4 +296,135 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 color: white;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  background-color: white;
+  position: absolute;
+  height: auto;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding-left: 7%;
+}
+
+.prod_col img {
+  width: 210px;
+}
+
+.details img {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .example{
+        display: none;
+    }
+
+    .column {
+    width: 50%;
+    padding: 0 0px;
+    }
+
+    .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 0 0px;
+    text-align: center;
+    background-color: #f1f1f1;
+    }
+
+    .main_container {
+        text-align: center;
+      }
+    
+      .main_container img {
+        margin-right: 5px;
+        float: left;
+        display: block;
+        width: 80px;
+        /* height: 80px; */
+      }
+      .main_container span {
+      font-size: 20px;
+      margin-right: auto;
+    }
+    
+     /* The alert message box */
+    .alert {
+      padding: 20px;
+      background-color: #0f172e; /* Red */
+      color: white;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    /* The close button */
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    /* When moving the mouse over the close button */
+    .closebtn:hover {
+      color: black;
+    }
+
+    .nav_details {
+      display: none;
+    }
+
+    .sidebar {
+      display: none;
+    }
+    div.content {
+      margin-left: 0;
+      padding-left: 0;
+  }
+
+  .desktop_nav{
+    display: none;
+  }
+
+  .prod_col img {
+    width: 160px;
+  }
+
+  .details img {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
 }

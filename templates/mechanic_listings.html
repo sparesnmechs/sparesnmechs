@@ -2,9 +2,7 @@
 {% load static %}
 
 {% block nav %}
-<div class="topnav">
-    <a class="active" href="{% url 'sparedealers:listings' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> My Listings</a>
-</div> 
+{% include "top_nav.html" %}
 {% endblock nav %}
 
 {% block content %}

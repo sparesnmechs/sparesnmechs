@@ -2,10 +2,7 @@
 {% load static %}
 
 {% block nav %}
-<div class="topnav">
-    <a class="active" href="{% url 'sparedealers:profile' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-        Profile</a>
-</div>
+{% include "top_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
@@ -54,8 +51,8 @@
     style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">Start posting your parts to your clients</p>
-<a href="{% url 'sparedealers:create' %}"><button type="submit" class="btn btn-light"
-        style="background-color:#0f172e !important; color:white;">Sell a part</button></a>
+{% comment %} <a href="{% url 'sparedealers:create' %}"><button type="submit" class="btn btn-light"
+        style="background-color:#0f172e !important; color:white;">Sell a part</button></a> {% endcomment %}
 {% endif %}
 
 {% endblock %}

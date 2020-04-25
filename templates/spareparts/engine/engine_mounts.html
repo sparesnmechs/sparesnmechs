@@ -1,39 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-<div class="topnav">
-    <a class="active" href="{% url 'sparedealers:engine' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-        Engine</a>
-</div>
+{% include "top_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
-{% if engine_mounts %}
-{% for engine_mounts in engine_mounts %}
-<a href="{% url 'sparedealers:sparepart_detail' engine_mounts.id %}">
-    <div class="main_container">
-        {% if engine_mounts.photo %}
-        <img src="{{ engine_mounts.photo.url}}" alt="Avatar" style="width:100px">
-        {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-        {% endif %}
-        <span>
-            <p style="color: #0f172e;">{{ engine_mounts.name }}</p>
-        </span>
-        <span>
-            <p style="font-size: smaller;"><strong>Price:</strong> {{ engine_mounts.price }}</p>
-        </span>
-        <span>
-            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ engine_mounts.phone_number }}</p>
-        </span>
-    </div>
-</a>
-{% endfor %}
-{% else %}
-<br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
-    style="margin-left: auto; margin-right: auto; display: block;">
-<br>
-<p style="text-align: center;">No parts found yet...</p>
-{% endif %}
+{% include "product_cards.html" %}
 {% endblock %}
