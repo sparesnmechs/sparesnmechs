@@ -36,6 +36,7 @@ urlpatterns = [
         "delete/<int:pk>", views.SparePartDeleteView.as_view(), name="delete",
     ),
     path("requests/", views.EmailCreateView.as_view(), name="requests",),
+    path("profile/", views.ProfileView.as_view(), name="profile",),
     # ==========Exterior category & subcategories==========
     path(
         "sparepart/category/exterior/",
