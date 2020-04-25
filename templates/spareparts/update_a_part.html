@@ -4,11 +4,7 @@
 
 {% include 'spareparts/sell_a_part.html' %}
 {% block nav %}
-<div class="topnav">
-    <a class="active" href="{% url 'sparedealers:listings' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-        My listings</a>
-</div>
-
+{% include "top_nav.html" %}
 {% endblock nav %}
 {% block content%}
 <br>

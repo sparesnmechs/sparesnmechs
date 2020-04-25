@@ -2,16 +2,13 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block nav %}
-<div class="topnav">
-  <a class="active" href="{% url 'sparedealers:sparepart-list' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-    Home</a>
-</div>
-{% endblock nav %}
-
 {% block content%}
-<br>
-<form method="post">
+<br><br><br><br><br><br>
+<span>
+  <h5 class="text-muted" style="text-align: center;">Login to Sparesnmechs</h5>
+</span>
+<hr>
+<form method="post" class="col-md-4" style="margin-left: auto; margin-right: auto; display: block;">
   {% csrf_token %}
   <div class="form-group">
     {{ form.username|as_crispy_field }}
@@ -21,7 +18,7 @@
   </div>
   <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Login</button>
 </form>
-<p>Don't have an account? <a href="{% url 'carowners:signup' %}">sign up</a></p>
+<p style="text-align: center;">Don't have an account? <a href="{% url 'carowners:signup' %}">sign up</a></p>
 {% comment %} <p><a href="{% url 'password_reset' %}">Forgot password?</a></p> {% endcomment %}
 {% endblock content%}
 

@@ -1,39 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-<div class="topnav">
-    <a class="active" href="{% url 'sparedealers:exterior' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-        Exterior</a>
-</div>
+{% include "top_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
-{% if bumper_lips %}
-{% for bumper_lips in bumper_lips %}
-<div class="main_container">
-    {% if bumper_lips.photo %}
-    <img src="{{ bumper_lips.photo.url}}" alt="Avatar" style="width:100px">
-    {% else %}
-    <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-    {% endif %}
-    <p><span>{{ bumper_lips.name }}</span>{{ bumper_lips.price }}</p>
-    <p><i class="fa fa-phone" aria-hidden="true"></i>
-        {{ bumper_lips.phone_number }}</p>
-    <br>
-    <hr>
-    <p><strong>Category: </strong>{{ bumper_lips.category }} | <strong>Subcategory:
-        </strong>{{ bumper_lips.sub_category }} |
-        <strong>Condition:</strong> {{ bumper_lips.condition }} | <strong>Year of Manufacture:
-        </strong>{{ bumper_lips.year_of_manufacture }}
-        | <strong>Car make: </strong>{{ bumper_lips.car_make }}| <strong>Car Model: </strong>{{ bumper_lips.car_model }}
-    </p>
-</div>
-{% endfor %}
-{% else %}
-<br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
-    style="margin-left: auto; margin-right: auto; display: block;">
-<br>
-<p style="text-align: center;">No parts found yet...</p>
-{% endif %}
+{% include "product_cards.html" %}
 {% endblock %}

@@ -1,39 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-<div class="topnav">
-    <a class="active" href="{% url 'sparedealers:audio' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-        Audio</a>
-</div>
+{% include "top_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
-{% if stereos %}
-{% for stereos in stereos %}
-<a href="{% url 'sparedealers:sparepart_detail' stereos.id %}">
-    <div class="main_container">
-        {% if stereos.photo %}
-        <img src="{{ stereos.photo.url}}" alt="Avatar" style="width:100px">
-        {% else %}
-        <img src="{% static 'default/process.png' %}" alt="Avatar" style="width:100px">
-        {% endif %}
-        <span>
-            <p style="color: #0f172e;">{{ stereos.name }}</p>
-        </span>
-        <span>
-            <p style="font-size: smaller;"><strong>Price:</strong> {{ stereos.price }}</p>
-        </span>
-        <span>
-            <p style="font-size: smaller;"><strong>Contact info:</strong> {{ stereos.phone_number }}</p>
-        </span>
-    </div>
-</a>
-{% endfor %}
-{% else %}
-<br>
-<img src="{% static 'svg/process.png' %}" width="100" height="100" alt=""
-    style="margin-left: auto; margin-right: auto; display: block;">
-<br>
-<p style="text-align: center;">No parts found yet...</p>
-{% endif %}
+{% include "product_cards.html" %}
 {% endblock %}
