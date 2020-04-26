@@ -92,7 +92,7 @@
     </div>
     <div class="col-4 nav_details">
       <div class="row">
-        <div class="col" style="margin-top: 2%; margin-left: 10%;">
+        <div class="col" style="margin-top: 2%;">
           {% if user.is_authenticated %}
           <a href="{% url 'logout' %}">
             <p style="color: white;">Log out</p>
@@ -376,6 +376,7 @@
   </div>
 </div>
 <br>
+{% include "ad_cards.html" %}
 <span>
   <p class="text-muted" style="text-align: center;">Products coming soon!</p>
 </span>
