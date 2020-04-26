@@ -6,7 +6,8 @@
 
 {% block content %}
 <br>
-<div class="contianer details" style="background-color: #FFFFFF;">
+<div class="contianer details col-md-6"
+    style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; display: block;">
     {% if object.photo %}
     <img src="{{ object.photo.url}}" alt="Avatar">
     {% else %}

@@ -330,14 +330,11 @@ div.content {
 }
 
 .details img {
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  width: 530px;
 }
 
 .filter_col img {
-  width: 190px;
+  width: 193px;
   height: 140px;
 }
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
@@ -348,7 +345,15 @@ div.content {
 
     .column {
     width: 50%;
-    padding: 0 0px;
+    padding: 1 1px;
+    }
+
+    .filter_col {
+      width: 50%;
+      }
+
+    .filter_col img {
+      width: 160px;
     }
 
     .card {
