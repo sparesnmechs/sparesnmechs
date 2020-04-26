@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% if filter.qs %}
+<br>
+<div class="row" style="margin-left: auto; margin-right: auto; display: block;">
+    {% for object_list in filter.qs %}
+    <a href="{% url 'sparedealers:sparepart_detail' object_list.id %}">
+        <div class="column filter_col">
+            <div class="card">
+                {% if object_list.photo %}
+                <img src="{{ object_list.photo.url}}" alt="Avatar">
+                {% else %}
+                <img src="{% static 'default/process.png' %}" alt="Avatar">
+                {% endif %}
+                <br>
+                <p style="text-align: left;">{{ object_list.name }}</p>
+                <p style="text-align: left; margin-top: -20; color: #d02222;">{{ object_list.price }}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<br>
+<span>
+    <h3 style="text-align: center;"><strong>Oops! Parts Not Found</strong></h3>
+    <p class="text-muted" style="text-align: center;">You can either add a part or send us a request for the part
+        you
+        want.</p>
+</span>
+{% endif %}
+{% endblock %}
