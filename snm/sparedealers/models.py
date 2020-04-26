@@ -83,9 +83,7 @@ class SparePart(models.Model):
     )
     car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
     car_model = models.ForeignKey(CarModel, on_delete=models.PROTECT)
-    photo = models.ImageField(
-        upload_to="spareparts/", blank=True, null=True
-    )  # Only for development
+    photo = models.ImageField(upload_to="spareparts/")  # Only for development
     is_featured = models.BooleanField(default=False)
 
     # AD contact infomation
