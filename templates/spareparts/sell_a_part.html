@@ -8,7 +8,8 @@
 {% block content%}
 <br>
 <div class="container">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="col-md-6"
+        style="margin-left: auto; margin-right: auto; display: block;">
         {% csrf_token %}
         <div class="form-group">
             {{ form.name|as_crispy_field }}
@@ -47,10 +48,7 @@
             {{ form.phone_number|as_crispy_field }}
         </div>
         <div class="form-group">
-            {{ form.region|as_crispy_field }}
-        </div>
-        <div class="form-group">
-            {{ form.place|as_crispy_field }}
+            {{ form.location|as_crispy_field }}
         </div>
         <div class="form-group">
             {{ form.store|as_crispy_field }}

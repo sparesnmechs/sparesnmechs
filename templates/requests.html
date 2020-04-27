@@ -14,7 +14,11 @@
     </p>
 </span>
 <form method="post" class="col-md-6" style="margin-left: auto; margin-right: auto; display: block;">{% csrf_token %}
-    {{ form.message|as_crispy_field }}
+    {{ form.car_make|as_crispy_field }}
+    {{ form.chasis_number|as_crispy_field }}
+    {{ form.part|as_crispy_field }}
+    {{ form.location|as_crispy_field }}
+    {{ form.phone_number|as_crispy_field }}
     <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Request a
         part</button>
 </form>

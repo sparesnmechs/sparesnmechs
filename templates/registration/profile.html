@@ -13,21 +13,23 @@
 
 {% block content %}
 <br>
-<div class="container" style="background-color: white;">
+<div class="container col-md-6" style="background-color: white;">
     <hr>
     <span>
         <a href="{% url 'sparedealers:listings' %}">
-            <p>My listings</p>
+            <p>View my parts</p>
         </a>
     </span>
     <hr>
     <span>
-        <p>Notifications</p>
+        <a href="{% url 'mechanics:listings' %}">
+            <p>View my garage/specialities</p>
+        </a>
     </span>
     <hr>
     <span>
         <br>
-        <h5 style="text-align: center;"><strong>Profile settings</strong></h5>
+        <h5><strong>Profile settings</strong></h5>
         <hr>
     </span>
     <span>

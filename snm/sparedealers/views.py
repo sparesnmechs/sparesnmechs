@@ -36,8 +36,7 @@ class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         "car_make",
         "car_model",
         "phone_number",
-        "region",
-        "place",
+        "location",
         "store",
         "photo",
     ]
@@ -74,8 +73,7 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         "first_name",
         "last_name",
         "phone_number",
-        "region",
-        "place",
+        "location",
         "store",
         "photo",
     ]

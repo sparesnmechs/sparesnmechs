@@ -7,13 +7,9 @@
 
 {% block content %}
 <br>
-<div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <a href="{% url 'mechanics:listings' %}" style="color: white !important;">View my mechanic listings instead?</a>
-</div>
 {% if listings %}
 {% for listing in listings %}
-<div class="main_container">
+<div class="main_container col-md-6">
     {% if listing.photo %}
     <img src="{{ listing.photo.url}}" alt="Avatar" style="width:100px; height: 80px;">
     {% else %}
@@ -51,8 +47,6 @@
     style="margin-left: auto; margin-right: auto; display: block;">
 <br>
 <p style="text-align: center;">Start posting your parts to your clients</p>
-{% comment %} <a href="{% url 'sparedealers:create' %}"><button type="submit" class="btn btn-light"
-        style="background-color:#0f172e !important; color:white;">Sell a part</button></a> {% endcomment %}
 {% endif %}
 
 {% endblock %}
