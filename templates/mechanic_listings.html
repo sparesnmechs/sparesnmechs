@@ -6,32 +6,48 @@
 {% endblock nav %}
 
 {% block content %}
-    {% if listings %}
-        {% for listing in listings %}
-            <a href="{% url 'mechanics:update' listing.id %}">
-            <div class="main_container">
-                {% if listing.photo %}
-                    <img src="{{ listing.photo.url}}" alt="Avatar" style="width:100px">
-                {% else %}
-                    <img src="{% static 'default/index.png' %}" alt="Avatar" style="width:100px">
-                {% endif %}
-                <p><span>{{ listing.name }}</span>  -  Ksh:{{ listing.price }}</p>
-                <p><i class="fa fa-phone" aria-hidden="true"></i>
-                    {{ listing.phone_number }}</p>
-                <hr>
-                <p><strong>Car make: </strong>{{ listing.car_make }} | <strong>Region: </strong>{{ listing.region }} | 
-                    <strong>Place:</strong> {{ listing.place }}</p>
-                <a href="{% url 'mechanics:delete' listing.id %}"><button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Delete</button></a>
-            </div>
-            </a>
-        {% endfor %}
+<br>
+{% if listings %}
+{% for listing in listings %}
+<div class="main_container col-md-6">
+    {% if listing.photo %}
+    <img src="{{ listing.photo.url}}" alt="Avatar" style="width:100px; height: 80px;">
     {% else %}
-        <br>
-        <img src="{% static 'svg/car.png' %}" width="100" height="100" alt="" style="margin-left: auto; margin-right: auto; display: block;">
-        <br>
-        <p style="text-align: center;">Start posting your specialities to your clients</p>
-        <a href="{% url 'mechanics:create' %}"><button type="submit" class="btn btn-light" 
-            style="background-color:#0f172e !important; color:white;">Post new listing</button></a>
+    <img src="{% static 'svg/car.png' %}" alt="Avatar" style="width:100px; height: 80px;">
     {% endif %}
-    
+    <span>
+        <p style="font-size: smaller;">{{ listing.name }}</p>
+    </span>
+    <span>
+        <p style="font-size: smaller;">{{ listing.price }}</p>
+    </span>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'sparedealers:delete' listing.id %}">
+                <button type="submit" class="btn btn-light"
+                    style="background-color:#0f172e !important; color:white;">Delete
+                </button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'sparedealers:update' listing.id %}">
+                <button type="submit" class="btn btn-light"
+                    style="background-color:#0f172e !important; color:white;">Update
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<br><br>
+{% else %}
+<br>
+<img src="{% static 'svg/car.png' %}" width="100" height="100" alt=""
+    style="margin-left: auto; margin-right: auto; display: block;">
+<br>
+<p style="text-align: center;">Start posting your garage/speciality to your clients</p>
+<a href="{% url 'mechanics:create' %}"><button type="button" class="btn btn-light"
+        style="background-color:#0f172e !important; color:white;">Sell</button></a>
+{% endif %}
 {% endblock %}
