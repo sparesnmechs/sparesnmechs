@@ -13,7 +13,7 @@
         Send a short message describing your requests and we will get right back to you.
     </p>
 </span>
-<form method="post" class="col-md-6" style="margin-left: auto; margin-right: auto; display: block;">{% csrf_token %}
+<form method="post" class="col-md-5" style="margin-left: auto; margin-right: auto; display: block;">{% csrf_token %}
     {{ form.car_make|as_crispy_field }}
     {{ form.chasis_number|as_crispy_field }}
     {{ form.part|as_crispy_field }}

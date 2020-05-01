@@ -120,37 +120,29 @@
 <div class="jumbotron jumbotron-fluid" style="background-color: #d02222;">
   {% include "messages.html" %}
   <div class="container">
-    <div class="alert" style="margin:auto; max-width:320px">
+    <div class="alert" style="margin:auto; max-width:550px">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <a href="{% url 'mechanics:speciality' %}" style="color: white !important;">Find a garage or mechanic instead?</a>
     </div>
+    <br>
     <p class="lead" style="text-align: center;">Find anything in sparesnmechs</p>
     <!-- Phone filter -->
-    <form style="margin:auto; max-width:500px">
+    <form style="margin:auto; max-width:500px; margin-left: auto; margin-right: auto; display: block;">
       <div class="container">
         <div class="row">
-          <div class="col-10" style="background-color: #D3D3D3">
+          <div class="col">
             <span>
-              <div class="row">
-                <div class="col">{{ filter.form.car_make|as_crispy_field }}</div>
-                <div class="col">{{ filter.form.car_model|as_crispy_field }}</div>
+              <div>{{ filter.form.car_make|as_crispy_field }}</div>
+              <div>
+                {{ filter.form.car_model|as_crispy_field }}
+                <button type="submit" style="background-color: #0f172e;">Search</button>
               </div>
             </span>
-          </div>
-          <div class="col-2" style="background-color: #0f172e">
-            <br><button type="submit"
-              style="width: auto; background-color: #0f172e; margin-top: 15%; margin-bottom: auto; display: block;"><i
-                class="fa fa-search"></i></button>
           </div>
         </div>
       </div>
     </form>
-    <br>
-    <!-- Desktop search bar -->
-    <!-- <form class="example" method="get" action="{% url 'sparedealers:search_results' %}"
-      style="margin:auto; max-width:500px">
-      <input type="text" placeholder="Search.." name="q">
-    </form> -->
+    <hr>
     <span><button onclick="document.getElementById('id01').style.display='block'"
         style="width: auto; background-color: #0f172e; margin-left: auto; margin-right: auto; display: block;">Advanced
         Search</button></span>
@@ -161,7 +153,7 @@
         title="Close Modal">&times;</span>
 
       <!-- Modal Content -->
-      <form method="get" class="modal-content animate">
+      <form method="get" class="modal-content animate col-md-4">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
           title="Close Modal">&times;</span>
         <div class="container">
@@ -270,7 +262,6 @@
       style="background-color:#0f172e !important; color:white; margin-left: auto; margin-right: auto; display: block;">Filter
       Parts</button>
   </form>
-  <br><br>
 </div>
 {% endblock %}
 
@@ -368,11 +359,12 @@
   </div>
 </div>
 <hr>
-<div class="hero-image">
-  <div class="hero-text">
+<div class="image_container">
+  <img src="{% static 'default/spare2.jpg' %}" style="width:100%; height: 50%;">
+  <div class="centered">
     <h1>Sparesnmechs featured ADs</h1>
     <p>Would you like your AD to appear on this front page?</p>
-    <a href="{% url 'carowners:contact' %}"><button>Contact us</button></a>
+    <a href="{% url 'carowners:contact' %}"><button style="background-color: #0f172e;">Contact us</button></a>
   </div>
 </div>
 <br>
