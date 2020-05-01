@@ -18,28 +18,14 @@ from django.views.generic import (
 from .models import SparePart, SparePartCategory, SparePartSubCategory
 from .filters import SparePartFilter
 from django.shortcuts import render
-from .forms import EmailForm
+from .forms import EmailForm, SellPartForm
 
 
 class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Create view for spare parts."""
 
     model = SparePart
-    fields = [
-        "name",
-        "description",
-        "price",
-        "condition",
-        "year_of_manufacture",
-        "category",
-        "sub_category",
-        "car_make",
-        "car_model",
-        "phone_number",
-        "location",
-        "store",
-        "photo",
-    ]
+    form_class = SellPartForm
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your sparepart has been succesfully created"
@@ -60,23 +46,7 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Update view for spare parts."""
 
     model = SparePart
-    fields = [
-        "name",
-        "description",
-        "price",
-        "condition",
-        "year_of_manufacture",
-        "category",
-        "sub_category",
-        "car_make",
-        "car_model",
-        "first_name",
-        "last_name",
-        "phone_number",
-        "location",
-        "store",
-        "photo",
-    ]
+    form_class = SellPartForm
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your sparepart has been succesfully updated"

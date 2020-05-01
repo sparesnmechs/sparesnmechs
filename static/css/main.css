@@ -267,31 +267,6 @@ clear: both;
 display: table;
 }
 
-/* The hero image */
-.hero-image {
-/* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-
-/* Set a specific height */
-height: 50%;
-
-/* Position and center the image to scale nicely on all screens */
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-position: relative;
-}
-
-/* Place text in the middle of the image */
-.hero-text {
-text-align: center;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-color: white;
-}
-
 .sidebar {
   margin: 0;
   padding: 0;
@@ -307,16 +282,6 @@ color: white;
   color: black;
   padding: 16px;
   text-decoration: none;
-}
- 
-.sidebar a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
 }
 
 div.content {
@@ -337,8 +302,24 @@ div.content {
   width: 193px;
   height: 140px;
 }
+
+/* Container holding the image and the text */
+.image_container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1200px) {
     .example{
         display: none;
     }
@@ -432,4 +413,10 @@ div.content {
     display: block;
   }
 
+}
+
+@media screen and (min-width: 1201px) {
+.bottom_nav {
+  display: none !important;
+}
 }
