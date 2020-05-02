@@ -24,6 +24,4 @@ class MechanicFilter(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super(MechanicFilter, self).__init__(*args, **kwargs)
-        self.filters["car_make"].label = ""
-        self.filters["speciality"].label = ""
         self.filters["location"].label = ""
