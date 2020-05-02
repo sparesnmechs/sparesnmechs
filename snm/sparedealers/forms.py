@@ -125,7 +125,7 @@ class SellPartForm(forms.ModelForm):
                 attrs={"placeholder": "Description"}
             ),
             "price": forms.TextInput(attrs={"placeholder": "Price"}),
-            "condition": forms.TextInput(attrs={"placeholder": "Condition"}),
+            "condition": forms.Select(attrs={"placeholder": "Condition"}),
             "year_of_manufacture": forms.TextInput(
                 attrs={"placeholder": "Year of Manufacture"}
             ),
@@ -148,3 +148,4 @@ class SellPartForm(forms.ModelForm):
         self.fields["sub_category"].empty_label = "Sub Category"
         self.fields["car_make"].empty_label = "Car Make"
         self.fields["car_model"].empty_label = "Car Model"
+        self.fields["condition"].empty_label = "Condition"

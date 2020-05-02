@@ -50,7 +50,7 @@ class SparePartUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your sparepart has been succesfully updated"
-    template_name = "spareparts/update_a_part.html"
+    template_name = "spareparts/sell_a_part.html"
 
     def get_success_url(self):
         return reverse_lazy("sparedealers:listings")

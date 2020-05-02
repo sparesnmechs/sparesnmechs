@@ -78,6 +78,7 @@ class MechanicDeleteView(LoginRequiredMixin, DeleteView):
 
     model = Mechanic
     success_url = reverse_lazy("mechanics:listings")
+    template_name = "mechanics/delete.html"
 
 
 class SearchResultsView(ListView):
