@@ -3,7 +3,6 @@
 
 {% block content %}
 {% if filter.qs %}
-<br>
 <div class="row" style="margin-left: auto; margin-right: auto; display: block;">
     {% for object_list in filter.qs %}
     <a href="{% url 'sparedealers:sparepart_detail' object_list.id %}">
