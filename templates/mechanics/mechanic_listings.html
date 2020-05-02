@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block nav %}
-{% include "top_nav.html" %}
+{% include "mechanics/mech_top_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
@@ -10,17 +10,23 @@
 {% if listings %}
 {% for listing in listings %}
 <div class="main_container col-md-6" style="margin-left: auto; margin-right: auto; display: block;">
-    {% if listing.photo %}
-    <img src="{{ listing.photo.url}}" alt="Avatar" style="width:100px; height: 80px;">
-    {% else %}
-    <img src="{% static 'svg/car.png' %}" alt="Avatar" style="width:100px; height: 80px;">
-    {% endif %}
-    <span>
-        <p style="font-size: smaller;">{{ listing.name }}</p>
-    </span>
-    <span>
-        <p style="font-size: smaller;">{{ listing.price }}</p>
-    </span>
+    <div class="row">
+        <div class="col">
+            {% if listing.photo %}
+            <img src="{{ listing.photo.url}}" alt="Avatar" style="width:100px; height: 80px;">
+            {% else %}
+            <img src="{% static 'svg/car.png' %}" alt="Avatar" style="width:100px; height: 80px;">
+            {% endif %}
+        </div>
+        <div class="col">
+            <span>
+                <p style="font-size: smaller;">{{ listing.specialities }}</p>
+            </span>
+            <span>
+                <p style="font-size: smaller;">{{ listing.car_makes }}</p>
+            </span>
+        </div>
+    </div>
     <hr>
     <div class="row">
         <div class="col">
@@ -39,6 +45,7 @@
         </div>
     </div>
 </div>
+<br>
 {% endfor %}
 <br><br>
 {% else %}

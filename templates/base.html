@@ -27,10 +27,10 @@
   {% block sidebar %}
   {% endblock %}
 
-  <div class="content">
+  <!-- <div class="content">
     {% block index %}
     {% endblock %}
-  </div>
+  </div> -->
 
   <div class="container">
     {% block content %}
@@ -39,7 +39,7 @@
 
   <div class="navbar bottom_nav fixed-bottom">
     <a href="{% url 'sparedealers:sparepart-list' %}" class="badge badge-pill badge-light">Home</a>
-    <a href="{% url 'sparedealers:create' %}" class="badge badge-pill badge-light">Sell</a>
+    <a href="{% url 'sparedealers:create' %}" class="badge badge-pill badge-light">Sell Part</a>
     <a href="{% url 'sparedealers:requests' %}" class="badge badge-pill badge-light">Request</a>
     <a href="{% url 'sparedealers:profile' %}" class="badge badge-pill badge-light">Profile</a>
   </div>

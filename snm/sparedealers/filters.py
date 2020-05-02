@@ -27,14 +27,6 @@ class SparePartFilter(django_filters.FilterSet):
             "condition": ["exact"],
             "year_of_manufacture": ["lt", "gt"],
         }
-        widgets = {
-            "year_of_manufacture__lt": TextInput(
-                attrs={"placeholder": "Year of Manufacture"}
-            ),
-            "year_of_manufacture__gt": TextInput(
-                attrs={"placeholder": "Year of Manufacture"}
-            ),
-        }
 
     def __init__(self, *args, **kwargs):
         super(SparePartFilter, self).__init__(*args, **kwargs)
