@@ -7,6 +7,21 @@ from snm.carowners.models import CarMake
 
 
 class Speciality(models.Model):
+    """Make a list of specialitites."""
+
+    speciality = models.CharField(max_length=100)
+
+    class Meta:
+        """Speciality in its correct plural."""
+
+        verbose_name_plural = "specialities"
+
+    def __str__(self):
+        """Represent name for human readability."""
+        return self.speciality
+
+
+class Mechanic(models.Model):
     """
     Create fields for mechanic specialities.
 
@@ -15,14 +30,14 @@ class Speciality(models.Model):
     """
 
     mechanic = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    car_make = models.ForeignKey(CarMake, on_delete=models.PROTECT)
+    speciality = models.ManyToManyField(
+        Speciality, related_name="specialities"
+    )
+    car_make = models.ManyToManyField(CarMake)
     is_featured = models.BooleanField(default=False)  # Half Baked
-    price = models.DecimalField(max_digits=14, decimal_places=2)
 
     # Contact information
-    store = models.CharField(max_length=100, blank=True, null=True)
+    garage = models.CharField(max_length=100, blank=True, null=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(
@@ -36,15 +51,17 @@ class Speciality(models.Model):
             ),
         ],
     )
-    photo = models.ImageField(upload_to="mechanic/", blank=True, null=True)
-    region = models.CharField(max_length=20)
-    place = models.CharField(max_length=20)
-
-    class Meta:
-        """Speciality in its correct plural."""
-
-        verbose_name_plural = "specialities"
+    logo = models.ImageField(upload_to="mechanic/")
+    location = models.CharField(max_length=100)
 
     def __str__(self):
         """Represent name for human readability."""
-        return self.name
+        return self.phone_number
+
+    def specialities(self):
+        return ", ".join(
+            [str(speciality) for speciality in self.speciality.all()]
+        )
+
+    def car_makes(self):
+        return ", ".join([str(car_make) for car_make in self.car_make.all()])

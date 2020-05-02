@@ -7,6 +7,12 @@
 {% endblock nav %}
 {% block content%}
 <br>
+<div class="alert" style="margin:auto; max-width:550px">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <a href="{% url 'mechanics:create' %}" style="color: white !important;">Post mechanic/garage
+        instead?</a>
+</div>
+<br>
 <div class="container">
     <form method="post" enctype="multipart/form-data" class="col-md-5"
         style="margin-left: auto; margin-right: auto; display: block;">

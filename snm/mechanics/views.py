@@ -3,42 +3,34 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    ListView,
+    UpdateView,
+    DetailView,
+)
 
-from .models import Speciality
+from .models import Mechanic
+from .forms import MechanicForm
+from .filters import MechanicFilter
+from django.shortcuts import render
 
 
-class SpecialityListView(ListView):
-    """List view of spareparts."""
-
-    queryset = Speciality.objects.all()
-    context_object_name = "specialities"
-    template_name = "specialities/speciality.html"
+def filtered_mechanic_list(request):
+    f = MechanicFilter(request.GET, queryset=Mechanic.objects.all())
+    return render(request, "mechanics/mechanic.html", {"filter": f})
 
 
-class SpecialityCreateView(
-    SuccessMessageMixin, LoginRequiredMixin, CreateView
-):
-    """Create view for spare parts."""
+class MechanicCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    """Create view for mechanics."""
 
-    model = Speciality
-    fields = [
-        "name",
-        "description",
-        "car_make",
-        "first_name",
-        "last_name",
-        "phone_number",
-        "store",
-        "photo",
-        "region",
-        "place",
-        "price",
-    ]
+    model = Mechanic
+    form_class = MechanicForm
     login_url = "login"
     redirect_field_name = "redirect_to"
-    success_message = "Your speciality has been succesfully created"
-    template_name = "specialities/sell_a_speciality.html"
+    success_message = "Mechanic has been succesfully created"
+    template_name = "mechanics/create_a_mechanic.html"
 
     def get_success_url(self):
         return reverse_lazy("mechanics:listings")
@@ -46,33 +38,20 @@ class SpecialityCreateView(
     def form_valid(self, form):
         """Add the logged in user."""
         form.instance.mechanic = self.request.user
+        form.instance.first_name = self.request.user.first_name
+        form.instance.last_name = self.request.user.last_name
         return super().form_valid(form)
 
 
-class SpecialityUpdateView(
-    SuccessMessageMixin, LoginRequiredMixin, UpdateView
-):
+class MechanicUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """Update view for spare parts."""
 
-    model = Speciality
-    fields = [
-        "name",
-        "description",
-        "car_make",
-        "first_name",
-        "last_name",
-        "phone_number",
-        "store",
-        "photo",
-        "region",
-        "place",
-        "price",
-    ]
+    model = Mechanic
+    form_class = MechanicForm
     login_url = "login"
     redirect_field_name = "redirect_to"
     success_message = "Your speciality has been succesfully updated"
-    template_name = "specialities/sell_a_speciality.html"
-    template_name = "specialities/update_a_speciality.html"
+    template_name = "mechanics/create_a_mechanic.html"
 
     def get_success_url(self):
         return reverse_lazy("mechanics:listings")
@@ -86,30 +65,61 @@ class SpecialityUpdateView(
 class MechanicListingsListView(LoginRequiredMixin, ListView):
     """A user can see their listings."""
 
-    template_name = "mechanic_listings.html"
+    template_name = "mechanics/mechanic_listings.html"
     context_object_name = "listings"
 
     def get_queryset(self):
         """Filter by user."""
-        return Speciality.objects.filter(mechanic=self.request.user)
+        return Mechanic.objects.filter(mechanic=self.request.user)
 
 
-class SpecialityDeleteView(LoginRequiredMixin, DeleteView):
+class MechanicDeleteView(LoginRequiredMixin, DeleteView):
     """Delete a sparepart."""
 
-    model = Speciality
-    success_url = reverse_lazy('mechanics:listings')
+    model = Mechanic
+    success_url = reverse_lazy("mechanics:listings")
 
 
 class SearchResultsView(ListView):
-    """Search view for specialities."""
+    """Search view for mechanics."""
 
-    model = Speciality
-    template_name = "specialities/search_results.html"
+    model = Mechanic
+    template_name = "mechanics/search_results.html"
 
     def get_queryset(self):
         """Get filtered queryset."""
         query = self.request.GET.get("q")
-        return Speciality.objects.filter(
-            Q(name__icontains=query) | Q(car_make__name__icontains=query)
+        return Mechanic.objects.filter(
+            Q(location__icontains=query)
+            | Q(speciality__speciality__icontains=query)
+            | Q(garage__icontains=query)
+            | Q(car_make__name__icontains=query)
         )
+
+
+class MechanicDetailView(DetailView):
+    """Detail view of cechanics."""
+
+    model = Mechanic
+    template_name = "mechanics/details.html"
+
+
+class BodyWorkListView(ListView):
+    """View items in body works category."""
+
+    queryset = Mechanic.objects.filter(speciality__speciality="Body work")
+    template_name = "mechanics/body_work/body_work.html"
+
+
+class ElectricalListView(ListView):
+    """View items in electrical category."""
+
+    queryset = Mechanic.objects.filter(speciality__speciality="Electrical")
+    template_name = "mechanics/electrical/electrical.html"
+
+
+class MechanicalListView(ListView):
+    """View items in mechanical category."""
+
+    queryset = Mechanic.objects.filter(speciality__speciality="Mechanical")
+    template_name = "mechanics/mechanical/mechanical.html"
