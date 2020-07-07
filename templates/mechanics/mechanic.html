@@ -3,52 +3,17 @@
 {% load crispy_forms_tags %}
 
 {% block nav %}
-
-<!-- Top Navigation Menu -->
-<div class="topnav">
-    <!-- <a href="#home" class="active">Logo</a> -->
-    <div class="row">
-        <div class="col-8">
-            <a href="{% url 'sparedealers:sparepart-list' %}" class="active">
-                <img src="{% static 'logo/spares-logo.svg' %}" width="120" height="60" alt="">
-            </a>
-        </div>
-        <div class="col-4 nav_details">
-            <div class="row">
-                <div class="col" style="margin-top: 2%;">
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}">
-                        <p style="color: white;">Log out</p>
-                    </a>
-                    {% else %}
-                    <a href="{% url 'login' %}">
-                        <p style="color: white;">Log in</p>
-                    </a>
-                    {% endif %}
-                    <a href="{% url 'carowners:signup' %}">
-                        <p style="color: white;">Register</p>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="{% url 'mechanics:create' %}"><button type="button" class="btn btn-light btn-lg btn-block"
-                            style="width: auto; background-color: #0f172e; color: white;">SELL</button></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include "base_nav.html" %}
 {% endblock nav %}
 
 {% block jumbotron %}
-<div class="jumbotron jumbotron-fluid" style="background-color: #d02222;">
+<div class="jumbotron jumbotron-fluid">
     {% include "messages.html" %}
     <div class="container">
-        <div class="alert" style="margin:auto; max-width:550px">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <a href="{% url 'sparedealers:sparepart-list' %}" style="color: white !important;">Find a sparepart
-                instead?</a>
-        </div>
-        <p class="lead" style="text-align: center;">Find anything in sparesnmechs</p>
+        <p class="lead" style="text-align: center;">Find a mechanic/garage or <span
+                class="badge badge-pill badge-success"><a href="{% url 'sparedealers:sparepart-list' %}">Find
+                    spareparts
+                    instead</a></span></p>
         <form style="margin:auto; max-width:500px; margin-left: auto; margin-right: auto; display: block;">
             <div class="container">
                 <div class="row">
@@ -56,7 +21,7 @@
                         <span>
                             <div>{{ filter.form.car_make|as_crispy_field }}</div>
                             <div>
-                                {{ filter.form.location|as_crispy_field }}
+                                <!-- {{ filter.form.location|as_crispy_field }} -->
                                 <button type="submit" style="background-color: #0f172e;">Search</button>
                             </div>
                         </span>
@@ -65,8 +30,10 @@
             </div>
         </form>
         <hr>
+        <p style="text-align: center;">Or</p>
         <span><button onclick="document.getElementById('id01').style.display='block'"
-                style="width: auto; background-color: #0f172e; margin-left: auto; margin-right: auto; display: block;">Advanced
+                style="width: auto; background-color: #0f172e; margin-left: auto; margin-right: auto; display: block;">Proceed
+                To Advanced
                 Search</button></span>
 
         <!-- The Modal -->
@@ -80,21 +47,42 @@
                     title="Close Modal">&times;</span>
                 <div class="container">
                     <br>
+                    <p class="text-muted" style="text-align: center;">Find anything in Sparesnmechs advanced search</p>
+                    <hr>
+                    <br>
                     {{ filter.form|crispy}}
                     <button type="submit" class="btn btn-light"
                         style="background-color:#0f172e !important; color:white; margin-left: auto; margin-right: auto; display: block;">Advanced
                         Search</button>
                 </div>
+                <br>
             </form>
+            <br>
         </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block image %}
+<div class="image_container">
+    <img src="{% static 'default/banner.jpg' %}" style="width:100%; height: 40%;">
+    <div class="centered"
+        style="background-color: #808080; border-radius: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
+        <h1>Sparesnmechs featured ADs</h1>
+        <p>Would you like your AD to appear on this front page?</p>
+        <a href="{% url 'carowners:contact' %}"><button style="background-color: #d02222; border-radius: 15px;">Contact
+                us</button></a>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
 {% if filter.qs %}
-<div class="row" style="margin-left: auto; margin-right: auto; display: block;">
-    <div class="column">
+<br>
+<h4>Featured categories</h4>
+<hr>
+<div class="row">
+    <div class="column" style="margin-left: auto; margin-right: auto; display: block;">
         <div class="card">
             <a href="{% url 'mechanics:body_work' %}">
                 <img src="{% static 'svg/accessories.jpg' %}">
@@ -103,7 +91,7 @@
         </div>
     </div>
 
-    <div class="column">
+    <div class="column" style="margin-left: auto; margin-right: auto; display: block;">
         <div class="card">
             <a href="{% url 'mechanics:electrical' %}">
                 <img src="{% static 'svg/audio_n_video.jpg' %}">
@@ -112,7 +100,7 @@
         </div>
     </div>
 
-    <div class="column">
+    <div class="column" style="margin-left: auto; margin-right: auto; display: block;">
         <div class="card">
             <a href="{% url 'mechanics:mechanical' %}">
                 <img src="{% static 'svg/electrical.jpg' %}">
@@ -121,15 +109,8 @@
         </div>
     </div>
 </div>
-<hr>
-<div class="image_container">
-    <img src="{% static 'default/spare2.jpg' %}" style="width:100%; height: 50%;">
-    <div class="centered">
-        <h1>Sparesnmechs featured ADs</h1>
-        <p>Would you like your AD to appear on this front page?</p>
-        <a href="{% url 'carowners:contact' %}"><button style="background-color: #0f172e;">Contact us</button></a>
-    </div>
-</div>
+<br>
+<h4>Featured ADs</h4>
 <hr>
 {% include "mechanics/mech_ad_cards.html" %}
 <br>

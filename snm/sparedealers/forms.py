@@ -34,6 +34,12 @@ class EmailForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": "Phone Number"}),
         label="",
     )  # Needs validation
+    description = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"placeholder": "Any other information..."}
+        ),
+        label="",
+    )
 
     def save(self):
         """Save user email directly."""
@@ -51,7 +57,8 @@ class EmailForm(forms.Form):
         message = (
             f"A request has been made for {car_make} "
             f"{part} with chasis number {chasis_number} "
-            f"from {location} by {phone_number}"
+            f"from {location} by {phone_number}. "
+            f"Any other information {description}."
         )
         email = self.cleaned_data["email"]
 
@@ -119,8 +126,10 @@ class SellPartForm(forms.ModelForm):
             "store": "",
             "photo": "",
         }
+        # TODO Work on the image form.
+        # Work on the colours.
         widgets = {
-            "name": forms.TextInput(attrs={"placeholder": "Name"}),
+            "name": forms.TextInput(attrs={"placeholder": "Title"}),
             "description": forms.TextInput(
                 attrs={"placeholder": "Description"}
             ),
@@ -129,12 +138,6 @@ class SellPartForm(forms.ModelForm):
             "year_of_manufacture": forms.TextInput(
                 attrs={"placeholder": "Year of Manufacture"}
             ),
-            "category": forms.Select(attrs={"placeholder": "Category"}),
-            "sub_category": forms.Select(
-                attrs={"placeholder": "Sub Category"}
-            ),
-            "car_make": forms.Select(attrs={"placeholder": "Car Make"}),
-            "car_model": forms.Select(attrs={"placeholder": "Car Model"}),
             "phone_number": forms.TextInput(
                 attrs={"placeholder": "Phone Number"}
             ),

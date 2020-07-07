@@ -1,19 +1,19 @@
 {% load static %}
 
 {% if object_list %}
-<br>
 <div class="row" style="margin-left: auto; margin-right: auto; display: block;">
     {% for object_list in object_list %}
     <a href="{% url 'mechanics:detail' object_list.id %}">
         <div class="column prod_col">
             <div class="card">
                 {% if object_list.logo %}
-                <img src="{{ object_list.logo.url}}" alt="Avatar">
+                <img src="{{ object_list.logo.url}}" alt="Avatar" style="width: 100%;">
                 {% else %}
-                <img src="{% static 'default/process.png' %}" alt="Avatar">
+                <img src="{% static 'default/process.png' %}" alt="Avatar" style="width: 100%;">
                 {% endif %}
-                <p style="text-align: left;">{{ object_list.first_name }} {{ object_list.last_name }}</p>
-                <p style="text-align: left; margin-top: -20; color: #d02222;">{{ object_list.location }}</p>
+                <h5>{{ object_list.first_name }} {{ object_list.last_name }}</h5>
+                <span class="badge badge-pill badge-light" style="font-size: 18px;"><i class="fa fa-map-marker"></i>
+                    {{ object_list.location }}</span>
             </div>
         </div>
     </a>

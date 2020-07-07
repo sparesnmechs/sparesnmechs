@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-{% include "top_nav.html" %}
+{% include "base_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
 <br>
-<ul class="list-group">
-  <a href="{% url 'sparedealers:transmission_mounts' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Transmission mounts
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:transmission_components' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Transmission components
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:trans' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Transmissions
-    </li>
-  </a>
-</ul>
+<div class="container col-md-8">
+  <h4>Transmissions subcategories</h4>
+  <ul class="list-group">
+    <a href="{% url 'sparedealers:transmission_mounts' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Transmission mounts
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:transmission_components' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Transmission components
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:trans' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Transmissions
+      </li>
+    </a>
+  </ul>
+</div>
 {% endblock %}

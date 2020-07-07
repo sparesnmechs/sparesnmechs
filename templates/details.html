@@ -1,70 +1,57 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-{% include "top_nav.html" %}
+{% include "base_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
 <br>
-<div class="contianer details col-md-6"
-    style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; display: block;">
-    {% if object.photo %}
-    <img src="{{ object.photo.url}}" alt="Avatar">
-    {% else %}
-    <img src="{% static 'default/process.png' %}" alt="Avatar">
-    {% endif %}
-    <hr>
+<div class="contianer details col-md-10"
+    style="background-color: #FFFFFF; margin-left: auto; margin-right: auto; display: block; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 15px;">
+    <br>
+    <br>
     <div class="row">
-        <div class="col">
-            <span>
-                <p style="font-size: smaller;"><strong>Name:</strong> {{ object.name }}</p>
-            </span>
+        <div class="col-6">
+            {% if object.photo %}
+            <img src="{{ object.photo.url}}" alt="Avatar" style="width: 100%;">
+            {% else %}
+            <img src="{% static 'default/process.png' %}" alt="Avatar" style="width: 100%;">
+            {% endif %}
         </div>
-        <div class="col">
+        <div class="col-6">
             <span>
-                <p style="font-size: smaller;"><strong>Price:</strong> {{ object.price }}</p>
+                <h2>{{ object.name }}</h2>
+            </span>
+            <span>
+                <h4 style="color: #d02222;">KSH {{ object.price }}</h4>
+            </span>
+            <span>
+                <h4>{{ object.phone_number }}</h4>
+            </span>
+            <br>
+            <span>
+                <p>{{ object.description }}</p>
+            </span>
+            <span>
+                <p><strong>Category:</strong> {{ object.category }}</p>
+            </span>
+            <span>
+                <p><strong>Sub category:</strong> {{ object.sub_category }}</p>
+            </span>
+            <span>
+                <p><strong>Car Make:</strong> {{ object.car_make }}</p>
+            </span>
+            <span>
+                <p><strong>Car Model:</strong> {{ object.car_model }}</p>
+            </span>
+            <span>
+                <p><strong>Year of Manufacture:</strong> {{ object.year_of_manufacture }}
+                </p>
             </span>
         </div>
     </div>
-    <hr>
-    <span>
-        <p style="font-size: smaller;"><strong>Contact info:</strong> {{ object.phone_number }}</p>
-    </span>
-    <hr>
-    <div class="row">
-        <div class="col">
-            <span>
-                <p style="font-size: smaller;"><strong>Sub category:</strong> {{ object.sub_category }}</p>
-            </span>
-        </div>
-        <div class="col">
-            <span>
-                <p style="font-size: smaller;"><strong>Category:</strong> {{ object.category }}</p>
-            </span>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col">
-            <span>
-                <p style="font-size: smaller;"><strong>Car Make:</strong> {{ object.car_make }}</p>
-            </span>
-        </div>
-        <div class="col">
-            <span>
-                <p style="font-size: smaller;"><strong>Car Model:</strong> {{ object.car_model }}</p>
-            </span>
-        </div>
-    </div>
-    <hr>
-    <span>
-        <p style="font-size: smaller;"><strong>Year of Manufacture:</strong> {{ object.year_of_manufacture }}</p>
-    </span>
-    <hr>
-    <span>
-        <p style="font-size: smaller;"><strong>Description:</strong> {{ object.description }}</p>
-    </span>
-    <hr>
+    <br>
+    <br>
 </div>
-<br><br>
+<br><br><br>
 {% endblock %}

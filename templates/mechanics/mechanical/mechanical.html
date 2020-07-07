@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-{% include "top_nav.html" %}
+{% include "base_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
+<br>
+<h4>Featured mechanics/garages</h4>
+<hr>
 {% include "mechanics/mech_product_cards.html" %}
 {% endblock %}

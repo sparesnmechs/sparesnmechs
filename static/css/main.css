@@ -114,24 +114,9 @@ font-family: arial;
 }
 
 .price {
-color: grey;
-font-size: 22px;
-}
-
-.card button {
-border: none;
-outline: 0;
-padding: 12px;
-color: white;
-background-color: #0f172e;
-text-align: center;
-cursor: pointer;
-width: 100%;
+color: #d02222;
 font-size: 18px;
-}
-
-.card button:hover {
-opacity: 0.7;
+margin-top: -10;
 }
 
 /* Style buttons */
@@ -172,8 +157,8 @@ color: white;
 /* The alert message box */
 .alert {
 padding: 20px;
-background-color: #0f172e; /* Red */
-color: white;
+background-color: #B0B0B0; /* Red */
+color: #000000;
 margin-bottom: 15px;
 }
 
@@ -439,8 +424,8 @@ div.content {
      /* The alert message box */
     .alert {
       padding: 20px;
-      background-color: #0f172e; /* Red */
-      color: white;
+      background-color: #B0B0B0; /* Red */
+      color: #000000;
       margin-bottom: 15px;
       position: relative;
     }

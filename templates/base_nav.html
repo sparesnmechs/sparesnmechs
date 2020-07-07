@@ -1,0 +1,50 @@
+{% load static %}
+{% if user.is_authenticated %}
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-light"
+    style="background-color: #d02222 !important; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <a class="navbar-brand" href="{% url 'sparedealers:sparepart-list' %}">
+        <img src="{% static 'logo/spares-logo.svg' %}" width="100" height="50" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item avatar">
+                <a class="nav-link p-10" href="{% url 'sparedealers:requests' %}" data-toggle="tooltip"
+                    data-placement="top" title="Send us a request">
+                    <img src="{% static 'svg/request.png' %}" class="rounded-circle z-depth-0" alt="avatar image"
+                        height="30">
+                </a>
+            </li>
+            <li class="nav-item avatar">
+                <a class="nav-link p-10" href="{% url 'sparedealers:profile' %}" data-toggle="tooltip"
+                    data-placement="top" title="Profile">
+                    <img src="{% static 'svg/person.png' %}" class="rounded-circle z-depth-0" alt="avatar image"
+                        height="30">
+                </a>
+            </li>
+        </ul>
+        <a href="{% url 'sparedealers:create' %}"><button class="btn btn-primary my-2 my-sm-0" type="button">Post an
+                AD</button></a>
+    </div>
+</nav>
+{% else %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light"
+    style="background-color: #d02222 !important; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <a class="navbar-brand" href="#">
+        <img src="{% static 'logo/spares-logo.svg' %}" width="120" height="60" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="{% url 'login' %}">Log in</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'carowners:signup' %}" class="nav-link">
+                    Registration
+                </a>
+            </li>
+        </ul>
+        <a href="{% url 'sparedealers:create' %}"><button class="btn btn-primary my-2 my-sm-0" type="button">Post an
+                AD</button></a>
+    </div>
+</nav>
+{% endif %}

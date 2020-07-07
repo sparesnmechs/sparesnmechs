@@ -1,56 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-{% include "top_nav.html" %}
+{% include "base_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
 <br>
-<ul class="list-group">
-  <a href="{% url 'sparedealers:engines' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Engine
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:engine_mounts' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Engine mounts
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:timing_kits' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Timing kits
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:tensioners' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Tensioners
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:exhausts' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Exhausts
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:ignition_systems' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Ignition systems
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:fuel_systems' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Fuel systems
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:engine_components' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Engine components
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:engine_covers' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Engine covers
-    </li>
-  </a>
-</ul>
+<div class="container col-md-8">
+  <h4>Engine subcategories</h4>
+  <ul class="list-group">
+    <a href="{% url 'sparedealers:engines' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Engine
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:engine_mounts' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Engine mounts
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:timing_kits' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Timing kits
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:tensioners' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Tensioners
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:exhausts' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Exhausts
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:ignition_systems' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Ignition systems
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:fuel_systems' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Fuel systems
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:engine_components' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Engine components
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:engine_covers' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Engine covers
+      </li>
+    </a>
+  </ul>
+</div>
 {% endblock %}

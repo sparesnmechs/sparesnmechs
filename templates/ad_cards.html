@@ -3,18 +3,22 @@
 
 {% block content %}
 {% if filter.qs %}
+<h4>Featured ADs</h4>
+<hr>
 <div class="row" style="margin-left: auto; margin-right: auto; display: block;">
     {% for object_list in filter.qs %}
     <a href="{% url 'sparedealers:sparepart_detail' object_list.id %}">
         <div class="column filter_col">
             <div class="card">
                 {% if object_list.photo %}
-                <img src="{{ object_list.photo.url}}" alt="Avatar">
+                <img src="{{ object_list.photo.url}}" alt="Avatar" style="width: 100%;">
                 {% else %}
-                <img src="{% static 'default/process.png' %}" alt="Avatar">
+                <img src="{% static 'default/process.png' %}" alt="Avatar" style="width: 100%;">
                 {% endif %}
-                <p style="text-align: left;">{{ object_list.name }}</p>
-                <p style="text-align: left; margin-top: -20; color: #d02222;">{{ object_list.price }}</p>
+                <h4>{{ object_list.name }}</h4>
+                <p class="price">{{ object_list.price }}</p>
+                <span class="badge badge-pill badge-light" style="font-size: 18px; margin-top: -10;"><i
+                        class="fa fa-map-marker"></i> {{ object_list.location }}</span>
             </div>
         </div>
     </a>

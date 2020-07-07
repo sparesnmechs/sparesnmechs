@@ -1,31 +1,34 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-{% include "top_nav.html" %}
+{% include "base_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
 <br>
-<ul class="list-group">
-  <a href="{% url 'sparedealers:shift_knobs' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Shift knobs
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:dash_covers' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Dash covers
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:sun_shades' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Sun shades
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:steering_wheels' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Steering wheels
-    </li>
-  </a>
-</ul>
+<div class="container col-md-8">
+  <h4>Interior subcategories</h4>
+  <ul class="list-group">
+    <a href="{% url 'sparedealers:shift_knobs' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Shift knobs
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:dash_covers' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Dash covers
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:sun_shades' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Sun shades
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:steering_wheels' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Steering wheels
+      </li>
+    </a>
+  </ul>
+</div>
 {% endblock %}

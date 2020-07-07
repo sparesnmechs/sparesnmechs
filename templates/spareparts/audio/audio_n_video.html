@@ -1,36 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-{% include "top_nav.html" %}
+{% include "base_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
 <br>
-<ul class="list-group">
-  <a href="{% url 'sparedealers:subwoofers' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Subwoofers
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:speakers' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Speakers
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:equalizers' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Equalizers
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:stereos' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Stereos
-    </li>
-  </a>
-  <a href="{% url 'sparedealers:amplifiers' %}">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Amplifiers
-    </li>
-  </a>
-</ul>
+<div class="container col-md-8">
+  <h4>Audio and Videos sub categories</h4>
+  <ul class="list-group">
+    <a href="{% url 'sparedealers:subwoofers' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Subwoofers
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:speakers' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Speakers
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:equalizers' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Equalizers
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:stereos' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Stereos
+      </li>
+    </a>
+    <a href="{% url 'sparedealers:amplifiers' %}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Amplifiers
+      </li>
+    </a>
+  </ul>
+</div>
 {% endblock %}

@@ -3,24 +3,35 @@
 {% load crispy_forms_tags %}
 
 {% block nav %}
-{% include "top_nav.html" %}
+{% include "base_nav.html" %}
 {% endblock nav %}
 
 {% block content %}
 <br>
-<span>
-    <p class="text-muted" style="text-align: center;">
-        Send a short message describing your requests and we will get right back to you.
-    </p>
-</span>
-<form method="post" class="col-md-5" style="margin-left: auto; margin-right: auto; display: block;">{% csrf_token %}
-    {{ form.car_make|as_crispy_field }}
-    {{ form.chasis_number|as_crispy_field }}
-    {{ form.part|as_crispy_field }}
-    {{ form.location|as_crispy_field }}
-    {{ form.phone_number|as_crispy_field }}
-    <button type="submit" class="btn btn-light" style="background-color:#0f172e !important; color:white;">Request a
-        part</button>
-</form>
-<br><br>
+<div class="container"
+    style="background-color: #FFFFFF; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 15px;">
+    <br>
+    <h4 style="text-align: center;">Request for any anything in Sparesnmechs</h4>
+    <hr>
+    <span>
+        <p class="text-muted" style="text-align: center;"><span class="badge badge-pill badge-success">Fill out this
+                form below.</span>
+        </p>
+    </span>
+    <form method="post" class="col-md-8" style="margin-left: auto; margin-right: auto; display: block;">
+        {% csrf_token %}
+        {{ form.car_make|as_crispy_field }}
+        {{ form.chasis_number|as_crispy_field }}
+        {{ form.part|as_crispy_field }}
+        {{ form.location|as_crispy_field }}
+        {{ form.phone_number|as_crispy_field }}
+        {{ form.description|as_crispy_field }}
+        <button type="submit" class="btn btn-light col-md-4"
+            style="background-color:#0f172e !important; color:white; margin-left: auto; margin-right: auto; display: block;">Request
+            a
+            part</button>
+    </form>
+    <br>
+</div>
+<br>
 {% endblock %}

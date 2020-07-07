@@ -47,6 +47,19 @@ class SparePartSubCategory(models.Model):
         return self.name
 
 
+class Condition(models.Model):
+    """This class has been created.
+
+    To fulfil some frontend needs.
+    """
+
+    condition = models.CharField(max_length=50)
+
+    def __str__(self):
+        """Represent name for human readability."""
+        return self.condition
+
+
 class SparePart(models.Model):
     """
     Create fields for spare parts.
@@ -54,17 +67,11 @@ class SparePart(models.Model):
     Sparedealers deal with selling spareparts to car owners. Eg. Bumper
     """
 
-    CONDITION_CHOICES = [
-        ("NEW", "New"),
-        ("LOCALLY USED", "Locally Used"),
-        ("FOREIGN USED", "Foreign Used"),
-    ]
-
     dealer = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField()
     price = models.DecimalField(max_digits=14, decimal_places=2)
-    condition = models.CharField(max_length=255, choices=CONDITION_CHOICES)
+    condition = models.ForeignKey(Condition, on_delete=models.CASCADE)
     year_of_manufacture = models.CharField(
         max_length=4,
         validators=[
