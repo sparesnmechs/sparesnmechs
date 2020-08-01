@@ -1,5 +1,6 @@
 """Views."""
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import serializers
 from django.http import HttpResponse
@@ -12,7 +13,7 @@ from django.views.generic import (
 )
 
 from .models import CarModel, CarOwner
-from snm.sparedealers.forms import CustomUserCreationForm
+from snm.sparedealers.forms import CustomUserCreationForm, CustomUserChangeForm
 
 
 class SignUp(CreateView):
@@ -21,6 +22,15 @@ class SignUp(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
+
+
+class DetailsUpdate(UpdateView):
+    """Change user details."""
+
+    model = User
+    form_class = CustomUserChangeForm
+    success_url = reverse_lazy("login")
+    template_name = "registration/update.html"
 
 
 class ContactUs(TemplateView):

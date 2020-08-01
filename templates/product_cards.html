@@ -14,7 +14,7 @@
                 {% else %}
                 <img src="{% static 'default/process.png' %}" alt="Avatar" style="width: 100%;">
                 {% endif %}
-                <h4>{{ object_list.name }}</h4>
+                <p>{{ object_list.name }}</p>
                 <p class="price">{{ object_list.price }}</p>
                 <span class="badge badge-pill badge-light" style="font-size: 18px; margin-top: -10;"><i
                         class="fa fa-map-marker"></i> {{ object_list.location }}</span>

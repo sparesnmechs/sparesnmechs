@@ -9,16 +9,17 @@
 <br>
 {% if listings %}
 {% for listing in listings %}
-<div class="main_container col-md-6" style="margin-left: auto; margin-right: auto; display: block;">
+<div class="main_container col-md-6"
+    style="margin-left: auto; margin-right: auto; display: block; background-color: #FFFFFF; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 15px;">
     <div class="row">
-        <div class="col-10">
+        <div class="col-6">
             {% if listing.photo %}
             <img src="{{ listing.photo.url}}" alt="Avatar" style="width:100px; height: 80px;">
             {% else %}
             <img src="{% static 'svg/car.png' %}" alt="Avatar" style="width:100px; height: 80px;">
             {% endif %}
         </div>
-        <div class="col-2">
+        <div class="col-6">
             <span>
                 <p>{{ listing.name }}</p>
             </span>
