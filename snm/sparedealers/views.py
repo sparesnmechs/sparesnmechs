@@ -19,6 +19,7 @@ from .models import SparePart, SparePartCategory, SparePartSubCategory
 from .filters import SparePartFilter
 from django.shortcuts import render
 from .forms import EmailForm, SellPartForm
+from snm.mechanics.models import Mechanic
 
 
 class SparePartCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -112,6 +113,19 @@ class ProfileView(TemplateView):
     """Profile view."""
 
     template_name = "registration/profile.html"
+
+    def get_context_data(self, **kwargs):
+        """Get user number of posts."""
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            context["mech_spec_count"] = Mechanic.objects.filter(
+                mechanic=user
+            ).count()
+            context["parts_count"] = SparePart.objects.filter(
+                dealer=user
+            ).count()
+        return context
 
 
 # ==========Exterior category & subcategories==========

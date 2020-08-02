@@ -17,7 +17,7 @@
     </span>
     <br>
     <br>
-    <a href="">View and/or edit personal information</a>
+    <a href="{% url 'carowners:update' user.id %}">View and/or edit personal information</a>
     <hr>
     <br>
     <span class="badge badge-success">
@@ -26,10 +26,10 @@
     <br>
     <br>
     <p>Total Spareparts posted: <span class="badge badge-pill badge-primary">
-            100
+            {{ parts_count }}
         </span></p>
     <p>Total garages/speciality posted: <span class="badge badge-pill badge-primary">
-            100
+            {{ mech_spec_count }}
         </span></p>
     <hr>
     <br>
@@ -72,5 +72,5 @@
     </span>
     <hr>
 </div>
-<br>
+<br><br>
 {% endblock %}
