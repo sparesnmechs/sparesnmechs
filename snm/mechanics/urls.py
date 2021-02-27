@@ -1,1 +1,0 @@
-"""Mechanics app urls."""

@@ -1,1 +1,0 @@
-"""Carowners app urls."""
