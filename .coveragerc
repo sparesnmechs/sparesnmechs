@@ -1,7 +1,7 @@
 [run]
 branch=True
 source=snm
-omit=config/*, snm/**/migrations/*, snm/**/apps.py, snm/**/admin.py, snm/**/urls.py, snm/**/__init__.py
+omit=config/*, snm/**/migrations/*, snm/**/apps.py, snm/**/admin.py, snm/**/urls.py, snm/**/__init__.py, snm/**/managers.py
 
 [report]
 show_missing=True

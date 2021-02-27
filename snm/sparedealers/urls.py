@@ -1,1 +1,0 @@
-"""Sparedealers app urls."""

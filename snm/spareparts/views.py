@@ -1,0 +1,1 @@
+"""Spareparts app views."""
