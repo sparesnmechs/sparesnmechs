@@ -53,15 +53,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third party apps
-    "crispy_forms",
+
     # local apps
-    "snm.carowners",
-    "snm.mechanics",
-    "snm.sparedealers",
+    "snm.spareparts",
+    "snm.specialities",
+    "snm.userprofiles",
 ]
 
-CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -152,26 +150,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
-
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
-
-MESSAGE_TAGS = {
-    messages.DEBUG: "alert-info",
-    messages.INFO: "alert-info",
-    messages.SUCCESS: "alert-success",
-    messages.WARNING: "alert-warning",
-    messages.ERROR: "alert-danger",
-}
-
-import django_heroku
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
-
 MG_URL = os.getenv("MG_URL", "")
 MG_DEFAULT_EMAIL = os.getenv("MG_DEFAULT_EMAIL", "")
 MG_DOMAIN = os.getenv("MG_DOMAIN", "")
 MG_API = os.getenv("MG_API", "")
+
+
+# Custom user
+AUTH_USER_MODEL = 'userprofiles.UserProfile'

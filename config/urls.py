@@ -22,13 +22,4 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("snm.sparedealers.urls", namespace="sparedealers")),
-    path("", include("snm.mechanics.urls", namespace="mechanics")),
-    path("", include("snm.carowners.urls", namespace="carowners")),
-    path("accounts/", include('django.contrib.auth.urls')),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-    )
