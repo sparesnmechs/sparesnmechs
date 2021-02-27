@@ -1,6 +1,7 @@
 Sparesnmechs
 ============
-This is a platform that connects car owners to spare part dealers and mechanics.
+This is the backend API server for a Mobile first platform that connects car owners, 
+spare part dealers and mechanics.
 
 How to install the project
 --------------------------
@@ -81,7 +82,7 @@ Install the requirements.
 
 .. code:: bash
 
-	(name-of-your-virtualenv)$ pip install -r requirements.txt
+	$(name-of-your-virtualenv) pip install -r requirements.txt
 
 Running and testing the project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,7 +99,7 @@ To run the project:
 
 .. code:: bash
 	
-	(name-of-your-virtualenv)$ ./manage.py runserver # the information below will be displayed if everything is okay
+	$(name-of-your-virtualenv) ./manage.py runserver # the information below will be displayed if everything is okay
 	Performing system checks...
 
 	System check identified no issues (0 silenced).
@@ -111,7 +112,7 @@ To test the project:
 
 .. code:: bash
 
-	(name-of-your-virtualenv)$ tox -r # This will run all the tests in the project
+	$(name-of-your-virtualenv) tox -r # This will run all the tests in the project
 
 Credits
 -------
