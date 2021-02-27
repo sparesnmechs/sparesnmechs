@@ -17,7 +17,6 @@ class UserProfileManager(BaseUserManager):
         first_name,
         last_name,
         password=None,
-        **extra_fields
     ):
         """
         Create and save a User.
@@ -34,10 +33,9 @@ class UserProfileManager(BaseUserManager):
             phone_number=phone_number,
             first_name=first_name,
             last_name=last_name,
-            **extra_fields
         )
         user.set_password(password)
-        user.save()
+        user.save(using=self._db)
         return user
 
     def create_superuser(
@@ -46,21 +44,14 @@ class UserProfileManager(BaseUserManager):
         first_name,
         last_name,
         password=None,
-        **extra_fields
     ):
         """
         Create and save a Super User.
 
         Creates with the given phone number, names and password.
         """
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("is_active", True)
+        user = self.create_user(phone_number, first_name, last_name, password)
+        user.is_admin = True
+        user.save(using=self._db)
 
-        if extra_fields.get("is_staff") is not True:
-            raise ValueError(_("Superuser must have is_staff=True."))
-        if extra_fields.get("is_superuser") is not True:
-            raise ValueError(_("Superuser must have is_superuser=True."))
-        return self.create_user(
-            phone_number, first_name, last_name, **extra_fields
-        )
+        return user
