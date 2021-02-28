@@ -11,14 +11,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
 
 
 def get_bool_env(env_var, default=False):
@@ -36,6 +34,7 @@ def get_bool_env(env_var, default=False):
     except ValueError:
         raise Exception("Invalid boolean config: {}".format(val))
 
+
 def get_env_variable(var_name):
     """Get the environment variable or return exception."""
     try:
@@ -43,6 +42,7 @@ def get_env_variable(var_name):
     except KeyError:
         error_msg = "Set the {} environment variable".format(var_name)
         raise ImproperlyConfigured(error_msg)
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_env_variable("SECRET_KEY")
@@ -61,11 +61,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # local apps
     "snm.spareparts",
     "snm.specialities",
     "snm.userprofiles",
+    # External
+    "graphene_django",
 ]
 
 
@@ -165,4 +166,9 @@ MG_API = os.getenv("MG_API", "")
 
 
 # Custom user
-AUTH_USER_MODEL = 'userprofiles.UserProfile'
+AUTH_USER_MODEL = "userprofiles.UserProfile"
+
+# GraphQL
+GRAPHENE = {
+    "SCHEMA": "snm.schema.schema"
+}

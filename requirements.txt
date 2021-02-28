@@ -7,3 +7,4 @@ tox>=3.14.1
 model-bakery>=1.0.2
 flake8>=3.7.9
 flake8-docstrings>=1.5.0
+graphene-django>=2.15.0
