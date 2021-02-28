@@ -19,8 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", "ugdvTVcdjwmathengeTYewqdqoohgweionkd",)
 
 
 def get_bool_env(env_var, default=False):
@@ -38,9 +36,19 @@ def get_bool_env(env_var, default=False):
     except ValueError:
         raise Exception("Invalid boolean config: {}".format(val))
 
+def get_env_variable(var_name):
+    """Get the environment variable or return exception."""
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(var_name)
+        raise ImproperlyConfigured(error_msg)
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = get_env_variable("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_bool_env("DEBUG", True)
+DEBUG = get_bool_env("DEBUG")
 
 ALLOWED_HOSTS = [".127.0.0.1"]
 
@@ -99,11 +107,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "sparesnmechs"),
-        "USER": os.getenv("DB_USER", "sparesnmechs"),
-        "PASSWORD": os.getenv("DB_PASS", "sparesnmechs"),
-        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+        "NAME": get_env_variable("DB_NAME"),
+        "USER": get_env_variable("DB_USER"),
+        "PASSWORD": get_env_variable("DB_PASS"),
+        "HOST": get_env_variable("DB_HOST"),
+        "PORT": get_env_variable("DB_PORT"),
     }
 }
 
