@@ -1,10 +1,11 @@
 """Speciality app models."""
 from django.db import models
 
+from snm.common.models import AbstractBase
 from snm.userprofiles.models import UserProfile
 
 
-class CarMake(models.Model):
+class CarMake(AbstractBase):
     """Holds the basic information of a car make eg. Toyota."""
 
     name = models.CharField(max_length=20)
@@ -14,7 +15,7 @@ class CarMake(models.Model):
         return self.name
 
 
-class CarModel(models.Model):
+class CarModel(AbstractBase):
     """Holds the basic information of a car model eg Toyota Harrier."""
 
     name = models.CharField(max_length=20)
@@ -25,7 +26,7 @@ class CarModel(models.Model):
         return self.name
 
 
-class Speciality(models.Model):
+class Speciality(AbstractBase):
     """Holds the basic information of a Speciality."""
 
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
