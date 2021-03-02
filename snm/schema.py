@@ -42,7 +42,7 @@ class SubCategoryInput(graphene.InputObjectType):
     """Sparepart sub-category input."""
 
     name = graphene.String()
-    category_id = graphene.Int()
+    category_id = graphene.String()
 
 
 class SubCategoryMutation(graphene.Mutation):
@@ -73,8 +73,8 @@ class SparePartInput(graphene.InputObjectType):
     description = graphene.String()
     condition = graphene.String()
     price = graphene.Decimal()
-    category_id = graphene.Int()
-    sub_category_id = graphene.Int()
+    category_id = graphene.String()
+    sub_category_id = graphene.String()
 
 
 class SparePartMutation(graphene.Mutation):
