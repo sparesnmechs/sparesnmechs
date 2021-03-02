@@ -1,7 +1,6 @@
 """Sparesnmechs Python package setup."""
 from setuptools import setup
 
-
 name = "sparesnmechs"
 
 setup(
