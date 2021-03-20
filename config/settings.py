@@ -111,7 +111,7 @@ DATABASES = {
         "NAME": get_env_variable("DB_NAME"),
         "USER": get_env_variable("DB_USER"),
         "PASSWORD": get_env_variable("DB_PASS"),
-        "HOST": get_env_variable("DB_HOST"),
+        "HOST": get_env_variable("DB_PASS"),
         "PORT": get_env_variable("DB_PORT"),
     }
 }
