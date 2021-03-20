@@ -30,7 +30,7 @@ setup(
         "django~=3.1.7",
         "psycopg2~=2.8.4",
         "django-environ~=0.4.5",
-        "pytest-django~=3.7.0",
+        "pytest-django~=4.1.0",
         "pytest-cov~=2.8.1",
         "tox~=3.14.1",
         "model-bakery~=1.0.2",
