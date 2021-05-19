@@ -108,10 +108,15 @@ class Query(graphene.ObjectType):
     """GraphQL query operation type."""
 
     categories = graphene.List(CategoryType)
+    sub_categories = graphene.List(SubCategoryType)
 
     def resolve_categories(root, info):
         """Categories GraphQL resolver."""
         return spareparts_models.SparePartCategory.objects.all()
+
+    def resolve_sub_categories(root, info):
+        """Sub Categories GraphQL resolver."""
+        return spareparts_models.SparePartSubCategory.objects.all()
 
 
 class Mutation(graphene.ObjectType):
