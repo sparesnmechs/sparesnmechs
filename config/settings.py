@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+
 import os
+
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -65,8 +68,10 @@ INSTALLED_APPS = [
     "snm.spareparts",
     "snm.specialities",
     "snm.userprofiles",
+    "snm.otps",
     # External
     "graphene_django",
+    "phonenumber_field",
 ]
 
 
@@ -78,6 +83,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # django graphql jwt middleware
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -170,5 +177,13 @@ AUTH_USER_MODEL = "userprofiles.UserProfile"
 
 # GraphQL
 GRAPHENE = {
-    "SCHEMA": "snm.schema.schema"
+    "SCHEMA": "config.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
