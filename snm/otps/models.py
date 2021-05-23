@@ -2,8 +2,10 @@
 from django.db import models
 from phonenumber_field.validators import validate_international_phonenumber
 
+from snm.common.models import AbstractBase
 
-class Otp(models.Model):
+
+class Otp(AbstractBase):
     """OTP data model."""
 
     phone_number = models.CharField(

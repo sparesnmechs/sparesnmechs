@@ -1,5 +1,5 @@
 django>=3.1.7 
-psycopg2>=2.8.4
+psycopg2-binary>=2.8.6
 django-environ>=0.4.5
 pytest-django>=4.1.0
 pytest-cov>=2.8.1
@@ -11,3 +11,7 @@ graphene-django>=2.15.0
 django-phonenumber-field>=5.1.0
 django-graphql-jwt==0.3.2
 phonenumbers>=8.12.23
+gunicorn==20.1.0
+google-cloud-secret-manager==2.4.0
+google-auth==1.30.0
+django-storages[google]==1.11.1

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="display: flex;">
+    <div class="image-container" style="width: 150%; padding-top: 10%;">
+        <img src="{% static 'images/by-my-car-animate.svg' %}" alt="">
+    </div>
+    <div class="text" style="width: 150%; padding-top: 15%;">
+        <h2 style="color: #d02222;">Welcome to Sparesnmechs</h2>
+        <p>If you are seeing this, it means that the site is up running and healthy :)</p>
+    </div>
+</div>
+{% endblock %}

@@ -53,7 +53,11 @@ SECRET_KEY = get_env_variable("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_bool_env("DEBUG")
 
-ALLOWED_HOSTS = [".127.0.0.1"]
+ALLOWED_HOSTS = [
+    ".127.0.0.1",
+    ".localhost",
+    ".snm-testing-biunwixfgq-uc.a.run.app",
+]
 
 # Application definition
 
@@ -157,14 +161,14 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+# Define static storage via django-storages[google]
+GS_BUCKET_NAME = "sparesnmechs-testing-media"
+DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+GS_DEFAULT_ACL = "publicRead"
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MG_URL = os.getenv("MG_URL", "")
 MG_DEFAULT_EMAIL = os.getenv("MG_DEFAULT_EMAIL", "")
