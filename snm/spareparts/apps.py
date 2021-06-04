@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 
 class SparepartsConfig(AppConfig):
-    name = "spareparts"
+    name = "snm.spareparts"

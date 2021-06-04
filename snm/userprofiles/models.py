@@ -1,13 +1,14 @@
 """UserProfiles app models."""
-from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.utils import timezone
 from phonenumber_field.validators import validate_international_phonenumber
 
+from snm.common.models import AbstractCustomUser
+
 from .managers import UserProfileManager
 
 
-class UserProfile(AbstractBaseUser):
+class UserProfile(AbstractCustomUser):
     """UserProfile defines a sparesnmechs user information."""
 
     phone_number = models.CharField(
