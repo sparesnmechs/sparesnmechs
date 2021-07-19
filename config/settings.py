@@ -10,17 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+
 import os
-from django.contrib.messages import constants as messages
+
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", "ugdvTVcdjwmathengeTYewqdqoohgweionkd",)
 
 
 def get_bool_env(env_var, default=False):
@@ -39,10 +38,26 @@ def get_bool_env(env_var, default=False):
         raise Exception("Invalid boolean config: {}".format(val))
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_bool_env("DEBUG", True)
+def get_env_variable(var_name):
+    """Get the environment variable or return exception."""
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(var_name)
+        raise ImproperlyConfigured(error_msg)
 
-ALLOWED_HOSTS = [".127.0.0.1"]
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = get_env_variable("SECRET_KEY")
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = get_bool_env("DEBUG")
+
+ALLOWED_HOSTS = [
+    ".127.0.0.1",
+    ".localhost",
+    ".snm-testing-biunwixfgq-uc.a.run.app",
+]
 
 # Application definition
 
@@ -53,11 +68,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # local apps
     "snm.spareparts",
     "snm.specialities",
     "snm.userprofiles",
+    "snm.otps",
+    # External
+    "graphene_django",
+    "phonenumber_field",
 ]
 
 
@@ -69,6 +87,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # django graphql jwt middleware
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -99,11 +119,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "sparesnmechs"),
-        "USER": os.getenv("DB_USER", "sparesnmechs"),
-        "PASSWORD": os.getenv("DB_PASS", "sparesnmechs"),
-        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+        "NAME": get_env_variable("DB_NAME"),
+        "USER": get_env_variable("DB_USER"),
+        "PASSWORD": get_env_variable("DB_PASS"),
+        "HOST": get_env_variable("DB_HOST"),
+        "PORT": get_env_variable("DB_PORT"),
     }
 }
 
@@ -141,14 +161,14 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+# Define static storage via django-storages[google]
+GS_BUCKET_NAME = "sparesnmechs-testing-media"
+DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+GS_DEFAULT_ACL = "publicRead"
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MG_URL = os.getenv("MG_URL", "")
 MG_DEFAULT_EMAIL = os.getenv("MG_DEFAULT_EMAIL", "")
@@ -157,4 +177,17 @@ MG_API = os.getenv("MG_API", "")
 
 
 # Custom user
-AUTH_USER_MODEL = 'userprofiles.UserProfile'
+AUTH_USER_MODEL = "userprofiles.UserProfile"
+
+# GraphQL
+GRAPHENE = {
+    "SCHEMA": "config.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
+}
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]

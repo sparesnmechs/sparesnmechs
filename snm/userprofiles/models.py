@@ -1,30 +1,20 @@
 """UserProfiles app models."""
-from django.contrib.auth.base_user import AbstractBaseUser
-from django.core.validators import MaxLengthValidator, RegexValidator
 from django.db import models
 from django.utils import timezone
+from phonenumber_field.validators import validate_international_phonenumber
+
+from snm.common.models import AbstractCustomUser
 
 from .managers import UserProfileManager
 
 
-class UserProfile(AbstractBaseUser):
+class UserProfile(AbstractCustomUser):
     """UserProfile defines a sparesnmechs user information."""
 
     phone_number = models.CharField(
-        max_length=12,
+        max_length=15,
+        validators=[validate_international_phonenumber],
         unique=True,
-        validators=[
-            RegexValidator(
-                regex="^07[0-9]|^254[0-9]",
-                message=(
-                    "A valid phone number should "
-                    "either start with 07.. or 254.."
-                ),
-            ),
-            MaxLengthValidator(
-                limit_value=12, message="An invalid phone number provided"
-            ),
-        ],
     )
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)

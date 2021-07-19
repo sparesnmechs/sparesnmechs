@@ -1,7 +1,6 @@
 """Sparesnmechs Python package setup."""
 from setuptools import setup
 
-
 name = "sparesnmechs"
 
 setup(
@@ -31,13 +30,15 @@ setup(
         "django~=3.1.7",
         "psycopg2~=2.8.4",
         "django-environ~=0.4.5",
-        "pytest-django~=3.7.0",
+        "pytest-django~=4.1.0",
         "pytest-cov~=2.8.1",
         "tox~=3.14.1",
         "model-bakery~=1.0.2",
         "flake8~=3.7.9",
         "wheel~=0.34.2",
         "twine~=3.1.1",
+        "flake8-docstrings~=1.5.0",
+        "graphene-django~=2.15.0",
     ],
     scripts=["bin/snm_manage"],
     include_package_data=True,

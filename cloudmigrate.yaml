@@ -1,0 +1,48 @@
+steps:
+- name: "gcr.io/cloud-builders/docker"
+  args: [
+        "build", 
+        "-t", 
+        "gcr.io/${_GOOGLE_CLOUD_PROJECT}/${_IMAGE}", 
+        ".", 
+        "--build-arg", "SECRET_KEY=${_SECRET_KEY}",
+        "--build-arg", "DEBUG=${_DEBUG}",
+        "--build-arg", "DB_NAME=${_DB_NAME}",
+        "--build-arg", "DB_USER=${_DB_USER}",
+        "--build-arg", "DB_PORT=${_DB_PORT}",
+        "--build-arg", "DB_HOST=${_DB_HOST}",
+        "--build-arg", "DB_PASS=${_DB_PASS}",
+        ]
+
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/${_GOOGLE_CLOUD_PROJECT}/${_IMAGE}"]
+
+- name: "gcr.io/google-appengine/exec-wrapper"
+  args: [
+         "-i", "gcr.io/${_GOOGLE_CLOUD_PROJECT}/${_IMAGE}",
+         "-s", "sparesnmechs-testing:europe-west4:sparesnmechs",
+         "--", "python", "manage.py", "migrate"
+        ]
+
+- name: "gcr.io/google-appengine/exec-wrapper"
+  args: [
+         "-i", "gcr.io/${_GOOGLE_CLOUD_PROJECT}/${_IMAGE}",
+         "-s", "${PROJECT_ID}:europe-west4:sparesnmechs",
+         "--", "python", "manage.py", "collectstatic", "--no-input"
+        ]
+
+- name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  entrypoint: gcloud
+  args: [
+         "run", 
+         "deploy", 
+         "${_SERVICE_NAME}", 
+         "--platform", 
+         "managed",
+         "--region", 
+         "us-central1", 
+         "--image", 
+         "gcr.io/${_GOOGLE_CLOUD_PROJECT}/${_IMAGE}"
+        ]
+images:
+- "gcr.io/${_GOOGLE_CLOUD_PROJECT}/${_IMAGE}"

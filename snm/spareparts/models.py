@@ -1,10 +1,11 @@
 """Spareparts app models."""
 from django.db import models
 
+from snm.common.models import AbstractBase
 from snm.userprofiles.models import UserProfile
 
 
-class SparePartCategory(models.Model):
+class SparePartCategory(AbstractBase):
     """Holds the basic information of a sparepart category."""
 
     name = models.CharField(max_length=20)
@@ -14,7 +15,7 @@ class SparePartCategory(models.Model):
         return self.name
 
 
-class SparePartSubCategory(models.Model):
+class SparePartSubCategory(AbstractBase):
     """Holds the basic information of a sparepart sub-category."""
 
     name = models.CharField(max_length=20)
@@ -25,7 +26,7 @@ class SparePartSubCategory(models.Model):
         return self.name
 
 
-class SparePart(models.Model):
+class SparePart(AbstractBase):
     """Holds the basic information of a sparepart."""
 
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
