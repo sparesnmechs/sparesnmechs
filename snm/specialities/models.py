@@ -1,7 +1,7 @@
 """Speciality app models."""
 from django.db import models
 
-from snm.common.models import AbstractBase
+from snm.common.models import AbstractBase, AbstractListingBase
 from snm.userprofiles.models import UserProfile
 
 
@@ -26,13 +26,10 @@ class CarModel(AbstractBase):
         return self.name
 
 
-class Speciality(AbstractBase):
+class Speciality(AbstractListingBase):
     """Holds the basic information of a Speciality."""
 
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=20, decimal_places=4)
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
 
