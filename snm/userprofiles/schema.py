@@ -1,4 +1,6 @@
 """User profile schema file."""
+import datetime
+
 import graphene
 import graphql_jwt
 from django.contrib.auth.hashers import check_password
@@ -14,14 +16,6 @@ class UserProfileType(DjangoObjectType):
         """Meta options."""
 
         model = UserProfile
-        fields = (
-            "first_name",
-            "last_name",
-            "phone_number",
-            "email",
-            "is_active",
-            "password",
-        )
 
 
 class RegisterUserMutation(graphene.Mutation):
@@ -88,6 +82,8 @@ class UpdateUserProfileMutation(graphene.Mutation):
         if email is not None:
             user.email = email
 
+        user.updated_by = user_pk
+        user.updated = datetime.datetime.now()
         user.save()
 
         return UpdateUserProfileMutation(user=user)
@@ -116,6 +112,8 @@ class ChangePasswordMutation(graphene.Mutation):
             return Exception("Your passwords did not match. Please try again")
 
         user.set_password(new_password)
+        user.updated_by = user.pk
+        user.updated = datetime.datetime.now()
         user.save()
 
         return ChangePasswordMutation(user=user)

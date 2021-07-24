@@ -92,14 +92,20 @@ Make the initial migrations:
 
 .. code:: bash
 
-	(name-of-your-virtualenv)$ ./manage.py makemigrations
-	(name-of-your-virtualenv)$ ./manage.py migrate
+	(name-of-your-virtualenv)$ python3 manage.py makemigrations
+	(name-of-your-virtualenv)$ python3 manage.py migrate
+
+For local development, make sure to collect static:
+
+.. code:: bash
+
+	(name-of-your-virtualenv)$ python3 manage.py collectstatic
 
 To run the project:
 
 .. code:: bash
 	
-	$(name-of-your-virtualenv) ./manage.py runserver # the information below will be displayed if everything is okay
+	$(name-of-your-virtualenv) python3 manage.py runserver # the information below will be displayed if everything is okay
 	Performing system checks...
 
 	System check identified no issues (0 silenced).

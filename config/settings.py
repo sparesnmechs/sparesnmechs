@@ -152,7 +152,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Nairobi"
 
 USE_I18N = True
 
@@ -161,14 +161,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Define static storage via django-storages[google]
-GS_BUCKET_NAME = "sparesnmechs-testing-media"
-DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
-STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
-GS_DEFAULT_ACL = "publicRead"
-
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 MG_URL = os.getenv("MG_URL", "")
 MG_DEFAULT_EMAIL = os.getenv("MG_DEFAULT_EMAIL", "")
