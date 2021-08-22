@@ -1,4 +1,5 @@
 """GraphQL types."""
+from graphene import relay
 from graphene_django import DjangoObjectType
 
 from snm.spareparts.models import (
@@ -33,3 +34,19 @@ class SparePartType(DjangoObjectType):
         """Define Meta options."""
 
         model = SparePart
+
+
+class SparePartNode(DjangoObjectType):
+    """SparePartNode define a GraphQL spareparts Object Type Node."""
+
+    class Meta:
+        """Define Meta options."""
+
+        model = SparePart
+        filter_fields = {
+            "category__id": ["exact"],
+            "sub_category__id": ["exact"],
+            "condition": ["exact"],
+            "price": ["gt", "lt"],
+        }
+        interfaces = (relay.Node,)

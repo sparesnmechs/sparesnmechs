@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     # External
     "graphene_django",
     "phonenumber_field",
+    "django_filters",
 ]
 
 

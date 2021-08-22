@@ -1,9 +1,11 @@
 """GraphQL schema file."""
 import graphene
+from graphene_django.filter import DjangoFilterConnectionField
 
 from snm.spareparts.graphql.inputs import SparePartInput
 from snm.spareparts.graphql.types import (
     CategoryType,
+    SparePartNode,
     SparePartType,
     SubCategoryType,
 )
@@ -22,6 +24,9 @@ class Query(graphene.ObjectType):
     sub_categories_by_category = graphene.List(
         SubCategoryType, category_id=graphene.String()
     )
+
+    spareparts = graphene.relay.Node.Field(SparePartNode)
+    all_spareparts = DjangoFilterConnectionField(SparePartNode)
     spareparts_by_user_id = graphene.List(SparePartType)
     spareparts_by_category = graphene.List(
         SparePartType, category_id=graphene.String()
