@@ -1,7 +1,7 @@
 """Spareparts app models."""
 from django.db import models
 
-from snm.common.models import AbstractBase
+from snm.common.models import AbstractBase, AbstractListingBase
 from snm.userprofiles.models import UserProfile
 
 
@@ -26,12 +26,10 @@ class SparePartSubCategory(AbstractBase):
         return self.name
 
 
-class SparePart(AbstractBase):
+class SparePart(AbstractListingBase):
     """Holds the basic information of a sparepart."""
 
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
     condition = models.CharField(
         choices=[
             ("new", "New"),
@@ -41,7 +39,6 @@ class SparePart(AbstractBase):
         max_length=20,
         default="locally_used",
     )
-    price = models.DecimalField(max_digits=20, decimal_places=4)
     category = models.ForeignKey(SparePartCategory, on_delete=models.CASCADE)
     sub_category = models.ForeignKey(
         SparePartSubCategory, on_delete=models.CASCADE
